@@ -9,6 +9,9 @@
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
     
+    <!-- Script de Netlify Identity para el login del CMS -->
+    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+    
     <!-- Configuración de colores personalizados de Tailwind -->
     <script>
         tailwind.config = {
@@ -45,18 +48,16 @@
     <nav class="fixed w-full z-50 bg-vra-bg/90 backdrop-blur-md border-b border-vra-border">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-20">
-                <!-- Logo -->
-                <div class="flex-shrink-0 flex items-center gap-2">
-                    <!-- Placeholder para la imagen del logo -->
-                    <div class="w-10 h-10 rounded-full border-2 border-vra-primary flex items-center justify-center text-vra-primary font-bold">
-                        VRA
-                    </div>
-                    <span class="font-bold text-xl tracking-wider">V.R.A. <span class="text-vra-primary text-sm block -mt-1 font-normal">AUTO DETAILING</span></span>
+                <!-- Logo Actualizado -->
+                <div class="flex-shrink-0 flex items-center gap-3">
+                    <img src="image_be0f8a.jpg" alt="V.R.A. Logo" class="w-12 h-12 rounded-full object-cover border border-vra-primary shadow-[0_0_10px_rgba(163,255,0,0.2)]">
+                    <span class="font-bold text-xl tracking-wider hidden sm:block">V.R.A. <span class="text-vra-primary text-sm block -mt-1 font-normal">AUTO DETAILING</span></span>
                 </div>
                 <!-- Desktop Menu -->
                 <div class="hidden md:block">
                     <div class="ml-10 flex items-baseline space-x-8">
                         <a href="#how-it-works" class="hover:text-vra-primary transition-colors duration-200">How it Works</a>
+                        <a href="#results" class="hover:text-vra-primary transition-colors duration-200">Results</a>
                         <a href="#pricing" class="hover:text-vra-primary transition-colors duration-200">Pricing</a>
                         <a href="#coverage" class="hover:text-vra-primary transition-colors duration-200">Coverage Area</a>
                         <a href="#faq" class="hover:text-vra-primary transition-colors duration-200">FAQ</a>
@@ -128,9 +129,52 @@
     </section>
 
     <!-- ==========================================
+         RESULTS (BEFORE & AFTER GALLERY)
+    =========================================== -->
+    <section id="results" class="py-20 bg-[#0a0a0c] border-t border-vra-border">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold">Our Results</h2>
+                <p class="mt-4 text-vra-muted">Real transformations. See the V.R.A. difference.</p>
+            </div>
+
+            <!-- Grid de Imágenes -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                
+                <!-- Caso 1 -->
+                <div class="bg-vra-card border border-vra-border rounded-2xl overflow-hidden flex flex-col md:flex-row shadow-lg">
+                    <!-- Antes -->
+                    <div class="w-full md:w-1/2 relative bg-gray-800 flex items-center justify-center">
+                        <div class="absolute top-4 left-4 bg-black/80 text-white text-xs font-bold px-3 py-1 rounded backdrop-blur-sm z-10 border border-white/20">BEFORE</div>
+                        <img src="antes1.jpg" alt="Dirty car interior" class="w-full h-64 object-cover opacity-80 grayscale-[20%]">
+                    </div>
+                    <!-- Después -->
+                    <div class="w-full md:w-1/2 relative bg-gray-900 border-t md:border-t-0 md:border-l border-vra-border flex items-center justify-center">
+                        <div class="absolute top-4 right-4 bg-vra-primary text-vra-bg text-xs font-bold px-3 py-1 rounded backdrop-blur-sm z-10">AFTER</div>
+                        <img src="despues1.jpg" alt="Clean car interior" class="w-full h-64 object-cover">
+                    </div>
+                </div>
+
+                <!-- Caso 2 -->
+                <div class="bg-vra-card border border-vra-border rounded-2xl overflow-hidden flex flex-col md:flex-row shadow-lg">
+                    <div class="w-full md:w-1/2 relative bg-gray-800 flex items-center justify-center">
+                        <div class="absolute top-4 left-4 bg-black/80 text-white text-xs font-bold px-3 py-1 rounded backdrop-blur-sm z-10 border border-white/20">BEFORE</div>
+                        <img src="antes2.jpg" alt="Dirty car exterior" class="w-full h-64 object-cover opacity-80 grayscale-[20%]">
+                    </div>
+                    <div class="w-full md:w-1/2 relative bg-gray-900 border-t md:border-t-0 md:border-l border-vra-border flex items-center justify-center">
+                        <div class="absolute top-4 right-4 bg-vra-primary text-vra-bg text-xs font-bold px-3 py-1 rounded backdrop-blur-sm z-10">AFTER</div>
+                        <img src="despues2.jpg" alt="Clean car exterior" class="w-full h-64 object-cover">
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================
          PRICING SECTION (TARIFARIO)
     =========================================== -->
-    <section id="pricing" class="py-24 bg-[#0a0a0c]">
+    <section id="pricing" class="py-24 border-t border-vra-border">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16">
                 <h2 class="text-3xl md:text-4xl font-bold">Our Premium Packages</h2>
@@ -141,7 +185,6 @@
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
                 
                 <!-- TARJETA 1: STANDARD DETAIL -->
-                <!-- Clase group y hover:scale-105 crean el efecto visual solicitado -->
                 <div class="bg-vra-card rounded-2xl p-8 border border-vra-border flex flex-col transition-all duration-300 hover:-translate-y-2 hover:border-vra-primary hover:shadow-[0_10px_30px_rgba(163,255,0,0.1)]">
                     <div class="mb-6">
                         <h3 class="text-2xl font-bold text-white mb-2 uppercase tracking-wide">Standard Detail</h3>
@@ -172,7 +215,7 @@
                         </div>
                     </div>
                     
-                    <!-- Botón WhatsApp (URL codificada) -->
+                    <!-- Botón WhatsApp -->
                     <a href="https://wa.me/16784474945?text=Hello%2C%20I%20would%20like%20to%20book%20the%20Standard%20Detail%20package." target="_blank" 
                        class="w-full block text-center bg-transparent border-2 border-vra-primary text-vra-primary font-bold py-3 rounded-xl hover:bg-vra-primary hover:text-vra-bg transition-colors duration-300">
                         Choose Plan
@@ -181,7 +224,6 @@
 
                 <!-- TARJETA 2: INTERIOR FOCUS (Destacada) -->
                 <div class="bg-vra-card rounded-2xl p-8 border border-vra-border flex flex-col transition-all duration-300 hover:-translate-y-2 hover:border-vra-primary hover:shadow-[0_10px_30px_rgba(163,255,0,0.1)] relative overflow-hidden">
-                    <!-- Cinta de Destacado -->
                     <div class="absolute top-5 -right-12 bg-vra-primary text-vra-bg text-xs font-bold px-12 py-1 rotate-45">POPULAR</div>
                     
                     <div class="mb-6">
@@ -256,12 +298,11 @@
     <!-- ==========================================
          COVERAGE AREA
     =========================================== -->
-    <section id="coverage" class="py-20 border-t border-vra-border">
+    <section id="coverage" class="py-20 border-t border-vra-border bg-[#0a0a0c]">
         <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <h2 class="text-3xl md:text-4xl font-bold mb-6">Service Area</h2>
             <p class="text-vra-muted mb-10 text-lg">We are a 100% mobile detailing service. We proudly serve the following areas in [Your City/Region] and surrounding counties.</p>
             
-            <!-- Caja placeholder para mapa o lista de ciudades -->
             <div class="bg-vra-card border border-vra-border rounded-2xl p-10 flex items-center justify-center min-h-[300px]">
                 <div class="text-center">
                     <svg class="w-12 h-12 text-vra-primary mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
@@ -275,7 +316,7 @@
     <!-- ==========================================
          FAQ SECTION
     =========================================== -->
-    <section id="faq" class="py-20 bg-[#0a0a0c]">
+    <section id="faq" class="py-20 border-t border-vra-border">
         <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-12">
                 <h2 class="text-3xl md:text-4xl font-bold">Frequently Asked Questions</h2>
@@ -356,5 +397,31 @@
         </div>
     </footer>
 
+    <!-- Script para leer el JSON del CMS y actualizar imágenes de la galería -->
+    <script>
+        fetch('data/galeria.json')
+            .then(response => response.json())
+            .then(data => {
+                // Actualiza las imágenes si existen en el JSON generado por el CMS
+                if(data.antes1) document.querySelector('img[src="antes1.jpg"]').src = data.antes1;
+                if(data.despues1) document.querySelector('img[src="despues1.jpg"]').src = data.despues1;
+                if(data.antes2) document.querySelector('img[src="antes2.jpg"]').src = data.antes2;
+                if(data.despues2) document.querySelector('img[src="despues2.jpg"]').src = data.despues2;
+            })
+            .catch(error => console.log('Usando imágenes por defecto. No se encontró JSON del CMS aún.'));
+    </script>
+
+    <!-- Script para el login de administrador desde la página principal -->
+    <script>
+        if (window.netlifyIdentity) {
+            window.netlifyIdentity.on("init", user => {
+                if (!user) {
+                    window.netlifyIdentity.on("login", () => {
+                        document.location.href = "/admin/";
+                    });
+                }
+            });
+        }
+    </script>
 </body>
 </html>

@@ -1,0 +1,21 @@
+backend:
+  name: git-gateway
+  branch: main # Asegúrate de que esta sea la rama principal de tu repositorio en GitHub
+
+# Esta es la carpeta donde se guardarán físicamente las fotos que suba el cliente
+media_folder: "images"
+public_folder: "/images"
+
+# Aquí definimos lo que el cliente verá en su panel
+collections:
+  - name: "configuracion_web"
+    label: "Contenido de la Web"
+    files:
+      - label: "Galería Antes y Después"
+        name: "galeria"
+        file: "data/galeria.json" # El CMS creará este archivo con los datos de las fotos
+        fields:
+          - { label: "Caso 1 - Foto Antes", name: "antes1", widget: "image" }
+          - { label: "Caso 1 - Foto Después", name: "despues1", widget: "image" }
+          - { label: "Caso 2 - Foto Antes", name: "antes2", widget: "image" }
+          - { label: "Caso 2 - Foto Después", name: "despues2", widget: "image" }
