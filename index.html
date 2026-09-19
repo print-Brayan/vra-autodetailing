@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>V.R.A. Auto Detailing | Premium Mobile Care</title>
+    <!-- Tailwind CSS via CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Configuración de colores personalizados de Tailwind -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        vra: {
+                            bg: '#0F0F11',       /* Negro Mate Premium */
+                            card: '#18181B',     /* Fondo de tarjetas */
+                            primary: '#A3FF00',  /* Verde Lima Eléctrico */
+                            text: '#F4F4F5',     /* Texto principal claro */
+                            muted: '#A1A1AA',    /* Texto secundario gris */
+                            border: '#27272A'    /* Bordes sutiles */
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Montserrat', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Ocultar el comportamiento por defecto de detalles en el Acordeón FAQ */
+        details > summary { list-style: none; }
+        details > summary::-webkit-details-marker { display: none; }
+    </style>
+</head>
+<body class="bg-vra-bg text-vra-text font-sans antialiased selection:bg-vra-primary selection:text-vra-bg">
+
+    <!-- ==========================================
+         NAVIGATION BAR
+    =========================================== -->
+    <nav class="fixed w-full z-50 bg-vra-bg/90 backdrop-blur-md border-b border-vra-border">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <!-- Logo -->
+                <div class="flex-shrink-0 flex items-center gap-2">
+                    <!-- Placeholder para la imagen del logo -->
+                    <div class="w-10 h-10 rounded-full border-2 border-vra-primary flex items-center justify-center text-vra-primary font-bold">
+                        VRA
+                    </div>
+                    <span class="font-bold text-xl tracking-wider">V.R.A. <span class="text-vra-primary text-sm block -mt-1 font-normal">AUTO DETAILING</span></span>
+                </div>
+                <!-- Desktop Menu -->
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-8">
+                        <a href="#how-it-works" class="hover:text-vra-primary transition-colors duration-200">How it Works</a>
+                        <a href="#pricing" class="hover:text-vra-primary transition-colors duration-200">Pricing</a>
+                        <a href="#coverage" class="hover:text-vra-primary transition-colors duration-200">Coverage Area</a>
+                        <a href="#faq" class="hover:text-vra-primary transition-colors duration-200">FAQ</a>
+                    </div>
+                </div>
+                <!-- CTA Button -->
+                <div class="hidden md:block">
+                    <a href="#pricing" class="bg-vra-primary text-vra-bg px-6 py-2 rounded-full font-bold hover:bg-white transition-colors duration-300 shadow-[0_0_15px_rgba(163,255,0,0.3)]">
+                        Book Now
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ==========================================
+         HERO SECTION
+    =========================================== -->
+    <section class="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+            <h1 class="text-4xl md:text-6xl font-bold tracking-tight mb-6">
+                PREMIUM <span class="text-transparent bg-clip-text bg-gradient-to-r from-vra-primary to-green-400">MOBILE AUTO CARE</span>
+            </h1>
+            <p class="mt-4 text-xl md:text-2xl text-vra-muted max-w-3xl mx-auto mb-10">
+                Deep clean, sanitized, and refreshed. We bring the ultimate detailing experience directly to your doorstep. Est. 2024.
+            </p>
+            <div class="flex justify-center gap-4">
+                <a href="#pricing" class="bg-vra-primary text-vra-bg px-8 py-4 rounded-full font-bold text-lg hover:bg-white transition-colors duration-300 shadow-[0_0_20px_rgba(163,255,0,0.4)]">
+                    View Packages
+                </a>
+            </div>
+        </div>
+        <!-- Elemento de fondo decorativo -->
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-vra-primary opacity-5 rounded-full blur-3xl -z-10"></div>
+    </section>
+
+    <!-- ==========================================
+         HOW IT WORKS SECTION
+    =========================================== -->
+    <section id="how-it-works" class="py-20 border-t border-vra-border">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold">How It Works</h2>
+                <p class="mt-4 text-vra-muted">Simple, convenient, and professional.</p>
+            </div>
+            
+            <!-- Grid Responsive: 1 columna en móvil, 3 en PC -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+                <!-- Paso 1 -->
+                <div class="bg-vra-card p-8 rounded-2xl border border-vra-border text-center">
+                    <div class="w-16 h-16 bg-vra-bg rounded-full flex items-center justify-center text-vra-primary text-2xl font-bold mx-auto mb-6 border border-vra-border">1</div>
+                    <h3 class="text-xl font-bold mb-3">Choose Your Package</h3>
+                    <p class="text-vra-muted">Select the detailing package that best suits your vehicle's needs.</p>
+                </div>
+                <!-- Paso 2 -->
+                <div class="bg-vra-card p-8 rounded-2xl border border-vra-border text-center">
+                    <div class="w-16 h-16 bg-vra-bg rounded-full flex items-center justify-center text-vra-primary text-2xl font-bold mx-auto mb-6 border border-vra-border">2</div>
+                    <h3 class="text-xl font-bold mb-3">Book via WhatsApp</h3>
+                    <p class="text-vra-muted">Click to connect with us directly. We'll confirm your date and time instantly.</p>
+                </div>
+                <!-- Paso 3 -->
+                <div class="bg-vra-card p-8 rounded-2xl border border-vra-border text-center">
+                    <div class="w-16 h-16 bg-vra-bg rounded-full flex items-center justify-center text-vra-primary text-2xl font-bold mx-auto mb-6 border border-vra-border">3</div>
+                    <h3 class="text-xl font-bold mb-3">We Come To You</h3>
+                    <p class="text-vra-muted">Relax at home or work. Our fully equipped mobile unit handles the rest.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================
+         PRICING SECTION (TARIFARIO)
+    =========================================== -->
+    <section id="pricing" class="py-24 bg-[#0a0a0c]">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold">Our Premium Packages</h2>
+                <p class="mt-4 text-vra-muted">Transparent pricing. Exceptional results.</p>
+            </div>
+
+            <!-- Grid Responsive de Tarjetas -->
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+                
+                <!-- TARJETA 1: STANDARD DETAIL -->
+                <!-- Clase group y hover:scale-105 crean el efecto visual solicitado -->
+                <div class="bg-vra-card rounded-2xl p-8 border border-vra-border flex flex-col transition-all duration-300 hover:-translate-y-2 hover:border-vra-primary hover:shadow-[0_10px_30px_rgba(163,255,0,0.1)]">
+                    <div class="mb-6">
+                        <h3 class="text-2xl font-bold text-white mb-2 uppercase tracking-wide">Standard Detail</h3>
+                        <p class="text-vra-muted text-sm italic mb-4">Our Essential Premium Service</p>
+                        <div class="text-4xl font-bold text-vra-primary mb-2"><span class="text-xl text-vra-muted font-normal mr-1">Starting at</span>$149</div>
+                        <p class="text-sm text-vra-muted flex items-center gap-2">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                            2 - 3 Hours
+                        </p>
+                    </div>
+                    
+                    <div class="flex-grow space-y-4 mb-8">
+                        <div>
+                            <h4 class="text-vra-primary font-semibold mb-2">INTERIOR</h4>
+                            <ul class="space-y-2 text-sm text-vra-text">
+                                <li class="flex items-start gap-2"> <span class="text-vra-primary">✓</span> Thorough Vacuum </li>
+                                <li class="flex items-start gap-2"> <span class="text-vra-primary">✓</span> Dashboard & Console Cleaning </li>
+                                <li class="flex items-start gap-2"> <span class="text-vra-primary">✓</span> Interior Glass Cleaning </li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4 class="text-vra-primary font-semibold mb-2">EXTERIOR</h4>
+                            <ul class="space-y-2 text-sm text-vra-text">
+                                <li class="flex items-start gap-2"> <span class="text-vra-primary">✓</span> Foam Bath & Hand Wash </li>
+                                <li class="flex items-start gap-2"> <span class="text-vra-primary">✓</span> Wheel & Tire Cleaning </li>
+                                <li class="flex items-start gap-2"> <span class="text-vra-primary">✓</span> Ceramic Spray (Up to 2 Weeks) </li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <!-- Botón WhatsApp (URL codificada) -->
+                    <a href="https://wa.me/16784474945?text=Hello%2C%20I%20would%20like%20to%20book%20the%20Standard%20Detail%20package." target="_blank" 
+                       class="w-full block text-center bg-transparent border-2 border-vra-primary text-vra-primary font-bold py-3 rounded-xl hover:bg-vra-primary hover:text-vra-bg transition-colors duration-300">
+                        Choose Plan
+                    </a>
+                </div>
+
+                <!-- TARJETA 2: INTERIOR FOCUS (Destacada) -->
+                <div class="bg-vra-card rounded-2xl p-8 border border-vra-border flex flex-col transition-all duration-300 hover:-translate-y-2 hover:border-vra-primary hover:shadow-[0_10px_30px_rgba(163,255,0,0.1)] relative overflow-hidden">
+                    <!-- Cinta de Destacado -->
+                    <div class="absolute top-5 -right-12 bg-vra-primary text-vra-bg text-xs font-bold px-12 py-1 rotate-45">POPULAR</div>
+                    
+                    <div class="mb-6">
+                        <h3 class="text-2xl font-bold text-white mb-2 uppercase tracking-wide">Interior Focus</h3>
+                        <p class="text-vra-muted text-sm italic mb-4">Deep Clean. Sanitized. Refreshed.</p>
+                        <div class="text-4xl font-bold text-vra-primary mb-2"><span class="text-xl text-vra-muted font-normal mr-1">Starting at</span>$299</div>
+                        <p class="text-sm text-vra-muted flex items-center gap-2">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                            3 - 4 Hours
+                        </p>
+                    </div>
+                    
+                    <div class="flex-grow space-y-4 mb-8">
+                        <div>
+                            <h4 class="text-vra-primary font-semibold mb-2">FOCUS INTERIOR</h4>
+                            <ul class="space-y-2 text-sm text-vra-text">
+                                <li class="flex items-start gap-2"> <span class="text-vra-primary">✓</span> Shampoo Bath (Stain Removal) </li>
+                                <li class="flex items-start gap-2"> <span class="text-vra-primary">✓</span> Steam Cleaning & Sanitize </li>
+                                <li class="flex items-start gap-2"> <span class="text-vra-primary">✓</span> Leather/Vinyl Cleaning & Conditioner </li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4 class="text-vra-primary font-semibold mb-2">STANDARD EXTERIOR</h4>
+                            <ul class="space-y-2 text-sm text-vra-text">
+                                <li class="flex items-start gap-2"> <span class="text-vra-primary">✓</span> Includes all Standard Exterior features </li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <a href="https://wa.me/15551234567?text=Hello%2C%20I%20would%20like%20to%20book%20the%20Interior%20Focus%20Detail%20package." target="_blank" 
+                       class="w-full block text-center bg-vra-primary text-vra-bg font-bold py-3 rounded-xl hover:bg-white transition-colors duration-300">
+                        Choose Plan
+                    </a>
+                </div>
+
+                <!-- TARJETA 3: FULL DETAIL -->
+                <div class="bg-vra-card rounded-2xl p-8 border border-vra-border flex flex-col transition-all duration-300 hover:-translate-y-2 hover:border-vra-primary hover:shadow-[0_10px_30px_rgba(163,255,0,0.1)] relative overflow-hidden">
+                    <div class="absolute top-5 -right-12 bg-[#FFD700] text-black text-xs font-bold px-12 py-1 rotate-45">BEST VALUE</div>
+
+                    <div class="mb-6">
+                        <h3 class="text-2xl font-bold text-white mb-2 uppercase tracking-wide">Full Detail</h3>
+                        <p class="text-vra-muted text-sm italic mb-4">Our Most Comprehensive Service</p>
+                        <div class="text-4xl font-bold text-vra-primary mb-2"><span class="text-xl text-vra-muted font-normal mr-1">Starting at</span>$375</div>
+                        <p class="text-sm text-vra-muted flex items-center gap-2">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                            5+ Hours
+                        </p>
+                    </div>
+                    
+                    <div class="flex-grow space-y-4 mb-8">
+                        <div>
+                            <h4 class="text-vra-primary font-semibold mb-2">FOCUS INTERIOR & EXTERIOR</h4>
+                            <ul class="space-y-2 text-sm text-vra-text">
+                                <li class="flex items-start gap-2"> <span class="text-vra-primary">✓</span> All Interior Focus Features </li>
+                                <li class="flex items-start gap-2"> <span class="text-vra-primary">✓</span> Clay Bar to Smooth Paint </li>
+                                <li class="flex items-start gap-2"> <span class="text-vra-primary">✓</span> Iron Remover / Decontaminate </li>
+                                <li class="flex items-start gap-2"> <span class="text-vra-primary">✓</span> Gloss Spray Sealant (3 Month Protect) </li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <a href="https://wa.me/15551234567?text=Hello%2C%20I%20would%20like%20to%20book%20the%20Full%20Detail%20package." target="_blank" 
+                       class="w-full block text-center bg-transparent border-2 border-vra-primary text-vra-primary font-bold py-3 rounded-xl hover:bg-vra-primary hover:text-vra-bg transition-colors duration-300 mt-auto">
+                        Choose Plan
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================
+         COVERAGE AREA
+    =========================================== -->
+    <section id="coverage" class="py-20 border-t border-vra-border">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="text-3xl md:text-4xl font-bold mb-6">Service Area</h2>
+            <p class="text-vra-muted mb-10 text-lg">We are a 100% mobile detailing service. We proudly serve the following areas in [Your City/Region] and surrounding counties.</p>
+            
+            <!-- Caja placeholder para mapa o lista de ciudades -->
+            <div class="bg-vra-card border border-vra-border rounded-2xl p-10 flex items-center justify-center min-h-[300px]">
+                <div class="text-center">
+                    <svg class="w-12 h-12 text-vra-primary mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                    <p class="text-xl font-bold">Within a 30-mile radius of [City Center]</p>
+                    <p class="text-vra-muted mt-2">Contact us if you are outside this zone for availability.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================
+         FAQ SECTION
+    =========================================== -->
+    <section id="faq" class="py-20 bg-[#0a0a0c]">
+        <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold">Frequently Asked Questions</h2>
+            </div>
+            
+            <div class="space-y-4">
+                <!-- FAQ Item 1 -->
+                <details class="bg-vra-card border border-vra-border rounded-xl group overflow-hidden">
+                    <summary class="flex justify-between items-center font-bold cursor-pointer list-none p-6 text-lg">
+                        <span>Do I need to provide water or power?</span>
+                        <span class="transition group-open:rotate-180 text-vra-primary">
+                            <svg fill="none" height="24" shape-rendering="geometricPrecision" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" width="24"><path d="M6 9l6 6 6-6"></path></svg>
+                        </span>
+                    </summary>
+                    <div class="text-vra-muted p-6 pt-0 border-t border-vra-border/50">
+                        No, we are fully equipped with our own water tank and generator. We can detail your car at your home, apartment complex, or workplace seamlessly.
+                    </div>
+                </details>
+
+                <!-- FAQ Item 2 -->
+                <details class="bg-vra-card border border-vra-border rounded-xl group overflow-hidden">
+                    <summary class="flex justify-between items-center font-bold cursor-pointer list-none p-6 text-lg">
+                        <span>How long does a detailing service take?</span>
+                        <span class="transition group-open:rotate-180 text-vra-primary">
+                            <svg fill="none" height="24" shape-rendering="geometricPrecision" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" width="24"><path d="M6 9l6 6 6-6"></path></svg>
+                        </span>
+                    </summary>
+                    <div class="text-vra-muted p-6 pt-0 border-t border-vra-border/50">
+                        Depending on the package and the condition of the vehicle, it can take anywhere from 2 hours for a Standard Detail to over 5 hours for a Full Detail.
+                    </div>
+                </details>
+
+                <!-- FAQ Item 3 -->
+                <details class="bg-vra-card border border-vra-border rounded-xl group overflow-hidden">
+                    <summary class="flex justify-between items-center font-bold cursor-pointer list-none p-6 text-lg">
+                        <span>What payment methods do you accept?</span>
+                        <span class="transition group-open:rotate-180 text-vra-primary">
+                            <svg fill="none" height="24" shape-rendering="geometricPrecision" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" width="24"><path d="M6 9l6 6-6-6"></path></svg>
+                        </span>
+                    </summary>
+                    <div class="text-vra-muted p-6 pt-0 border-t border-vra-border/50">
+                        We accept Cash, Zelle, CashApp, and all major Credit/Debit cards upon completion of the service.
+                    </div>
+                </details>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================
+         FOOTER
+    =========================================== -->
+    <footer class="border-t border-vra-border bg-vra-bg pt-16 pb-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-8">
+                <!-- Brand -->
+                <div class="text-center md:text-left">
+                    <span class="font-bold text-2xl tracking-wider">V.R.A.</span>
+                    <p class="text-vra-primary text-sm font-semibold mt-1">AUTO DETAILING</p>
+                </div>
+                
+                <!-- Social Links Placeholder -->
+                <div class="flex gap-6">
+                    <a href="#" class="text-vra-muted hover:text-vra-primary transition-colors">
+                        <span class="sr-only">Facebook</span>
+                        <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z" clip-rule="evenodd" /></svg>
+                    </a>
+                    <a href="#" class="text-vra-muted hover:text-vra-primary transition-colors">
+                        <span class="sr-only">Instagram</span>
+                        <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.067.06 1.407.06 4.123v.08c0 2.643-.012 2.987-.06 4.043-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.067.048-1.407.06-4.123.06h-.08c-2.643 0-2.987-.012-4.043-.06-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.047-1.024-.06-1.379-.06-3.808v-.63c0-2.43.013-2.784.06-3.808.049-1.064.218-1.791.465-2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 015.45 2.525c.636-.247 1.363-.416 2.427-.465C8.901 2.013 9.256 2 11.685 2h.63zm-.081 1.802h-.468c-2.456 0-2.784.011-3.807.058-.975.045-1.504.207-1.857.344-.467.182-.8.398-1.15.748-.35.35-.566.683-.748 1.15-.137.353-.3.882-.344 1.857-.047 1.023-.058 1.351-.058 3.807v.468c0 2.456.011 2.784.058 3.807.045.975.207 1.504.344 1.857.182.466.399.8.748 1.15.35.35.683.566 1.15.748.353.137.882.3 1.857.344 1.054.048 1.37.058 4.041.058h.08c2.597 0 2.917-.01 3.96-.058.976-.045 1.505-.207 1.858-.344.466-.182.8-.398 1.15-.748.35-.35.566-.683.748-1.15.137-.353.3-.882.344-1.857.048-1.055.058-1.37.058-4.041v-.08c0-2.597-.01-2.917-.058-3.96-.045-.976-.207-1.505-.344-1.858a3.097 3.097 0 00-.748-1.15 3.098 3.098 0 00-1.15-.748c-.353-.137-.882-.3-1.857-.344-1.023-.047-1.351-.058-3.807-.058zM12 6.865a5.135 5.135 0 110 10.27 5.135 5.135 0 010-10.27zm0 1.802a3.333 3.333 0 100 6.666 3.333 3.333 0 000-6.666zm5.338-3.205a1.2 1.2 0 110 2.4 1.2 1.2 0 010-2.4z" clip-rule="evenodd" /></svg>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="mt-8 border-t border-vra-border pt-8 flex flex-col md:flex-row justify-between items-center text-sm text-vra-muted gap-4">
+                <p>&copy; 2026 V.R.A. Auto Detailing. All rights reserved.</p>
+                <p>vradetailing.com</p> <!-- Domain Placeholder -->
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
