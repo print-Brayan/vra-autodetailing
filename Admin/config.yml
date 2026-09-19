@@ -2,11 +2,9 @@ backend:
   name: git-gateway
   branch: main # Asegúrate de que tu rama en GitHub se llame 'main'
 
-# Rutas para guardar las imágenes que suba el cliente
 media_folder: "images"
 public_folder: "/images"
 
-# Configuración de los campos que verá el cliente en el panel
 collections:
   - name: "configuracion_web"
     label: "Contenido de la Web"
