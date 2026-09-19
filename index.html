@@ -10,11 +10,15 @@
     
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <!-- Favicon / tab logo -->
+    <link rel="icon" type="image/jpeg" href="images/logo.jpg">
+    <link rel="apple-touch-icon" href="images/logo.jpg">
     
-    <!-- SwiperJS CSS (Para el Carrusel) -->
+    <!-- SwiperJS CSS (for the carousel) -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
 
-    <!-- Script de Netlify Identity para el login del CMS -->
+    <!-- Netlify Identity script for CMS login -->
     <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
     
     <!-- Configuración de colores personalizados de Tailwind -->
@@ -40,11 +44,11 @@
         }
     </script>
     <style>
-        /* Ocultar el comportamiento por defecto de detalles en el Acordeón FAQ */
+        /* Hide the default details behavior in the FAQ accordion */
         details > summary { list-style: none; }
         details > summary::-webkit-details-marker { display: none; }
         
-        /* Ajustes visuales para los botones del carrusel Swiper */
+        /* Visual tweaks for the Swiper carousel buttons */
         .swiper-button-next, .swiper-button-prev {
             color: #A3FF00 !important;
         }
@@ -53,6 +57,10 @@
         }
         .swiper-pagination-bullet {
             background-color: #F4F4F5;
+        }
+
+        .image-modal-open {
+            overflow: hidden;
         }
     </style>
 </head>
@@ -149,17 +157,26 @@
             <!-- Estructura principal de Swiper -->
             <div class="swiper mySwiper pb-12">
                 <div class="swiper-wrapper" id="gallery-wrapper">
-                    <!-- Las tarjetas (slides) se inyectarán aquí mediante JavaScript -->
+                    <!-- Slides will be injected here via JavaScript -->
                 </div>
                 
-                <!-- Paginación (Puntitos) -->
+                <!-- Pagination dots -->
                 <div class="swiper-pagination mt-4"></div>
-                <!-- Flechas de navegación -->
+                <!-- Navigation arrows -->
                 <div class="swiper-button-next hidden md:flex"></div>
                 <div class="swiper-button-prev hidden md:flex"></div>
             </div>
         </div>
     </section>
+
+    <!-- Image zoom modal -->
+    <div id="image-modal" class="fixed inset-0 z-[100] hidden items-center justify-center bg-black/90 px-4 py-8">
+        <button id="image-modal-close" class="absolute top-4 right-4 text-white text-4xl leading-none hover:text-vra-primary transition-colors" aria-label="Close image">&times;</button>
+        <div class="max-w-6xl w-full">
+            <img id="image-modal-img" src="" alt="Zoomed image" class="w-full max-h-[85vh] object-contain rounded-2xl shadow-2xl border border-white/10">
+            <p id="image-modal-caption" class="text-center text-vra-muted mt-4 text-sm"></p>
+        </div>
+    </div>
 
     <!-- ==========================================
          PRICING SECTION
@@ -172,7 +189,7 @@
             </div>
 
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
-                <!-- TARJETA 1 -->
+                <!-- CARD 1 -->
                 <div class="bg-vra-card rounded-2xl p-8 border border-vra-border flex flex-col transition-all duration-300 hover:-translate-y-2 hover:border-vra-primary hover:shadow-[0_10px_30px_rgba(163,255,0,0.1)]">
                     <div class="mb-6">
                         <h3 class="text-2xl font-bold text-white mb-2 uppercase tracking-wide">Standard Detail</h3>
@@ -203,13 +220,13 @@
                         </div>
                     </div>
                     
-                    <a href="https://wa.me/16784474945?text=Hello%2C%20I%20would%20like%20to%20book%20the%20Standard%20Detail%20package." target="_blank" 
+                    <a href="https://wa.me/16784474945?text=Hello%2C%20I%20would%20like%20to%20book%20the%20Standard%20Detail%20package." target="_blank" rel="noopener noreferrer"
                        class="w-full block text-center bg-transparent border-2 border-vra-primary text-vra-primary font-bold py-3 rounded-xl hover:bg-vra-primary hover:text-vra-bg transition-colors duration-300">
                         Choose Plan
                     </a>
                 </div>
 
-                <!-- TARJETA 2 -->
+                <!-- CARD 2 -->
                 <div class="bg-vra-card rounded-2xl p-8 border border-vra-border flex flex-col transition-all duration-300 hover:-translate-y-2 hover:border-vra-primary hover:shadow-[0_10px_30px_rgba(163,255,0,0.1)] relative overflow-hidden">
                     <div class="absolute top-5 -right-12 bg-vra-primary text-vra-bg text-xs font-bold px-12 py-1 rotate-45">POPULAR</div>
                     <div class="mb-6">
@@ -239,13 +256,13 @@
                         </div>
                     </div>
                     
-                    <a href="https://wa.me/16784474945?text=Hello%2C%20I%20would%20like%20to%20book%20the%20Interior%20Focus%20Detail%20package." target="_blank" 
+                    <a href="https://wa.me/16784474945?text=Hello%2C%20I%20would%20like%20to%20book%20the%20Interior%20Focus%20Detail%20package." target="_blank" rel="noopener noreferrer"
                        class="w-full block text-center bg-vra-primary text-vra-bg font-bold py-3 rounded-xl hover:bg-white transition-colors duration-300">
                         Choose Plan
                     </a>
                 </div>
 
-                <!-- TARJETA 3 -->
+                <!-- CARD 3 -->
                 <div class="bg-vra-card rounded-2xl p-8 border border-vra-border flex flex-col transition-all duration-300 hover:-translate-y-2 hover:border-vra-primary hover:shadow-[0_10px_30px_rgba(163,255,0,0.1)] relative overflow-hidden">
                     <div class="absolute top-5 -right-12 bg-[#FFD700] text-black text-xs font-bold px-12 py-1 rotate-45">BEST VALUE</div>
                     <div class="mb-6">
@@ -270,7 +287,7 @@
                         </div>
                     </div>
                     
-                    <a href="https://wa.me/16784474945?text=Hello%2C%20I%20would%20like%20to%20book%20the%20Full%20Detail%20package." target="_blank" 
+                    <a href="https://wa.me/16784474945?text=Hello%2C%20I%20would%20like%20to%20book%20the%20Full%20Detail%20package." target="_blank" rel="noopener noreferrer"
                        class="w-full block text-center bg-transparent border-2 border-vra-primary text-vra-primary font-bold py-3 rounded-xl hover:bg-vra-primary hover:text-vra-bg transition-colors duration-300 mt-auto">
                         Choose Plan
                     </a>
@@ -336,7 +353,7 @@
                     <summary class="flex justify-between items-center font-bold cursor-pointer list-none p-6 text-lg">
                         <span>What payment methods do you accept?</span>
                         <span class="transition group-open:rotate-180 text-vra-primary">
-                            <svg fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" width="24"><path d="M6 9l6 6-6-6"></path></svg>
+                            <svg fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" width="24"><path d="M6 9l6 6 6-6"></path></svg>
                         </span>
                     </summary>
                     <div class="text-vra-muted p-6 pt-0 border-t border-vra-border/50">
@@ -382,40 +399,87 @@
     =========================================== -->
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script>
-        // Casos estáticos por defecto (si el CMS está vacío o falla)
+        // Default static cases (if the CMS is empty or fails)
         const defaultPairs = [
             { antes: 'images/antes1.jpg', despues: 'images/despues1.jpg' }
         ];
 
+        function safeImagePath(path, fallback) {
+            if (typeof path !== 'string') {
+                return fallback;
+            }
+
+            const normalizedPath = path.trim();
+            const allowedPattern = /^\/?images\/[a-zA-Z0-9._/-]+$/;
+
+            return allowedPattern.test(normalizedPath) ? normalizedPath : fallback;
+        }
+
+        function createImageColumn({ src, label, position, grayscale = false }) {
+            const column = document.createElement('div');
+            column.className = position === 'before'
+                ? 'w-full relative bg-gray-800 h-48 md:h-64 flex items-center justify-center'
+                : 'w-full relative bg-gray-900 border-t border-vra-border h-48 md:h-64 flex items-center justify-center';
+
+            const badge = document.createElement('div');
+            badge.className = position === 'before'
+                ? 'absolute top-4 left-4 bg-black/80 text-white text-xs font-bold px-3 py-1 rounded backdrop-blur-sm z-10 border border-white/20'
+                : 'absolute top-4 right-4 bg-vra-primary text-vra-bg text-xs font-bold px-3 py-1 rounded backdrop-blur-sm z-10';
+            badge.textContent = label.toUpperCase();
+
+            const image = document.createElement('img');
+            image.src = src;
+            image.alt = `${label} image`;
+            image.className = grayscale
+                ? 'w-full h-full object-cover opacity-80 grayscale-[20%] cursor-zoom-in'
+                : 'w-full h-full object-cover cursor-zoom-in';
+            image.tabIndex = 0;
+            image.setAttribute('role', 'button');
+            image.dataset.modalSrc = src;
+            image.dataset.modalLabel = label;
+
+            column.appendChild(badge);
+            column.appendChild(image);
+            return column;
+        }
+
         function initSwiper(casosArray) {
             const wrapper = document.getElementById('gallery-wrapper');
-            wrapper.innerHTML = ''; // Limpiamos contenedor
+            wrapper.replaceChildren(); // Clear container safely
 
-            // Generamos las tarjetas (slides) para cada caso
+            // Generate slides for each case
             casosArray.forEach(pair => {
-                const slideHTML = `
-                <div class="swiper-slide">
-                    <div class="bg-vra-card border border-vra-border rounded-2xl overflow-hidden flex flex-col shadow-lg h-full">
-                        <!-- Antes -->
-                        <div class="w-full relative bg-gray-800 h-48 md:h-64 flex items-center justify-center">
-                            <div class="absolute top-4 left-4 bg-black/80 text-white text-xs font-bold px-3 py-1 rounded backdrop-blur-sm z-10 border border-white/20">BEFORE</div>
-                            <img src="${pair.antes || 'images/antes1.jpg'}" class="w-full h-full object-cover opacity-80 grayscale-[20%]">
-                        </div>
-                        <!-- Después -->
-                        <div class="w-full relative bg-gray-900 border-t border-vra-border h-48 md:h-64 flex items-center justify-center">
-                            <div class="absolute top-4 right-4 bg-vra-primary text-vra-bg text-xs font-bold px-3 py-1 rounded backdrop-blur-sm z-10">AFTER</div>
-                            <img src="${pair.despues || 'images/despues1.jpg'}" class="w-full h-full object-cover">
-                        </div>
-                    </div>
-                </div>`;
-                wrapper.innerHTML += slideHTML;
+                const beforeSrc = safeImagePath(pair.antes, 'images/antes1.jpg');
+                const afterSrc = safeImagePath(pair.despues, 'images/despues1.jpg');
+
+                const slide = document.createElement('div');
+                slide.className = 'swiper-slide';
+
+                const card = document.createElement('div');
+                card.className = 'bg-vra-card border border-vra-border rounded-2xl overflow-hidden flex flex-col shadow-lg h-full';
+
+                card.appendChild(createImageColumn({ src: beforeSrc, label: 'Before', position: 'before', grayscale: true }));
+                card.appendChild(createImageColumn({ src: afterSrc, label: 'After', position: 'after' }));
+
+                slide.appendChild(card);
+                wrapper.appendChild(slide);
+            });
+
+            wrapper.querySelectorAll('img[data-modal-src]').forEach(img => {
+                img.addEventListener('click', () => openImageModal(img.dataset.modalSrc, img.dataset.modalLabel));
+                img.addEventListener('keydown', (event) => {
+                    if (event.key === 'Enter' || event.key === ' ') {
+                        event.preventDefault();
+                        openImageModal(img.dataset.modalSrc, img.dataset.modalLabel);
+                    }
+                });
             });
 
             // Inicializamos SwiperJS con "Slides Per View"
             new Swiper(".mySwiper", {
-                slidesPerView: 1, // En celulares se ve 1 tarjeta entera
-                spaceBetween: 30, // Espacio entre tarjetas
-                loop: true,       // Gira infinitamente
+                slidesPerView: 1, // One full card on mobile
+                spaceBetween: 30, // Space between cards
+                loop: true,       // Infinite loop
                 autoplay: {
                     delay: 4000,  // Pasa automático cada 4 segundos
                     disableOnInteraction: false,
@@ -429,19 +493,19 @@
                     prevEl: ".swiper-button-prev",
                 },
                 breakpoints: {
-                    // Cuando la pantalla es de Tablet o Computadora (768px o más)
+                    // Tablet and desktop screens (768px or more)
                     768: {
-                        slidesPerView: 2, // Se ven 2 tarjetas a la vez
+                        slidesPerView: 2, // Show 2 cards at once
                     },
                     1024: {
-                        slidesPerView: 3, // Opcional: Se ven 3 tarjetas en pantallas enormes
+                        slidesPerView: 3, // Optional: Show 3 cards on large screens
                     }
                 },
             });
         }
 
         // Obtener datos de Netlify CMS
-        fetch('data/galeria.json')
+        fetch('data/galeria.json', { cache: 'no-store' })
             .then(response => response.json())
             .then(data => {
                 if (data.casos && data.casos.length > 0) {
@@ -451,12 +515,46 @@
                 }
             })
             .catch(error => {
-                console.log('Mostrando casos estáticos locales.');
+                console.log('Showing local static cases.');
                 initSwiper(defaultPairs);
             });
+
+        const imageModal = document.getElementById('image-modal');
+        const imageModalImg = document.getElementById('image-modal-img');
+        const imageModalCaption = document.getElementById('image-modal-caption');
+        const imageModalClose = document.getElementById('image-modal-close');
+
+        function openImageModal(src, label) {
+            imageModalImg.src = src;
+            imageModalImg.alt = label ? `Image ${label}` : 'Zoomed image';
+            imageModalCaption.textContent = label ? label : '';
+            imageModal.classList.remove('hidden');
+            imageModal.classList.add('flex');
+            document.body.classList.add('image-modal-open');
+        }
+
+        function closeImageModal() {
+            imageModal.classList.add('hidden');
+            imageModal.classList.remove('flex');
+            imageModalImg.src = '';
+            imageModalCaption.textContent = '';
+            document.body.classList.remove('image-modal-open');
+        }
+
+        imageModalClose.addEventListener('click', closeImageModal);
+        imageModal.addEventListener('click', (event) => {
+            if (event.target === imageModal) {
+                closeImageModal();
+            }
+        });
+        document.addEventListener('keydown', (event) => {
+            if (event.key === 'Escape' && !imageModal.classList.contains('hidden')) {
+                closeImageModal();
+            }
+        });
     </script>
 
-    <!-- Redirección del Login CMS -->
+    <!-- CMS login redirect -->
     <script>
         if (window.netlifyIdentity) {
             window.netlifyIdentity.on("init", user => {
