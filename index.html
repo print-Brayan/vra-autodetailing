@@ -110,6 +110,24 @@
                         Book Now
                     </a>
                 </div>
+                <button id="mobile-menu-button" type="button" class="md:hidden inline-flex items-center justify-center w-11 h-11 rounded-lg border border-vra-border text-vra-primary hover:bg-vra-primary hover:text-vra-bg transition-colors" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
+                    <svg id="mobile-menu-open-icon" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                    <svg id="mobile-menu-close-icon" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 6l12 12M6 18L18 6"></path>
+                    </svg>
+                </button>
+            </div>
+            <div id="mobile-menu" class="hidden md:hidden border-t border-vra-border py-4">
+                <div class="flex flex-col gap-1">
+                    <a href="#how-it-works" class="mobile-menu-link px-4 py-3 rounded-lg hover:bg-vra-card hover:text-vra-primary transition-colors">How it Works</a>
+                    <a href="#results" class="mobile-menu-link px-4 py-3 rounded-lg hover:bg-vra-card hover:text-vra-primary transition-colors">Results</a>
+                    <a href="#pricing" class="mobile-menu-link px-4 py-3 rounded-lg hover:bg-vra-card hover:text-vra-primary transition-colors">Pricing</a>
+                    <a href="#coverage" class="mobile-menu-link px-4 py-3 rounded-lg hover:bg-vra-card hover:text-vra-primary transition-colors">Coverage Area</a>
+                    <a href="#faq" class="mobile-menu-link px-4 py-3 rounded-lg hover:bg-vra-card hover:text-vra-primary transition-colors">FAQ</a>
+                    <a href="#pricing" class="mobile-menu-link mt-2 bg-vra-primary text-vra-bg px-4 py-3 rounded-lg text-center font-bold hover:bg-white transition-colors">Book Now</a>
+                </div>
             </div>
         </div>
     </nav>
@@ -713,6 +731,29 @@
             if (event.key === 'Escape' && !imageModal.classList.contains('hidden')) {
                 closeImageModal();
             }
+        });
+
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileMenuOpenIcon = document.getElementById('mobile-menu-open-icon');
+        const mobileMenuCloseIcon = document.getElementById('mobile-menu-close-icon');
+
+        function toggleMobileMenu() {
+            const isOpen = !mobileMenu.classList.contains('hidden');
+            mobileMenu.classList.toggle('hidden', isOpen);
+            mobileMenuOpenIcon.classList.toggle('hidden', !isOpen);
+            mobileMenuCloseIcon.classList.toggle('hidden', isOpen);
+            mobileMenuButton.setAttribute('aria-expanded', String(!isOpen));
+            mobileMenuButton.setAttribute('aria-label', isOpen ? 'Open menu' : 'Close menu');
+        }
+
+        mobileMenuButton.addEventListener('click', toggleMobileMenu);
+        mobileMenu.querySelectorAll('.mobile-menu-link').forEach(link => {
+            link.addEventListener('click', () => {
+                if (!mobileMenu.classList.contains('hidden')) {
+                    toggleMobileMenu();
+                }
+            });
         });
     </script>
 
