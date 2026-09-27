@@ -123,7 +123,7 @@
             <div class="absolute inset-0 bg-vra-bg/75"></div>
         </div>
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
-            <h1 id="hero-title" class="text-4xl md:text-6xl font-display font-bold tracking-tight mb-6">
+            <h1 id="hero-title" class="text-4xl md:text-6xl font-display font-bold tracking-wide mb-6">
                 PREMIUM <span class="text-transparent bg-clip-text bg-gradient-to-r from-vra-primary to-green-400">MOBILE AUTO CARE</span>
             </h1>
             <p id="hero-subtitle" class="mt-4 text-xl md:text-2xl text-vra-muted max-w-3xl mx-auto mb-10">
@@ -528,7 +528,15 @@
             const citiesContainer = document.getElementById('service-cities');
 
             if (content.heroTitle) {
-                heroTitle.textContent = content.heroTitle;
+                const titleWords = content.heroTitle.trim().split(/\s+/);
+                const titleLead = titleWords.shift() || '';
+                heroTitle.replaceChildren();
+                heroTitle.append(document.createTextNode(`${titleLead} `));
+
+                const titleAccent = document.createElement('span');
+                titleAccent.className = 'text-transparent bg-clip-text bg-gradient-to-r from-vra-primary to-green-400';
+                titleAccent.textContent = titleWords.join(' ');
+                heroTitle.appendChild(titleAccent);
             }
             if (content.heroSubtitle) {
                 heroSubtitle.textContent = content.heroSubtitle;
