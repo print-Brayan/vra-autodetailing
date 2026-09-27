@@ -642,42 +642,42 @@
         }
 
         async function loadGallery() {
+            let localCases = defaultPairs;
+
             try {
                 const response = await fetch('data/galeria.json?ts=' + Date.now(), { cache: 'no-store' });
                 const data = await response.json();
-                const localCases = Array.isArray(data.casos) && data.casos.length > 0 ? data.casos : defaultPairs;
-                let sanityContent = null;
-
-                try {
-                    sanityContent = await fetchSanityContent();
-                } catch (sanityError) {
-                    console.log('Sanity content unavailable; using local content.');
+                if (Array.isArray(data.casos) && data.casos.length > 0) {
+                    localCases = data.casos;
                 }
+            } catch (localError) {
+                console.log('Local gallery unavailable; trying Sanity content.');
+            }
 
-                if (sanityContent) {
-                    const sanitySignature = JSON.stringify(sanityContent);
-                    if (sanitySignature !== lastSanitySignature) {
-                        lastSanitySignature = sanitySignature;
-                        applySanityContent(sanityContent);
-                    }
-                }
+            let sanityContent = null;
+            try {
+                sanityContent = await fetchSanityContent();
+            } catch (sanityError) {
+                console.log('Sanity content unavailable; using local content.');
+            }
 
-                const sanityCases = sanityContent && Array.isArray(sanityContent.gallery)
-                    ? sanityContent.gallery.filter(pair => pair.antes && pair.despues)
-                    : [];
-                const nextCases = sanityCases.length > 0 ? sanityCases : localCases;
-                const signature = JSON.stringify(nextCases);
+            if (sanityContent) {
+                const sanitySignature = JSON.stringify(sanityContent);
+                if (sanitySignature !== lastSanitySignature) {
+                    lastSanitySignature = sanitySignature;
+                    applySanityContent(sanityContent);
+                }
+            }
 
-                if (signature !== lastGallerySignature) {
-                    lastGallerySignature = signature;
-                    initSwiper(nextCases);
-                }
-            } catch (error) {
-                console.log('Showing local static cases.');
-                if (lastGallerySignature !== JSON.stringify(defaultPairs)) {
-                    lastGallerySignature = JSON.stringify(defaultPairs);
-                    initSwiper(defaultPairs);
-                }
+            const sanityCases = sanityContent && Array.isArray(sanityContent.gallery)
+                ? sanityContent.gallery.filter(pair => pair.antes && pair.despues)
+                : [];
+            const nextCases = sanityCases.length > 0 ? sanityCases : localCases;
+            const signature = JSON.stringify(nextCases);
+
+            if (signature !== lastGallerySignature) {
+                lastGallerySignature = signature;
+                initSwiper(nextCases);
             }
         }
 
