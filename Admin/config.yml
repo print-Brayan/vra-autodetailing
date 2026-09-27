@@ -1,6 +1,12 @@
 backend:
-  name: git-gateway
-  branch: main # Asegúrate de que tu rama en GitHub se llame 'main'
+  name: github
+  repo: print-Brayan/vra-autodetailing
+  branch: main
+  base_url: https://api.netlify.com
+  auth_endpoint: /auth
+
+site_url: https://vra-autodetailing.netlify.app
+display_url: https://vra-autodetailing.netlify.app
 
 media_folder: "images"
 public_folder: "/images"

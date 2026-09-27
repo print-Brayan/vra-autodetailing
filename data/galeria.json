@@ -1,8 +1,8 @@
 {
   "casos": [
-    {
-      "antes": "/images/antes1.jpg",
-      "despues": "/images/despues1.jpg"
-    }
+    { "antes": "images/antes1.jpg", "despues": "images/despues1.jpg" },
+    { "antes": "images/antes2.jpg", "despues": "images/despues2.jpg" },
+    { "antes": "images/antes3.jpg", "despues": "images/despues3.jpg" },
+    { "antes": "images/antes4.jpg", "despues": "images/despues4.jpg" }
   ]
 }

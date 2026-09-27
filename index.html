@@ -9,7 +9,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@400;500;600;700&family=Oswald:wght@600;700&display=swap" rel="stylesheet">
 
     <!-- Favicon / tab logo -->
     <link rel="icon" type="image/jpeg" href="images/logo.jpg">
@@ -37,7 +37,12 @@
                         }
                     },
                     fontFamily: {
-                        sans: ['Montserrat', 'sans-serif'],
+                        // Montserrat será la fuente por defecto para toda la página
+                        sans: ['Montserrat', 'sans-serif'], 
+                        // Oswald para títulos de secciones y tarjetas
+                        heading: ['Oswald', 'sans-serif'],  
+                        // Bebas Neue para el título gigante principal
+                        display: ['Bebas Neue', 'sans-serif'] 
                     }
                 }
             }
@@ -62,6 +67,14 @@
         .image-modal-open {
             overflow: hidden;
         }
+
+        .swiper-slide {
+            transition: opacity 0.7s ease, transform 0.7s ease;
+        }
+
+        .swiper-slide img {
+            transition: transform 0.7s ease, opacity 0.7s ease, filter 0.7s ease;
+        }
     </style>
 </head>
 <body class="bg-vra-bg text-vra-text font-sans antialiased selection:bg-vra-primary selection:text-vra-bg">
@@ -74,7 +87,7 @@
             <div class="flex items-center justify-between h-20">
                 <div class="flex-shrink-0 flex items-center gap-3">
                     <img src="images/logo.jpg" alt="V.R.A. Logo" class="w-12 h-12 rounded-full object-cover border border-vra-primary shadow-[0_0_10px_rgba(163,255,0,0.2)]">
-                    <span class="font-bold text-xl tracking-wider hidden sm:block">V.R.A. <span class="text-vra-primary text-sm block -mt-1 font-normal">AUTO DETAILING</span></span>
+                    <span class="font-heading font-bold text-xl tracking-wider hidden sm:block">V.R.A. <span class="text-vra-primary text-sm block -mt-1 font-normal">AUTO DETAILING</span></span>
                 </div>
                 <div class="hidden md:block">
                     <div class="ml-10 flex items-baseline space-x-8">
@@ -99,7 +112,7 @@
     =========================================== -->
     <section class="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
-            <h1 class="text-4xl md:text-6xl font-bold tracking-tight mb-6">
+            <h1 class="text-4xl md:text-6xl font-display font-bold tracking-tight mb-6">
                 PREMIUM <span class="text-transparent bg-clip-text bg-gradient-to-r from-vra-primary to-green-400">MOBILE AUTO CARE</span>
             </h1>
             <p class="mt-4 text-xl md:text-2xl text-vra-muted max-w-3xl mx-auto mb-10">
@@ -120,7 +133,7 @@
     <section id="how-it-works" class="py-20 border-t border-vra-border">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16">
-                <h2 class="text-3xl md:text-4xl font-bold">How It Works</h2>
+                <h2 class="text-3xl md:text-4xl font-heading font-bold">How It Works</h2>
                 <p class="mt-4 text-vra-muted">Simple, convenient, and professional.</p>
             </div>
             
@@ -150,7 +163,7 @@
     <section id="results" class="py-20 bg-[#0a0a0c] border-t border-vra-border overflow-hidden">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
             <div class="text-center mb-16">
-                <h2 class="text-3xl md:text-4xl font-bold">Our Results</h2>
+                <h2 class="text-3xl md:text-4xl font-heading font-bold">Our Results</h2>
                 <p class="mt-4 text-vra-muted">Real transformations. Swipe to see the V.R.A. difference.</p>
             </div>
 
@@ -184,7 +197,7 @@
     <section id="pricing" class="py-24 border-t border-vra-border">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16">
-                <h2 class="text-3xl md:text-4xl font-bold">Our Premium Packages</h2>
+                <h2 class="text-3xl md:text-4xl font-heading font-bold">Our Premium Packages</h2>
                 <p class="mt-4 text-vra-muted">Transparent pricing. Exceptional results.</p>
             </div>
 
@@ -302,7 +315,7 @@
     =========================================== -->
     <section id="coverage" class="py-20 border-t border-vra-border bg-[#0a0a0c]">
         <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h2 class="text-3xl md:text-4xl font-bold mb-6">Service Area</h2>
+            <h2 class="text-3xl md:text-4xl font-heading font-bold mb-6">Service Area</h2>
             <p class="text-vra-muted mb-10 text-lg">We are a 100% mobile detailing service. We proudly serve the following areas in [Your City/Region] and surrounding counties.</p>
             
             <div class="bg-vra-card border border-vra-border rounded-2xl p-10 flex items-center justify-center min-h-[300px]">
@@ -321,7 +334,7 @@
     <section id="faq" class="py-20 border-t border-vra-border">
         <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-12">
-                <h2 class="text-3xl md:text-4xl font-bold">Frequently Asked Questions</h2>
+                <h2 class="text-3xl md:text-4xl font-heading font-bold">Frequently Asked Questions</h2>
             </div>
             
             <div class="space-y-4">
@@ -371,7 +384,7 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex flex-col md:flex-row justify-between items-center gap-8">
                 <div class="text-center md:text-left">
-                    <span class="font-bold text-2xl tracking-wider">V.R.A.</span>
+                    <span class="font-heading font-bold text-2xl tracking-wider">V.R.A.</span>
                     <p class="text-vra-primary text-sm font-semibold mt-1">AUTO DETAILING</p>
                 </div>
                 
@@ -401,7 +414,10 @@
     <script>
         // Default static cases (if the CMS is empty or fails)
         const defaultPairs = [
-            { antes: 'images/antes1.jpg', despues: 'images/despues1.jpg' }
+            { antes: 'images/antes1.jpg', despues: 'images/despues1.jpg' },
+            { antes: 'images/antes2.jpg', despues: 'images/despues2.jpg' },
+            { antes: 'images/antes3.jpg', despues: 'images/despues3.jpg' },
+            { antes: 'images/antes4.jpg', despues: 'images/despues4.jpg' }
         ];
 
         function safeImagePath(path, fallback) {
@@ -409,8 +425,8 @@
                 return fallback;
             }
 
-            const normalizedPath = path.trim();
-            const allowedPattern = /^\/?images\/[a-zA-Z0-9._/-]+$/;
+            const normalizedPath = path.trim().replace(/^\/+/, '');
+            const allowedPattern = /^images\/[a-zA-Z0-9._/-]+$/;
 
             return allowedPattern.test(normalizedPath) ? normalizedPath : fallback;
         }
@@ -443,11 +459,13 @@
             return column;
         }
 
+        let swiperInstance = null;
+        let lastGallerySignature = '';
+
         function initSwiper(casosArray) {
             const wrapper = document.getElementById('gallery-wrapper');
-            wrapper.replaceChildren(); // Clear container safely
+            wrapper.replaceChildren();
 
-            // Generate slides for each case
             casosArray.forEach(pair => {
                 const beforeSrc = safeImagePath(pair.antes, 'images/antes1.jpg');
                 const afterSrc = safeImagePath(pair.despues, 'images/despues1.jpg');
@@ -475,49 +493,64 @@
                 });
             });
 
-            // Inicializamos SwiperJS con "Slides Per View"
-            new Swiper(".mySwiper", {
-                slidesPerView: 1, // One full card on mobile
-                spaceBetween: 30, // Space between cards
-                loop: true,       // Infinite loop
+            if (swiperInstance) {
+                swiperInstance.destroy(true, true);
+            }
+
+            swiperInstance = new Swiper('.mySwiper', {
+                slidesPerView: 1,
+                spaceBetween: 30,
+                speed: 900,
+                loop: true,
+                grabCursor: true,
+                observer: true,
+                observeParents: true,
                 autoplay: {
-                    delay: 4000,  // Pasa automático cada 4 segundos
+                    delay: 5000,
                     disableOnInteraction: false,
                 },
                 pagination: {
-                    el: ".swiper-pagination",
+                    el: '.swiper-pagination',
                     clickable: true,
                 },
                 navigation: {
-                    nextEl: ".swiper-button-next",
-                    prevEl: ".swiper-button-prev",
+                    nextEl: '.swiper-button-next',
+                    prevEl: '.swiper-button-prev',
                 },
                 breakpoints: {
-                    // Tablet and desktop screens (768px or more)
                     768: {
-                        slidesPerView: 2, // Show 2 cards at once
+                        slidesPerView: 2,
                     },
                     1024: {
-                        slidesPerView: 3, // Optional: Show 3 cards on large screens
+                        slidesPerView: 3,
                     }
                 },
             });
         }
 
-        // Obtener datos de Netlify CMS
-        fetch('data/galeria.json', { cache: 'no-store' })
-            .then(response => response.json())
-            .then(data => {
-                if (data.casos && data.casos.length > 0) {
-                    initSwiper(data.casos);
-                } else {
+        async function loadGallery() {
+            try {
+                const response = await fetch('data/galeria.json?ts=' + Date.now(), { cache: 'no-store' });
+                const data = await response.json();
+                const casos = Array.isArray(data.casos) ? data.casos : defaultPairs;
+                const nextCases = casos.length > 0 ? casos : defaultPairs;
+                const signature = JSON.stringify(nextCases);
+
+                if (signature !== lastGallerySignature) {
+                    lastGallerySignature = signature;
+                    initSwiper(nextCases);
+                }
+            } catch (error) {
+                console.log('Showing local static cases.');
+                if (lastGallerySignature !== JSON.stringify(defaultPairs)) {
+                    lastGallerySignature = JSON.stringify(defaultPairs);
                     initSwiper(defaultPairs);
                 }
-            })
-            .catch(error => {
-                console.log('Showing local static cases.');
-                initSwiper(defaultPairs);
-            });
+            }
+        }
+
+        loadGallery();
+        setInterval(loadGallery, 4000);
 
         const imageModal = document.getElementById('image-modal');
         const imageModalImg = document.getElementById('image-modal-img');
