@@ -451,7 +451,20 @@
             const normalizedPath = path.trim().replace(/^\/+/, '');
             const allowedPattern = /^images\/[a-zA-Z0-9._/-]+$/;
 
-            return allowedPattern.test(normalizedPath) ? normalizedPath : fallback;
+            if (allowedPattern.test(normalizedPath)) {
+                return normalizedPath;
+            }
+
+            try {
+                const imageUrl = new URL(path);
+                if (imageUrl.protocol === 'https:' && imageUrl.hostname === 'cdn.sanity.io') {
+                    return imageUrl.href;
+                }
+            } catch (error) {
+                return fallback;
+            }
+
+            return fallback;
         }
 
         function createImageColumn({ src, label, position, grayscale = false }) {
