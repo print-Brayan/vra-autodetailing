@@ -435,24 +435,9 @@
     =========================================== -->
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script>
-        // Default static cases (if the CMS is empty or fails)
-        const defaultPairs = [
-            { antes: 'images/antes1.jpg', despues: 'images/despues1.jpg' },
-            { antes: 'images/antes2.jpg', despues: 'images/despues2.jpg' },
-            { antes: 'images/antes3.jpg', despues: 'images/despues3.jpg' },
-            { antes: 'images/antes4.jpg', despues: 'images/despues4.jpg' }
-        ];
-
-        function safeImagePath(path, fallback) {
+        function safeSanityImageUrl(path) {
             if (typeof path !== 'string') {
-                return fallback;
-            }
-
-            const normalizedPath = path.trim().replace(/^\/+/, '');
-            const allowedPattern = /^images\/[a-zA-Z0-9._/-]+$/;
-
-            if (allowedPattern.test(normalizedPath)) {
-                return normalizedPath;
+                return null;
             }
 
             try {
@@ -461,10 +446,10 @@
                     return imageUrl.href;
                 }
             } catch (error) {
-                return fallback;
+                return null;
             }
 
-            return fallback;
+            return null;
         }
 
         function createImageColumn({ src, label, position, grayscale = false }) {
@@ -580,8 +565,12 @@
             wrapper.replaceChildren();
 
             casosArray.forEach(pair => {
-                const beforeSrc = safeImagePath(pair.antes, 'images/antes1.jpg');
-                const afterSrc = safeImagePath(pair.despues, 'images/despues1.jpg');
+                const beforeSrc = safeSanityImageUrl(pair.antes);
+                const afterSrc = safeSanityImageUrl(pair.despues);
+
+                if (!beforeSrc || !afterSrc) {
+                    return;
+                }
 
                 const slide = document.createElement('div');
                 slide.className = 'swiper-slide';
@@ -642,42 +631,29 @@
         }
 
         async function loadGallery() {
-            let localCases = defaultPairs;
-
             try {
-                const response = await fetch('data/galeria.json?ts=' + Date.now(), { cache: 'no-store' });
-                const data = await response.json();
-                if (Array.isArray(data.casos) && data.casos.length > 0) {
-                    localCases = data.casos;
+                const sanityContent = await fetchSanityContent();
+                if (!sanityContent) {
+                    return;
                 }
-            } catch (localError) {
-                console.log('Local gallery unavailable; trying Sanity content.');
-            }
 
-            let sanityContent = null;
-            try {
-                sanityContent = await fetchSanityContent();
-            } catch (sanityError) {
-                console.log('Sanity content unavailable; using local content.');
-            }
-
-            if (sanityContent) {
                 const sanitySignature = JSON.stringify(sanityContent);
                 if (sanitySignature !== lastSanitySignature) {
                     lastSanitySignature = sanitySignature;
                     applySanityContent(sanityContent);
                 }
-            }
 
-            const sanityCases = sanityContent && Array.isArray(sanityContent.gallery)
-                ? sanityContent.gallery.filter(pair => pair.antes && pair.despues)
-                : [];
-            const nextCases = sanityCases.length > 0 ? sanityCases : localCases;
-            const signature = JSON.stringify(nextCases);
+                const sanityCases = Array.isArray(sanityContent.gallery)
+                    ? sanityContent.gallery.filter(pair => pair.antes && pair.despues)
+                    : [];
+                const signature = JSON.stringify(sanityCases);
 
-            if (signature !== lastGallerySignature) {
-                lastGallerySignature = signature;
-                initSwiper(nextCases);
+                if (signature !== lastGallerySignature) {
+                    lastGallerySignature = signature;
+                    initSwiper(sanityCases);
+                }
+            } catch (sanityError) {
+                console.log('Sanity content unavailable; gallery will remain empty.');
             }
         }
 
