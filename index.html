@@ -9,7 +9,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@400;500;600;700&family=Oswald:wght@600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@400;500;600;700&family=Mr+Dafoe&family=Oswald:wght@600;700&display=swap" rel="stylesheet">
 
     <!-- Favicon / tab logo -->
     <link rel="icon" type="image/jpeg" href="images/logo.jpg">
@@ -42,7 +42,9 @@
                         // Oswald para títulos de secciones y tarjetas
                         heading: ['Oswald', 'sans-serif'],  
                         // Bebas Neue para el título gigante principal
-                        display: ['Bebas Neue', 'sans-serif'] 
+                        display: ['Bebas Neue', 'sans-serif'],
+                        // Caligrafia fina inspirada en el logotipo original
+                        logo: ['Mr Dafoe', 'cursive']
                     }
                 }
             }
@@ -85,9 +87,14 @@
     <nav class="fixed w-full z-50 bg-vra-bg/90 backdrop-blur-md border-b border-vra-border">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-20">
-                <div class="flex-shrink-0 flex items-center gap-3">
-                    <img src="images/logo.jpg" alt="V.R.A. Logo" class="w-12 h-12 rounded-full object-cover border border-vra-primary shadow-[0_0_10px_rgba(163,255,0,0.2)]">
-                    <span class="font-heading font-bold text-xl tracking-wider hidden sm:block">V.R.A. <span class="text-vra-primary text-sm block -mt-1 font-normal">AUTO DETAILING</span></span>
+                <div class="flex-shrink-0 flex items-center">
+                    <img src="images/logo.jpg" alt="V.R.A. Auto Detailing" class="w-14 h-14 rounded-full object-cover border border-vra-primary shadow-[0_0_10px_rgba(163,255,0,0.2)]">
+                    <div class="flex flex-col justify-center leading-none ml-2">
+                        <span class="font-logo text-3xl text-vra-primary tracking-normal">V.R.A.</span>
+                        <span class="font-sans text-[0.48rem] text-white tracking-[0.26em] uppercase mt-1 ml-1 font-medium">
+                            AUTO DETAILING
+                        </span>
+                    </div>
                 </div>
                 <div class="hidden md:block">
                     <div class="ml-10 flex items-baseline space-x-8">
@@ -314,15 +321,31 @@
          COVERAGE AREA
     =========================================== -->
     <section id="coverage" class="py-20 border-t border-vra-border bg-[#0a0a0c]">
-        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <h2 class="text-3xl md:text-4xl font-heading font-bold mb-6">Service Area</h2>
-            <p class="text-vra-muted mb-10 text-lg">We are a 100% mobile detailing service. We proudly serve the following areas in [Your City/Region] and surrounding counties.</p>
+            <p class="text-vra-muted mb-10 text-lg">We are a 100% mobile detailing service, proudly serving the greater metro Atlanta area.</p>
             
-            <div class="bg-vra-card border border-vra-border rounded-2xl p-10 flex items-center justify-center min-h-[300px]">
-                <div class="text-center">
-                    <svg class="w-12 h-12 text-vra-primary mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
-                    <p class="text-xl font-bold">Within a 30-mile radius of [City Center]</p>
-                    <p class="text-vra-muted mt-2">Contact us if you are outside this zone for availability.</p>
+            <div class="bg-vra-card border border-vra-border rounded-2xl p-4 md:p-6 overflow-hidden shadow-[0_10px_30px_rgba(163,255,0,0.06)]">
+                <div class="grid grid-cols-1 lg:grid-cols-[1.2fr_0.8fr] items-center gap-8">
+                    <div class="rounded-2xl border border-vra-border overflow-hidden bg-vra-card">
+                        <iframe
+                            title="Service area map"
+                            src="https://www.openstreetmap.org/export/embed.html?bbox=-85.07%2C33.82%2C-84.18%2C34.38&layer=mapnik&marker=34.035%2C-84.58"
+                            class="w-full h-[260px] md:h-[320px] border-0 bg-vra-card"
+                            loading="lazy"
+                            referrerpolicy="no-referrer-when-downgrade">
+                        </iframe>
+                    </div>
+
+                    <div class="text-left">
+                        <p class="text-xl md:text-2xl font-bold mb-5">Serving:</p>
+                        <div class="flex flex-wrap gap-3">
+                            <a href="https://www.openstreetmap.org/?mlat=34.0657&mlon=-84.6503#map=13/34.0657/-84.6503" target="_blank" rel="noopener noreferrer" class="px-5 py-2 rounded-full border border-vra-primary bg-vra-primary/10 text-vra-primary font-semibold hover:bg-vra-primary hover:text-vra-bg transition-colors">Acworth</a>
+                            <a href="https://www.openstreetmap.org/?mlat=34.0232&mlon=-84.6155#map=13/34.0232/-84.6155" target="_blank" rel="noopener noreferrer" class="px-5 py-2 rounded-full border border-vra-primary bg-vra-primary/10 text-vra-primary font-semibold hover:bg-vra-primary hover:text-vra-bg transition-colors">Kennesaw</a>
+                            <a href="https://www.openstreetmap.org/?mlat=34.1015&mlon=-84.5194#map=13/34.1015/-84.5194" target="_blank" rel="noopener noreferrer" class="px-5 py-2 rounded-full border border-vra-primary bg-vra-primary/10 text-vra-primary font-semibold hover:bg-vra-primary hover:text-vra-bg transition-colors">Woodstock</a>
+                        </div>
+                        <p class="text-vra-muted mt-6">We also service nearby communities in the surrounding metro area.</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -389,7 +412,7 @@
                 </div>
                 
                 <div class="flex gap-6">
-                    <a href="#" class="text-vra-muted hover:text-vra-primary transition-colors">
+                    <a href="https://www.facebook.com/VRAautodetailing" target="_blank" rel="noopener noreferrer" class="text-vra-muted hover:text-vra-primary transition-colors">
                         <span class="sr-only">Facebook</span>
                         <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z" clip-rule="evenodd" /></svg>
                     </a>
