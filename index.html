@@ -119,14 +119,7 @@
     =========================================== -->
     <section id="hero-section" class="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden">
         <div class="absolute inset-0 z-0 overflow-hidden pointer-events-none" aria-hidden="true">
-            <iframe
-                src="https://assets.pinterest.com/ext/embed.html?id=592434526029326620"
-                title="V.R.A. Auto Detailing video"
-                class="absolute left-1/2 top-1/2 w-[min(1100px,140vw)] h-[min(800px,110vw)] -translate-x-1/2 -translate-y-1/2 opacity-45 scale-110"
-                frameborder="0"
-                scrolling="no"
-                loading="lazy">
-            </iframe>
+            <video id="hero-video" class="absolute inset-0 w-full h-full object-cover opacity-45 hidden" autoplay muted loop playsinline></video>
             <div class="absolute inset-0 bg-vra-bg/75"></div>
         </div>
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
@@ -502,6 +495,7 @@
             heroTitle,
             heroSubtitle,
             "heroImageUrl": heroImage.asset->url,
+            videos[]{title, "url": video.asset->url, "posterUrl": poster.asset->url},
             gallery[]{"antes": beforeImage.asset->url, "despues": afterImage.asset->url},
             serviceAreaDescription,
             cities[]{name, latitude, longitude},
@@ -529,6 +523,7 @@
             const heroTitle = document.getElementById('hero-title');
             const heroSubtitle = document.getElementById('hero-subtitle');
             const heroSection = document.getElementById('hero-section');
+            const heroVideo = document.getElementById('hero-video');
             const serviceDescription = document.getElementById('service-area-description');
             const citiesContainer = document.getElementById('service-cities');
 
@@ -542,6 +537,13 @@
                 heroSection.style.backgroundImage = `linear-gradient(rgba(15, 15, 17, 0.72), rgba(15, 15, 17, 0.88)), url("${content.heroImageUrl}")`;
                 heroSection.style.backgroundSize = 'cover';
                 heroSection.style.backgroundPosition = 'center';
+            }
+            if (Array.isArray(content.videos) && content.videos[0]?.url) {
+                heroVideo.src = content.videos[0].url;
+                if (content.videos[0].posterUrl) {
+                    heroVideo.poster = content.videos[0].posterUrl;
+                }
+                heroVideo.classList.remove('hidden');
             }
             if (content.serviceAreaDescription) {
                 serviceDescription.textContent = content.serviceAreaDescription;

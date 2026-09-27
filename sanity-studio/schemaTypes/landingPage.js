@@ -25,6 +25,40 @@ export default defineType({
       options: {hotspot: true},
     }),
     defineField({
+      name: 'videos',
+      title: 'Videos',
+      type: 'array',
+      of: [
+        {
+          type: 'object',
+          name: 'videoItem',
+          title: 'Video',
+          fields: [
+            defineField({name: 'title', title: 'Nombre del video', type: 'string'}),
+            defineField({
+              name: 'video',
+              title: 'Archivo de video',
+              type: 'file',
+              options: {accept: 'video/*'},
+              validation: (rule) => rule.required(),
+            }),
+            defineField({
+              name: 'poster',
+              title: 'Imagen de portada (opcional)',
+              type: 'image',
+              options: {hotspot: true},
+            }),
+          ],
+          preview: {
+            select: {title: 'title', media: 'poster'},
+            prepare({title, media}) {
+              return {title: title || 'Video', media}
+            },
+          },
+        },
+      ],
+    }),
+    defineField({
       name: 'gallery',
       title: 'Galería antes y después',
       type: 'array',
