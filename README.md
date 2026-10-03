@@ -53,8 +53,9 @@ El documento principal se llama **V.R.A. Auto Detailing**. Desde allí se pueden
 - imagen y videos del hero
 - galería antes y después
 - paquetes, precios, duración y características
+- add-ons con títulos y precios editables
 - descripción del área de servicio y ciudades
-- enlaces de Facebook e Instagram
+- mensaje predeterminado de WhatsApp y enlaces de Facebook e Instagram
 
 ### Ejecutar el Studio localmente
 
@@ -87,6 +88,8 @@ full
 ```
 
 Cada paquete permite editar nombre, descripción, precio, duración, etiqueta y secciones de características. Al publicar, la landing consulta Sanity automáticamente.
+
+En **Add-ons / Servicios adicionales** se pueden editar los nombres y precios de servicios como Engine Bay Detail, Headlight Restoration, Pet Hair Removal y Clay Bar Treatment.
 
 ## Desarrollo y publicación de la web
 

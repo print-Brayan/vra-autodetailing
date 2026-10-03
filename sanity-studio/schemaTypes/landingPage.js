@@ -19,6 +19,13 @@ export default defineType({
       rows: 3,
     }),
     defineField({
+      name: 'whatsappMessage',
+      title: 'Mensaje predeterminado de WhatsApp',
+      type: 'text',
+      rows: 3,
+      initialValue: 'Hi! 👋🏻 Thank you for contacting VRA Auto Detailing.\nWe’d be happy to help you with a quote.\nWhat vehicle’s year, make & model?',
+    }),
+    defineField({
       name: 'heroImage',
       title: 'Imagen principal',
       type: 'image',
@@ -118,6 +125,23 @@ export default defineType({
               return {title: title || 'Paquete', subtitle: subtitle ? `$${subtitle}` : 'Sin precio'}
             },
           },
+        },
+      ],
+    }),
+    defineField({
+      name: 'addOns',
+      title: 'Add-ons / Servicios adicionales',
+      type: 'array',
+      of: [
+        {
+          type: 'object',
+          name: 'addOn',
+          title: 'Servicio adicional',
+          fields: [
+            defineField({name: 'title', title: 'Título', type: 'string', validation: (rule) => rule.required()}),
+            defineField({name: 'price', title: 'Precio', type: 'string', validation: (rule) => rule.required()}),
+          ],
+          preview: {select: {title: 'title', subtitle: 'price'}},
         },
       ],
     }),
