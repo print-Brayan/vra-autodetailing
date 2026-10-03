@@ -43,7 +43,8 @@ Landing page premium para el servicio móvil de detailing automotriz de V.R.A. L
 Proyecto: `vjs9yzly`
 Dataset: `production`
 Studio publicado: `https://vra-autodetailing.sanity.studio/`
-Web publicada: `https://vra-autodetailing.brayanmartinez1020.workers.dev/`
+Web principal: `https://vra-autodetailing.com/`
+Web temporal: `https://vra-autodetailing.brayanmartinez1020.workers.dev/`
 
 El documento principal se llama **V.R.A. Auto Detailing**. Desde allí se pueden administrar:
 
@@ -98,15 +99,15 @@ Después de publicar cambios en GitHub, Cloudflare realiza el despliegue automá
 
 ## CORS de Sanity
 
-El dominio público ya verificado es:
+El dominio principal registrado en CORS es:
 
 ```text
-https://vra-autodetailing.brayanmartinez1020.workers.dev
+https://vra-autodetailing.com
 ```
 
-Debe permanecer registrado en **Sanity > API > CORS origins**. Para desarrollo local, agrega también el origen del servidor utilizado, por ejemplo `http://localhost:3000`.
+El dominio temporal también está autorizado como respaldo. Para desarrollo local, agrega el origen del servidor utilizado, por ejemplo `http://localhost:3000`.
 
-La conexión fue verificada contra la API de Sanity con respuesta `200` y el encabezado CORS correcto.
+Sanity ya tiene ambos dominios registrados en **API > CORS origins**. El dominio personalizado aún requiere que el DNS de Cloudflare esté activo.
 
 ## Autor
 

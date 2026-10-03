@@ -26,4 +26,5 @@ Si se modifica el schema, vuelve a desplegarlo con `npm run deploy` usando una c
 
 Proyecto: `vjs9yzly`
 Dataset: `production`
-Web: `https://vra-autodetailing.brayanmartinez1020.workers.dev/`
+Web principal: `https://vra-autodetailing.com/`
+Web temporal: `https://vra-autodetailing.brayanmartinez1020.workers.dev/`
