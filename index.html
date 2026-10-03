@@ -18,6 +18,9 @@
     <!-- SwiperJS CSS (for the carousel) -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
 
+    <!-- Leaflet CSS (for the service area map) -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="" />
+
     <!-- Netlify Identity script for CMS login -->
     <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
     
@@ -396,13 +399,7 @@
             <div class="bg-vra-card border border-vra-border rounded-2xl p-4 md:p-6 overflow-hidden shadow-[0_10px_30px_rgba(56,71,27,0.18)]">
                 <div class="grid grid-cols-1 lg:grid-cols-[1.2fr_0.8fr] items-center gap-8">
                     <div class="rounded-2xl border border-vra-border overflow-hidden bg-vra-card">
-                        <iframe
-                            title="Service area map"
-                            src="https://www.openstreetmap.org/export/embed.html?bbox=-85.07%2C33.82%2C-84.18%2C34.38&layer=mapnik&marker=34.035%2C-84.58"
-                            class="w-full h-[260px] md:h-[320px] border-0 bg-vra-card"
-                            loading="lazy"
-                            referrerpolicy="no-referrer-when-downgrade">
-                        </iframe>
+                        <div id="service-area-map" class="w-full h-[260px] md:h-[320px]" aria-label="15-mile service radius map"></div>
                     </div>
 
                     <div class="text-left">
@@ -514,6 +511,7 @@
          SCRIPTS: SWIPERJS Y CMS LÓGICA
     =========================================== -->
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+        <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
     <script>
         function safeSanityImageUrl(path) {
             if (typeof path !== 'string') {
@@ -563,6 +561,64 @@
         let swiperInstance = null;
         let lastGallerySignature = '';
         let lastSanitySignature = '';
+        let serviceAreaMap = null;
+        let serviceAreaMarkers = null;
+
+        function initServiceAreaMap(cities = []) {
+            const mapElement = document.getElementById('service-area-map');
+            if (!mapElement || !window.L || serviceAreaMap) {
+                return;
+            }
+
+            const acworth = [34.0657, -84.6503];
+            const radiusMeters = 24140;
+            const radiusBounds = L.circle(acworth, {radius: radiusMeters}).getBounds();
+
+            serviceAreaMap = L.map(mapElement, {
+                zoomControl: false,
+                dragging: false,
+                scrollWheelZoom: false,
+                doubleClickZoom: false,
+                boxZoom: false,
+                keyboard: false,
+                touchZoom: false,
+                attributionControl: true,
+            });
+
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                maxZoom: 19,
+                attribution: '&copy; OpenStreetMap contributors',
+            }).addTo(serviceAreaMap);
+
+            L.circle(acworth, {
+                radius: radiusMeters,
+                color: '#38471B',
+                weight: 2,
+                fillColor: '#C8D59E',
+                fillOpacity: 0.14,
+            }).addTo(serviceAreaMap).bindPopup('15-mile service radius from Acworth, GA');
+
+            serviceAreaMarkers = L.layerGroup().addTo(serviceAreaMap);
+            const mapCities = cities.length > 0 ? cities : [
+                {name: 'Acworth', latitude: 34.0657, longitude: -84.6503},
+                {name: 'Kennesaw', latitude: 34.0232, longitude: -84.6155},
+                {name: 'Woodstock', latitude: 34.1015, longitude: -84.5194},
+            ];
+
+            mapCities.forEach(city => {
+                if (city.name && Number.isFinite(city.latitude) && Number.isFinite(city.longitude)) {
+                    L.circleMarker([city.latitude, city.longitude], {
+                        radius: 6,
+                        color: '#0F0F11',
+                        weight: 2,
+                        fillColor: '#D4AF37',
+                        fillOpacity: 1,
+                    }).bindTooltip(city.name, {permanent: true, direction: 'top', offset: [0, -6]}).addTo(serviceAreaMarkers);
+                }
+            });
+
+            serviceAreaMap.fitBounds(radiusBounds, {padding: [10, 10], maxZoom: 11});
+        }
 
         const sanityProjectId = 'vjs9yzly';
         const sanityDataset = 'production';
@@ -737,6 +793,7 @@
                 serviceDescription.textContent = content.serviceAreaDescription;
             }
             if (Array.isArray(content.cities) && content.cities.length > 0) {
+                initServiceAreaMap(content.cities);
                 citiesContainer.replaceChildren();
                 content.cities.forEach(city => {
                     if (!city.name || !Number.isFinite(city.latitude) || !Number.isFinite(city.longitude)) {
@@ -859,6 +916,7 @@
         }
 
         loadGallery();
+        initServiceAreaMap();
         setInterval(loadGallery, 4000);
 
         const imageModal = document.getElementById('image-modal');
