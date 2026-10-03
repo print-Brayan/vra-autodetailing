@@ -1,0 +1,12 @@
+{
+    "chat.tools.terminal.autoApprove": {
+        "/^Set-Location \"c:\\\\Users\\\\Windows 11 pro\\\\OneDrive\\\\Escritorio\\\\VRA auto deatil\\\\vra-autodetailing\\\\sanity-studio\"; npx sanity login$/": {
+            "approve": true,
+            "matchCommandLine": true
+        },
+        "/^Set-Location \"c:\\\\Users\\\\Windows 11 pro\\\\OneDrive\\\\Escritorio\\\\VRA auto deatil\\\\vra-autodetailing\\\\sanity-studio\"; npx sanity deploy$/": {
+            "approve": true,
+            "matchCommandLine": true
+        }
+    }
+}
