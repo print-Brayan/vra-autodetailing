@@ -1,80 +1,103 @@
 # V.R.A. Auto Detailing
 
-Landing page premium para un servicio móvil de detailing automotriz.
+Landing page premium para el servicio móvil de detailing automotriz de V.R.A. La web es estática y consume el contenido publicado desde Sanity.
 
-[![Netlify Status](https://api.netlify.com/api/v1/badges/4c432d40-e605-45e2-9ddf-3558585d312a/deploy-status)](https://app.netlify.com/projects/vra-autodetailing/deploys)
+## Características
 
-## Overview
-
-V.R.A. Auto Detailing es una marca enfocada en limpieza, restauración y cuidado premium de vehículos con servicio móvil. Este proyecto presenta la identidad visual y el flujo comercial de la marca para captar clientes, mostrar resultados y facilitar reservas por WhatsApp.
-
-## Características principales
-
-- Diseño premium oscuro con branding moderno
-- Sección principal con llamada a la acción
-- Cómo funciona el servicio
-- Galería antes y después con carrusel
-- Paquetes y precios
-- Área de cobertura
-- FAQ
-- Enlaces a redes sociales y WhatsApp
-- Panel de administración con Decap CMS para gestionar contenido
+- Diseño responsive con Tailwind CSS y Montserrat.
+- Hero con video administrable desde Sanity.
+- Galería antes y después cargada exclusivamente desde Sanity.
+- Paquetes, precios, descripciones y características editables desde Sanity.
+- Área de servicio con mapa y ciudades enlazadas.
+- Reservas por Gmail en computadora y SMS en teléfonos.
+- WhatsApp, Facebook, Instagram y correo en el footer.
+- Menú responsive para móviles.
 
 ## Stack
 
-- HTML5
-- Tailwind CSS
-- JavaScript
+- HTML5 y JavaScript vanilla
+- Tailwind CSS vía CDN
 - Swiper.js
-- Decap CMS
-- Netlify
+- Sanity Studio
+- Cloudflare Workers
 - GitHub
 
 ## Estructura
 
 ```text
 .
-├── admin/
-│   ├── config.yml
-│   └── index.html
-├── data/
-│   └── galeria.json
-├── images/
-├── index.html
+├── admin/                 # Configuración heredada de Decap CMS
+├── images/                # Logo local del sitio
+├── sanity-studio/         # Panel y schema de Sanity
+│   ├── schemaTypes/
+│   ├── package.json
+│   ├── sanity.cli.js
+│   └── sanity.config.js
+├── index.html             # Landing page
 ├── README.md
 └── .gitignore
 ```
 
-## CMS / Admin
+## Sanity
 
-El panel administrativo está disponible en:
+Proyecto: `vjs9yzly`
+Dataset: `production`
+Studio publicado: `https://vra-autodetailing.sanity.studio/`
 
-```text
-/admin/
+El documento principal se llama **V.R.A. Auto Detailing**. Desde allí se pueden administrar:
+
+- título y subtítulo del hero
+- imagen y videos del hero
+- galería antes y después
+- paquetes, precios, duración y características
+- descripción del área de servicio y ciudades
+- enlaces de Facebook e Instagram
+
+### Ejecutar el Studio localmente
+
+```powershell
+cd sanity-studio
+npm install
+npm run dev
 ```
 
-Se utiliza Decap CMS conectado con GitHub para permitir subir imágenes y actualizar la galería sin manipular el JSON manualmente.
+### Desplegar el Studio
 
-## Cómo desplegar
+Requiere una cuenta con permisos de administrador o developer en el proyecto:
 
-1. Conecta este repositorio a Netlify.
-2. Asegúrate de que el sitio se publique desde la rama principal.
-3. Habilita Netlify Identity y Git Gateway.
-4. Abre el panel de administración en `/admin/`.
-5. Inicia sesión y gestiona la galería desde el CMS.
+```powershell
+cd sanity-studio
+npx sanity login
+npm run deploy
+```
 
-## Cómo actualizar la galería
+El cliente solo necesita entrar al Studio publicado con su cuenta invitada como **Editor**. No necesita acceso a GitHub, Cloudflare ni al código.
 
-1. Ve al panel administrativo.
-2. Abre la colección de galería.
-3. Agrega un nuevo caso.
-4. Sube la imagen “Antes” y la imagen “Después”.
-5. Guarda y publica.
-6. La página se actualizará automáticamente.
+## Paquetes y precios
 
-## Uso local
+En Sanity, dentro de **Paquetes y precios**, usa estas claves para conectar las tarjetas existentes:
 
-Puedes abrir el sitio localmente con un servidor estático o con cualquier entorno de desarrollo que prefieras. Si quieres probar el CMS localmente, asegúrate de tener la configuración de Netlify habilitada correctamente.
+```text
+standard
+interior
+full
+```
+
+Cada paquete permite editar nombre, descripción, precio, duración, etiqueta y secciones de características. Al publicar, la landing consulta Sanity automáticamente.
+
+## Desarrollo y publicación de la web
+
+La web principal se publica desde la rama `main`. Para probarla localmente, usa cualquier servidor estático, por ejemplo:
+
+```powershell
+npx serve .
+```
+
+Después de publicar cambios en GitHub, Cloudflare realiza el despliegue automático. Para evitar caché, recarga con `Ctrl + F5`.
+
+## CORS de Sanity
+
+El dominio público de la web debe estar registrado en **Sanity > API > CORS origins**. Agrega la URL de Cloudflare y, para desarrollo local, el origen del servidor utilizado, por ejemplo `http://localhost:3000`.
 
 ## Autor
 
