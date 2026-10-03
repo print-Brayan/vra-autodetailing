@@ -44,6 +44,7 @@ Proyecto: `vjs9yzly`
 Dataset: `production`
 Studio publicado: `https://vra-autodetailing.sanity.studio/`
 Web principal: `https://vra-autodetailing.com/`
+Web con www: `https://www.vra-autodetailing.com/`
 Web temporal: `https://vra-autodetailing.brayanmartinez1020.workers.dev/`
 
 El documento principal se llama **V.R.A. Auto Detailing**. Desde allí se pueden administrar:
@@ -103,6 +104,12 @@ El dominio principal registrado en CORS es:
 
 ```text
 https://vra-autodetailing.com
+```
+
+También está autorizado:
+
+```text
+https://www.vra-autodetailing.com
 ```
 
 El dominio temporal también está autorizado como respaldo. Para desarrollo local, agrega el origen del servidor utilizado, por ejemplo `http://localhost:3000`.
