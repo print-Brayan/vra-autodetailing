@@ -43,6 +43,7 @@ Landing page premium para el servicio móvil de detailing automotriz de V.R.A. L
 Proyecto: `vjs9yzly`
 Dataset: `production`
 Studio publicado: `https://vra-autodetailing.sanity.studio/`
+Web publicada: `https://vra-autodetailing.brayanmartinez1020.workers.dev/`
 
 El documento principal se llama **V.R.A. Auto Detailing**. Desde allí se pueden administrar:
 
@@ -93,11 +94,19 @@ La web principal se publica desde la rama `main`. Para probarla localmente, usa 
 npx serve .
 ```
 
-Después de publicar cambios en GitHub, Cloudflare realiza el despliegue automático. Para evitar caché, recarga con `Ctrl + F5`.
+Después de publicar cambios en GitHub, Cloudflare realiza el despliegue automático en la cuenta que administra el dominio actual. Para evitar caché, recarga con `Ctrl + F5`.
 
 ## CORS de Sanity
 
-El dominio público de la web debe estar registrado en **Sanity > API > CORS origins**. Agrega la URL de Cloudflare y, para desarrollo local, el origen del servidor utilizado, por ejemplo `http://localhost:3000`.
+El dominio público ya verificado es:
+
+```text
+https://vra-autodetailing.brayanmartinez1020.workers.dev
+```
+
+Debe permanecer registrado en **Sanity > API > CORS origins**. Para desarrollo local, agrega también el origen del servidor utilizado, por ejemplo `http://localhost:3000`.
+
+La conexión fue verificada contra la API de Sanity con respuesta `200` y el encabezado CORS correcto.
 
 ## Autor
 
