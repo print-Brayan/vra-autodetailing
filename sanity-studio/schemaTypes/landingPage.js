@@ -81,6 +81,47 @@ export default defineType({
       ],
     }),
     defineField({
+      name: 'packages',
+      title: 'Paquetes y precios',
+      type: 'array',
+      of: [
+        {
+          type: 'object',
+          name: 'servicePackage',
+          title: 'Paquete de servicio',
+          fields: [
+            defineField({name: 'key', title: 'Identificador', type: 'string', description: 'Usa standard, interior o full para conectar esta tarjeta.'}),
+            defineField({name: 'name', title: 'Nombre del paquete', type: 'string', validation: (rule) => rule.required()}),
+            defineField({name: 'description', title: 'Descripción corta', type: 'string'}),
+            defineField({name: 'price', title: 'Precio desde', type: 'number', validation: (rule) => rule.min(0)}),
+            defineField({name: 'duration', title: 'Duración', type: 'string'}),
+            defineField({name: 'badge', title: 'Etiqueta opcional', type: 'string', description: 'Ejemplo: POPULAR o BEST VALUE'}),
+            defineField({
+              name: 'sections',
+              title: 'Características',
+              type: 'array',
+              of: [
+                {
+                  type: 'object',
+                  name: 'featureSection',
+                  fields: [
+                    defineField({name: 'title', title: 'Título de sección', type: 'string'}),
+                    defineField({name: 'items', title: 'Características', type: 'array', of: [{type: 'string'}]}),
+                  ],
+                },
+              ],
+            }),
+          ],
+          preview: {
+            select: {title: 'name', subtitle: 'price'},
+            prepare({title, subtitle}) {
+              return {title: title || 'Paquete', subtitle: subtitle ? `$${subtitle}` : 'Sin precio'}
+            },
+          },
+        },
+      ],
+    }),
+    defineField({
       name: 'serviceAreaDescription',
       title: 'Descripción del área de servicio',
       type: 'text',

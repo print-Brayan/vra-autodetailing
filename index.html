@@ -235,19 +235,19 @@
 
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
                 <!-- CARD 1 -->
-                <div class="order-1 lg:order-1 bg-vra-card rounded-2xl p-8 border border-vra-border flex flex-col transition-all duration-300 hover:-translate-y-2 hover:border-vra-primary hover:shadow-[0_10px_30px_rgba(56,71,27,0.24)] relative overflow-hidden">
+                <div data-package="standard" class="order-1 lg:order-1 bg-vra-card rounded-2xl p-8 border border-vra-border flex flex-col transition-all duration-300 hover:-translate-y-2 hover:border-vra-primary hover:shadow-[0_10px_30px_rgba(56,71,27,0.24)] relative overflow-hidden">
                     <div class="absolute top-5 -right-12 bg-[#D4AF37] text-[#0F0F11] text-xs font-bold px-12 py-1 rotate-45">POPULAR</div>
                     <div class="mb-6">
-                        <h3 class="text-2xl font-bold text-white mb-2 uppercase tracking-wide">Standard Detail</h3>
-                        <p class="text-vra-muted text-sm italic mb-4">Our Essential Premium Service</p>
-                        <div class="text-4xl font-bold text-vra-primary mb-2"><span class="text-xl text-vra-muted font-normal mr-1">Starting at</span>$149</div>
-                        <p class="text-sm text-vra-muted flex items-center gap-2">
+                        <h3 data-package-name class="text-2xl font-bold text-white mb-2 uppercase tracking-wide">Standard Detail</h3>
+                        <p data-package-description class="text-vra-muted text-sm italic mb-4">Our Essential Premium Service</p>
+                        <div data-package-price class="text-4xl font-bold text-vra-primary mb-2"><span class="text-xl text-vra-muted font-normal mr-1">Starting at</span><span data-package-price-value>$149</span></div>
+                        <p data-package-duration class="text-sm text-vra-muted flex items-center gap-2">
                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                            2 - 3 Hours
+                            <span data-package-duration-value>2 - 3 Hours</span>
                         </p>
                     </div>
                     
-                    <div class="flex-grow space-y-4 mb-8">
+                    <div data-package-features class="flex-grow space-y-4 mb-8">
                         <div>
                             <h4 class="text-vra-primary font-semibold mb-2">INTERIOR</h4>
                             <ul class="space-y-2 text-sm text-vra-text">
@@ -277,18 +277,18 @@
                 </div>
 
                 <!-- CARD 2 -->
-                <div class="order-2 lg:order-2 bg-vra-card rounded-2xl p-8 border border-vra-border flex flex-col transition-all duration-300 hover:-translate-y-2 hover:border-vra-primary hover:shadow-[0_10px_30px_rgba(56,71,27,0.24)] relative overflow-hidden">
+                <div data-package="interior" class="order-2 lg:order-2 bg-vra-card rounded-2xl p-8 border border-vra-border flex flex-col transition-all duration-300 hover:-translate-y-2 hover:border-vra-primary hover:shadow-[0_10px_30px_rgba(56,71,27,0.24)] relative overflow-hidden">
                     <div class="mb-6">
-                        <h3 class="text-2xl font-bold text-white mb-2 uppercase tracking-wide">Interior Focus</h3>
-                        <p class="text-vra-muted text-sm italic mb-4">Deep Clean. Sanitized. Refreshed.</p>
-                        <div class="text-4xl font-bold text-vra-primary mb-2"><span class="text-xl text-vra-muted font-normal mr-1">Starting at</span>$299</div>
-                        <p class="text-sm text-vra-muted flex items-center gap-2">
+                        <h3 data-package-name class="text-2xl font-bold text-white mb-2 uppercase tracking-wide">Interior Focus</h3>
+                        <p data-package-description class="text-vra-muted text-sm italic mb-4">Deep Clean. Sanitized. Refreshed.</p>
+                        <div data-package-price class="text-4xl font-bold text-vra-primary mb-2"><span class="text-xl text-vra-muted font-normal mr-1">Starting at</span><span data-package-price-value>$299</span></div>
+                        <p data-package-duration class="text-sm text-vra-muted flex items-center gap-2">
                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                            3 - 4 Hours
+                            <span data-package-duration-value>3 - 4 Hours</span>
                         </p>
                     </div>
                     
-                    <div class="flex-grow space-y-4 mb-8">
+                    <div data-package-features class="flex-grow space-y-4 mb-8">
                         <div>
                             <h4 class="text-vra-primary font-semibold mb-2">FOCUS INTERIOR</h4>
                             <ul class="space-y-2 text-sm text-vra-text">
@@ -316,19 +316,19 @@
                 </div>
 
                 <!-- CARD 3 -->
-                <div class="order-3 lg:order-3 bg-vra-card rounded-2xl p-8 border border-vra-border flex flex-col transition-all duration-300 hover:-translate-y-2 hover:border-vra-primary hover:shadow-[0_10px_30px_rgba(56,71,27,0.24)] relative overflow-hidden">
+                <div data-package="full" class="order-3 lg:order-3 bg-vra-card rounded-2xl p-8 border border-vra-border flex flex-col transition-all duration-300 hover:-translate-y-2 hover:border-vra-primary hover:shadow-[0_10px_30px_rgba(56,71,27,0.24)] relative overflow-hidden">
                     <div class="absolute top-5 -right-12 bg-[#FFD700] text-black text-xs font-bold px-12 py-1 rotate-45">BEST VALUE</div>
                     <div class="mb-6">
-                        <h3 class="text-2xl font-bold text-white mb-2 uppercase tracking-wide">Full Detail</h3>
-                        <p class="text-vra-muted text-sm italic mb-4">Our Most Comprehensive Service</p>
-                        <div class="text-4xl font-bold text-vra-primary mb-2"><span class="text-xl text-vra-muted font-normal mr-1">Starting at</span>$375</div>
-                        <p class="text-sm text-vra-muted flex items-center gap-2">
+                        <h3 data-package-name class="text-2xl font-bold text-white mb-2 uppercase tracking-wide">Full Detail</h3>
+                        <p data-package-description class="text-vra-muted text-sm italic mb-4">Our Most Comprehensive Service</p>
+                        <div data-package-price class="text-4xl font-bold text-vra-primary mb-2"><span class="text-xl text-vra-muted font-normal mr-1">Starting at</span><span data-package-price-value>$375</span></div>
+                        <p data-package-duration class="text-sm text-vra-muted flex items-center gap-2">
                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                            5+ Hours
+                            <span data-package-duration-value>5+ Hours</span>
                         </p>
                     </div>
                     
-                    <div class="flex-grow space-y-4 mb-8">
+                    <div data-package-features class="flex-grow space-y-4 mb-8">
                         <div>
                             <h4 class="text-vra-primary font-semibold mb-2">FOCUS INTERIOR & EXTERIOR</h4>
                             <ul class="space-y-2 text-sm text-vra-text">
@@ -382,7 +382,7 @@
                             <a href="https://www.openstreetmap.org/?mlat=34.1015&mlon=-84.5194#map=13/34.1015/-84.5194" target="_blank" rel="noopener noreferrer" class="px-5 py-2 rounded-full border border-vra-button bg-vra-button/20 text-vra-buttonSoft font-semibold hover:bg-vra-buttonHover hover:text-white transition-colors">Woodstock</a>
                         </div>
                         <div class="mt-6 space-y-2 text-sm leading-relaxed">
-                            <p class="text-vra-buttonSoft font-semibold">15-Mile Service Radius</p>
+                            <p class="text-vra-buttonSoft font-semibold">15-Miles Service Radius</p>
                             <p class="text-vra-muted">We bring the detail shop to your driveway at no extra cost within 15 miles of Acworth, GA.</p>
                             <p class="text-vra-muted"><span class="text-vra-buttonSoft font-semibold">NOTE:</span> Locations beyond 15 miles are welcome! A standard per-mile travel fee will apply.</p>
                         </div>
@@ -542,6 +542,7 @@
             "heroImageUrl": heroImage.asset->url,
             videos[]{title, "url": video.asset->url, "posterUrl": poster.asset->url},
             gallery[]{"antes": beforeImage.asset->url, "despues": afterImage.asset->url},
+            packages[]{key, name, description, price, duration, badge, sections[]{title, items}},
             serviceAreaDescription,
             cities[]{name, latitude, longitude},
             facebookUrl,
@@ -558,6 +559,81 @@
 
             const payload = await response.json();
             return payload.result || null;
+        }
+
+        function applyPackageContent(packages) {
+            if (!Array.isArray(packages)) {
+                return;
+            }
+
+            packages.forEach(packageData => {
+                if (!packageData.key) {
+                    return;
+                }
+
+                const card = document.querySelector(`[data-package="${packageData.key}"]`);
+                if (!card) {
+                    return;
+                }
+
+                if (packageData.name) {
+                    card.querySelector('[data-package-name]').textContent = packageData.name;
+                }
+                if (packageData.description) {
+                    card.querySelector('[data-package-description]').textContent = packageData.description;
+                }
+                if (Number.isFinite(packageData.price)) {
+                    card.querySelector('[data-package-price-value]').textContent = `$${packageData.price}`;
+                }
+                if (packageData.duration) {
+                    card.querySelector('[data-package-duration-value]').textContent = packageData.duration;
+                }
+
+                const badge = card.querySelector('.absolute.top-5');
+                if (badge) {
+                    if (packageData.badge) {
+                        badge.textContent = packageData.badge;
+                        badge.classList.remove('hidden');
+                    } else {
+                        badge.classList.add('hidden');
+                    }
+                }
+
+                if (Array.isArray(packageData.sections) && packageData.sections.length > 0) {
+                    const features = card.querySelector('[data-package-features]');
+                    features.replaceChildren();
+                    packageData.sections.forEach(section => {
+                        if (!section.title && !Array.isArray(section.items)) {
+                            return;
+                        }
+
+                        const sectionElement = document.createElement('div');
+                        const heading = document.createElement('h4');
+                        heading.className = 'text-vra-primary font-semibold mb-2';
+                        heading.textContent = section.title || 'Features';
+                        sectionElement.appendChild(heading);
+
+                        const list = document.createElement('ul');
+                        list.className = 'space-y-2 text-sm text-vra-text';
+                        (section.items || []).forEach(item => {
+                            const listItem = document.createElement('li');
+                            listItem.className = 'flex items-start gap-2';
+                            listItem.innerHTML = '<span class="text-vra-primary">✓</span>';
+                            listItem.append(document.createTextNode(` ${item}`));
+                            list.appendChild(listItem);
+                        });
+                        sectionElement.appendChild(list);
+                        features.appendChild(sectionElement);
+                    });
+                }
+
+                const bookingText = `Hello, I would like to book the ${packageData.name || 'service'} package.`;
+                const emailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=vra.autodetailing@gmail.com&su=${encodeURIComponent(`${packageData.name || 'Service'} Booking`)}&body=${encodeURIComponent(bookingText)}`;
+                const smsUrl = `sms:+14042874757?body=${encodeURIComponent(bookingText)}`;
+                card.querySelectorAll('a[href*="mail.google.com"], a[href^="sms:"]').forEach(link => {
+                    link.href = link.href.startsWith('sms:') ? smsUrl : emailUrl;
+                });
+            });
         }
 
         function applySanityContent(content) {
@@ -586,6 +662,7 @@
             if (content.heroSubtitle) {
                 heroSubtitle.textContent = content.heroSubtitle;
             }
+            applyPackageContent(content.packages);
             if (content.heroImageUrl) {
                 heroSection.style.backgroundImage = `linear-gradient(rgba(15, 15, 17, 0.72), rgba(15, 15, 17, 0.88)), url("${content.heroImageUrl}")`;
                 heroSection.style.backgroundSize = 'cover';
