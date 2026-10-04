@@ -312,7 +312,7 @@
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
                 <!-- CARD 1 -->
                 <div data-package="standard" class="order-1 lg:order-1 bg-vra-card rounded-2xl p-8 border border-vra-border flex flex-col transition-all duration-300 hover:-translate-y-2 hover:border-vra-primary hover:shadow-[0_10px_30px_rgba(38,126,34,0.26)] relative overflow-hidden">
-                    <div class="absolute top-5 -right-12 bg-[#D4AF37] text-[#0F0F11] text-xs font-bold px-12 py-1 rotate-45">POPULAR</div>
+                    <div class="package-badge absolute top-5 -right-12 bg-[#D4AF37] text-[#0F0F11] text-xs font-bold px-12 py-1 rotate-45">POPULAR</div>
                     <div class="mb-6">
                         <h3 data-package-name class="text-2xl font-bold text-white mb-2 uppercase tracking-wide">Standard Detail</h3>
                         <p data-package-description class="text-vra-muted text-sm italic mb-4">Our Essential Premium Service</p>
@@ -354,6 +354,7 @@
 
                 <!-- CARD 2 -->
                 <div data-package="interior" class="order-2 lg:order-2 bg-vra-card rounded-2xl p-8 border border-vra-border flex flex-col transition-all duration-300 hover:-translate-y-2 hover:border-vra-primary hover:shadow-[0_10px_30px_rgba(38,126,34,0.26)] relative overflow-hidden">
+                    <div class="package-badge absolute top-5 -right-12 bg-[#D4AF37] text-[#0F0F11] text-xs font-bold px-12 py-1 rotate-45 hidden"></div>
                     <div class="mb-6">
                         <h3 data-package-name class="text-2xl font-bold text-white mb-2 uppercase tracking-wide">Interior Focus</h3>
                         <p data-package-description class="text-vra-muted text-sm italic mb-4">Deep Clean. Sanitized. Refreshed.</p>
@@ -393,7 +394,7 @@
 
                 <!-- CARD 3 -->
                 <div data-package="full" class="order-3 lg:order-3 bg-vra-card rounded-2xl p-8 border border-vra-border flex flex-col transition-all duration-300 hover:-translate-y-2 hover:border-vra-primary hover:shadow-[0_10px_30px_rgba(38,126,34,0.26)] relative overflow-hidden">
-                    <div class="absolute top-5 -right-12 bg-[#FFD700] text-black text-xs font-bold px-12 py-1 rotate-45">BEST VALUE</div>
+                    <div class="package-badge absolute top-5 -right-12 bg-[#FFD700] text-black text-xs font-bold px-12 py-1 rotate-45">BEST VALUE</div>
                     <div class="mb-6">
                         <h3 data-package-name class="text-2xl font-bold text-white mb-2 uppercase tracking-wide">Full Detail</h3>
                         <p data-package-description class="text-vra-muted text-sm italic mb-4">Our Most Comprehensive Service</p>
@@ -795,37 +796,50 @@
         }
 
         function applyPackageContent(packages) {
-            if (!Array.isArray(packages)) {
+            if (!Array.isArray(packages) || packages.length === 0) {
                 return;
             }
 
-            packages.forEach(packageData => {
-                if (!packageData.key) {
-                    return;
-                }
+            const defaultKeys = ['standard', 'interior', 'full'];
+            packages.forEach((packageData, index) => {
+                if (!packageData) return;
 
-                const card = document.querySelector(`[data-package="${packageData.key}"]`);
+                const rawKey = packageData.key || defaultKeys[index] || '';
+                const cleanKey = String(rawKey).toLowerCase().trim();
+
+                let card = document.querySelector(`[data-package="${cleanKey}"]`);
+                if (!card && index < 3) {
+                    const allCards = document.querySelectorAll('[data-package]');
+                    card = allCards[index];
+                }
                 if (!card) {
                     return;
                 }
 
-                if (packageData.name) {
-                    card.querySelector('[data-package-name]').textContent = packageData.name;
+                if (packageData.name && String(packageData.name).trim()) {
+                    const nameEl = card.querySelector('[data-package-name]');
+                    if (nameEl) nameEl.textContent = String(packageData.name).trim();
                 }
-                if (packageData.description) {
-                    card.querySelector('[data-package-description]').textContent = packageData.description;
+                if (packageData.description && String(packageData.description).trim()) {
+                    const descEl = card.querySelector('[data-package-description]');
+                    if (descEl) descEl.textContent = String(packageData.description).trim();
                 }
-                if (Number.isFinite(packageData.price)) {
-                    card.querySelector('[data-package-price-value]').textContent = `$${packageData.price}`;
+                if (packageData.price !== undefined && packageData.price !== null) {
+                    const rawPrice = String(packageData.price).trim().replace(/^\$/, '');
+                    if (rawPrice && !isNaN(Number(rawPrice))) {
+                        const priceEl = card.querySelector('[data-package-price-value]');
+                        if (priceEl) priceEl.textContent = `$${rawPrice}`;
+                    }
                 }
-                if (packageData.duration) {
-                    card.querySelector('[data-package-duration-value]').textContent = packageData.duration;
+                if (packageData.duration && String(packageData.duration).trim()) {
+                    const durEl = card.querySelector('[data-package-duration-value]');
+                    if (durEl) durEl.textContent = String(packageData.duration).trim();
                 }
 
-                const badge = card.querySelector('.absolute.top-5');
+                const badge = card.querySelector('.package-badge, .absolute.top-5');
                 if (badge) {
-                    if (packageData.badge) {
-                        badge.textContent = packageData.badge;
+                    if (packageData.badge && String(packageData.badge).trim()) {
+                        badge.textContent = String(packageData.badge).trim().toUpperCase();
                         badge.classList.remove('hidden');
                     } else {
                         badge.classList.add('hidden');
@@ -834,34 +848,43 @@
 
                 if (Array.isArray(packageData.sections) && packageData.sections.length > 0) {
                     const features = card.querySelector('[data-package-features]');
-                    features.replaceChildren();
-                    packageData.sections.forEach(section => {
-                        if (!section.title && !Array.isArray(section.items)) {
-                            return;
-                        }
+                    if (features) {
+                        features.replaceChildren();
+                        packageData.sections.forEach(section => {
+                            if (!section) return;
+                            const items = Array.isArray(section.items) ? section.items.filter(it => it && String(it).trim()) : [];
+                            if (!section.title && items.length === 0) {
+                                return;
+                            }
 
-                        const sectionElement = document.createElement('div');
-                        const heading = document.createElement('h4');
-                        heading.className = 'text-vra-primary font-semibold mb-2';
-                        heading.textContent = section.title || 'Features';
-                        sectionElement.appendChild(heading);
+                            const sectionElement = document.createElement('div');
+                            if (section.title && String(section.title).trim()) {
+                                const heading = document.createElement('h4');
+                                heading.className = 'text-vra-primary font-semibold mb-2 uppercase tracking-wide text-sm';
+                                heading.textContent = String(section.title).trim();
+                                sectionElement.appendChild(heading);
+                            }
 
-                        const list = document.createElement('ul');
-                        list.className = 'space-y-2 text-sm text-vra-text';
-                        (section.items || []).forEach(item => {
-                            const listItem = document.createElement('li');
-                            listItem.className = 'flex items-start gap-2';
-                            listItem.innerHTML = '<span class="text-vra-primary">✓</span>';
-                            listItem.append(document.createTextNode(` ${item}`));
-                            list.appendChild(listItem);
+                            if (items.length > 0) {
+                                const list = document.createElement('ul');
+                                list.className = 'space-y-2 text-sm text-vra-text';
+                                items.forEach(item => {
+                                    const listItem = document.createElement('li');
+                                    listItem.className = 'flex items-start gap-2';
+                                    listItem.innerHTML = '<span class="text-vra-primary font-bold">✓</span>';
+                                    listItem.append(document.createTextNode(` ${String(item).trim()}`));
+                                    list.appendChild(listItem);
+                                });
+                                sectionElement.appendChild(list);
+                            }
+                            features.appendChild(sectionElement);
                         });
-                        sectionElement.appendChild(list);
-                        features.appendChild(sectionElement);
-                    });
+                    }
                 }
 
-                const bookingText = `Hello, I would like to book the ${packageData.name || 'service'} package.`;
-                const bookingSubject = `${packageData.name || 'Service'} Booking`;
+                const packageName = packageData.name || 'Detailing';
+                const bookingText = `Hello, I would like to book the ${packageName} package.`;
+                const bookingSubject = `${packageName} Booking`;
                 const emailUrl = getSmartEmailUrl(bookingSubject, bookingText);
                 const smsUrl = `sms:+14042874757?body=${encodeURIComponent(bookingText)}`;
                 const isMobile = isMobileDevice();
@@ -883,23 +906,56 @@
             });
         }
 
+        const DEFAULT_ADDON_PRICES = {
+            'Engine Bay Detail': '$50 - $80',
+            'Headlight Restoration': '$90 - $150',
+            'Pet Hair Removal': '$30 - $80',
+            'Seat & Carpet Shampoo': '$40 - $100',
+            'Odor Treatment': '$40 - $80',
+            'Clay Bar Treatment': '$80 - $120'
+        };
+
+        function formatAddonPrice(priceStr, title) {
+            const clean = priceStr ? String(priceStr).trim() : '';
+            if (clean.length > 0) {
+                if (/^\d+(\.\d+)?$/.test(clean)) {
+                    return `$${clean}`;
+                }
+                return clean;
+            }
+            return DEFAULT_ADDON_PRICES[title] || 'Ask for quote';
+        }
+
         function applyAddOns(addOns) {
             if (!Array.isArray(addOns) || addOns.length === 0) {
                 return;
             }
 
             const list = document.getElementById('add-ons-list');
+            if (!list) return;
+
             list.replaceChildren();
             addOns.forEach(addOn => {
-                if (!addOn.title || !addOn.price) {
+                if (!addOn || !addOn.title || !String(addOn.title).trim()) {
                     return;
                 }
 
+                const title = String(addOn.title).trim();
+                const displayPrice = formatAddonPrice(addOn.price, title);
+
                 const item = document.createElement('div');
-                item.className = 'border border-vra-border rounded-xl p-4 bg-vra-bg';
-                item.innerHTML = `<p class="text-sm font-semibold"></p><p class="text-vra-primary text-sm mt-2"></p>`;
-                item.querySelector('p').textContent = addOn.title;
-                item.querySelectorAll('p')[1].textContent = addOn.price;
+                item.className = 'border border-vra-border rounded-xl p-4 bg-vra-bg transition-colors hover:border-vra-primary/50';
+
+                const titleEl = document.createElement('p');
+                titleEl.className = 'text-sm font-semibold text-white';
+                titleEl.textContent = title;
+
+                const priceEl = document.createElement('p');
+                priceEl.className = 'text-vra-primary text-sm mt-2 font-medium';
+                priceEl.textContent = displayPrice;
+
+                item.appendChild(titleEl);
+                item.appendChild(priceEl);
                 list.appendChild(item);
             });
         }
@@ -1061,7 +1117,7 @@
             });
         }
 
-        const SANITY_CACHE_STORAGE_KEY = 'vra_sanity_cached_data_v3';
+        const SANITY_CACHE_STORAGE_KEY = 'vra_sanity_cached_data_v4';
 
         function getStoredSanityData() {
             try {
