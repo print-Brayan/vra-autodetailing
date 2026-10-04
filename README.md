@@ -10,11 +10,10 @@ El sitio es estático, optimizado para alto rendimiento y consume su contenido d
 
 - **Diseño Móvil First**: Interfaz visual moderna, oscura y responsiva construida con Tailwind CSS y tipografías optimizadas (*Montserrat*, *Oswald*, *Bebas Neue*).
 - **Contenido Dinámico con Sanity CMS**: Títulos, galería antes/después, paquetes, precios, add-ons y descripciones administrables en tiempo real.
-- **Cero Parpadeo (0ms Cache)**: Hidratación local inmediata con `localStorage` que previene saltos de precios al navegar o recargar.
-- **Canales de Reserva Integrados**: Enlaces directos a llamada telefónica, SMS, WhatsApp y correo electrónico nativo (`mailto:`) adaptados automáticamente según el dispositivo (móvil o escritorio).
-- **Área de Cobertura Interactiva**: Mapa con Leaflet y OpenStreetMap que delimita el radio operativo de 15 millas desde Acworth, GA.
-- **Cumplimiento Legal y Privacidad**: Incluye Términos de Servicio (Aviso Legal), Política de Privacidad y Banner de Consentimiento de Cookies con panel de preferencias.
-- **Resiliencia Operativa**: Páginas personalizadas `404.html`, `maintenance.html` (aviso de caída de servicio con líneas directas de despacho) y detector de conectividad sin conexión en tiempo real.
+- **Cero Parpadeo (0ms Cache)**: Hidratación local inmediata con fallback garantizado que previene saltos o pantallas en blanco.
+- **Canales de Reserva Integrados**: Enlaces directos a llamada telefónica, SMS, WhatsApp y correo electrónico nativo adaptados automáticamente según el dispositivo.
+- **Área de Cobertura Interactiva**: Mapa interactivo con diseño oscuro y marcadores de ciudades principales (Acworth, Kennesaw, Woodstock).
+- **Página 404 Personalizada**: Manejo estilizado de rutas no encontradas.
 
 ---
 
@@ -25,7 +24,7 @@ El sitio es estático, optimizado para alto rendimiento y consume su contenido d
 | **Frontend** | HTML5 semántico, JavaScript Vanilla ES6+, Tailwind CSS |
 | **Librerías UI** | Swiper.js (carrusel antes/después), Leaflet (mapa de cobertura) |
 | **Headless CMS** | Sanity Studio v3 (`@sanity/cli`, esquemas estructurados) |
-| **Hosting & CDN** | Cloudflare |
+| **Hosting & CDN** | Cloudflare Pages |
 | **Control de Versiones** | Git / GitHub |
 
 ---
@@ -41,11 +40,7 @@ El sitio es estático, optimizado para alto rendimiento y consume su contenido d
 │   ├── sanity.config.js   # Configuración del panel de Sanity Studio
 │   └── package.json       # Dependencias de Sanity Studio
 ├── 404.html               # Página personalizada para rutas no encontradas
-├── 500.html               # Redirección de errores de servidor
 ├── index.html             # Landing page principal
-├── maintenance.html       # Página de respaldo ante caída o mantenimiento
-├── privacy.html           # Política de Privacidad
-├── terms.html             # Términos de Servicio y Aviso Legal
 ├── README.md              # Documentación del proyecto
 └── .gitignore             # Archivos excluidos del control de versiones
 ```

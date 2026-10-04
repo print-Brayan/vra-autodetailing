@@ -85,9 +85,28 @@
             transition: transform 0.7s ease, opacity 0.7s ease, filter 0.7s ease;
         }
 
-        #service-area-map .leaflet-container {
-            background: #E8E6DC;
+        #service-area-map,
+        #service-area-map .leaflet-container,
+        .leaflet-container {
+            background: #0F0F11 !important;
             font-family: Montserrat, sans-serif;
+        }
+
+        .leaflet-tile-pane {
+            filter: brightness(0.9) contrast(1.1);
+        }
+
+        .vra-map-tooltip {
+            background: #18181B !important;
+            color: #F4F4F5 !important;
+            border: 1px solid #38471B !important;
+            border-radius: 6px !important;
+            font-weight: 600 !important;
+            font-size: 11px !important;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.5) !important;
+        }
+        .vra-map-tooltip:before {
+            border-top-color: #38471B !important;
         }
 
         [data-package-price-value], [data-package-name], [data-package-description] {
@@ -96,17 +115,6 @@
     </style>
 </head>
 <body class="bg-vra-bg text-vra-text font-sans antialiased selection:bg-vra-primary selection:text-vra-bg">
-
-    <!-- Real-time Connectivity & Service Outage Alert -->
-    <div id="connection-alert" class="fixed top-0 inset-x-0 z-[100] transform -translate-y-full transition-transform duration-300 ease-in-out pointer-events-none px-4 py-2.5 flex items-center justify-center">
-        <div class="pointer-events-auto max-w-lg w-full rounded-xl shadow-2xl border px-4 py-3 flex items-center justify-between gap-3 text-xs sm:text-sm backdrop-blur-md bg-amber-950/90 border-amber-600/50 text-amber-200" id="connection-alert-box">
-            <div class="flex items-center gap-2.5">
-                <span id="connection-icon" class="text-base sm:text-lg">⚠️</span>
-                <span id="connection-text" class="font-medium text-white">Connection lost. Operating in offline mode.</span>
-            </div>
-            <a id="connection-action" href="tel:+14042874757" class="shrink-0 px-3 py-1 bg-white/10 hover:bg-white/20 border border-white/20 rounded-lg text-white font-semibold transition-colors">Call Dispatch</a>
-        </div>
-    </div>
 
     <!-- ==========================================
          NAVIGATION BAR
@@ -420,7 +428,7 @@
             <div class="bg-vra-card border border-vra-border rounded-2xl p-4 md:p-6 overflow-hidden shadow-[0_10px_30px_rgba(56,71,27,0.18)]">
                 <div class="grid grid-cols-1 lg:grid-cols-[1.2fr_0.8fr] items-center gap-8">
                     <div class="rounded-2xl border border-vra-border overflow-hidden bg-vra-card">
-                        <div id="service-area-map" class="relative z-0 w-full h-[260px] md:h-[320px] bg-[#E8E6DC]" aria-label="15-mile service radius map"></div>
+                        <div id="service-area-map" class="relative z-0 w-full h-[260px] md:h-[320px] bg-[#0F0F11]" aria-label="Service area map"></div>
                     </div>
 
                     <div class="text-left">
@@ -521,15 +529,9 @@
                 </div>
             </div>
             
-            <div class="mt-8 border-t border-vra-border pt-8 flex flex-col md:flex-row justify-between items-center text-xs sm:text-sm text-vra-muted gap-4">
+            <div class="mt-8 border-t border-vra-border pt-8 flex flex-col md:flex-row justify-between items-center text-sm text-vra-muted gap-4">
                 <p>&copy; 2026 V.R.A. Auto Detailing. All rights reserved.</p>
-                <div class="flex flex-wrap items-center justify-center gap-3 sm:gap-5 text-xs">
-                    <a href="terms.html" class="hover:text-vra-primary transition-colors">Terms of Service (Aviso Legal)</a>
-                    <span>•</span>
-                    <a href="privacy.html" class="hover:text-vra-primary transition-colors">Privacy Policy</a>
-                    <span>•</span>
-                    <button type="button" id="cookie-settings-btn" class="hover:text-vra-primary transition-colors underline underline-offset-2">Cookie Settings</button>
-                </div>
+                <p>vra-autodetailing.com</p>
             </div>
         </div>
     </footer>
@@ -638,10 +640,6 @@
                 return;
             }
 
-            const acworth = [34.0657, -84.6503];
-            const radiusMeters = 24140;
-            const radiusBounds = L.circle(acworth, {radius: radiusMeters}).getBounds();
-
             serviceAreaMap = L.map(mapElement, {
                 zoomControl: false,
                 dragging: false,
@@ -650,21 +648,14 @@
                 boxZoom: false,
                 keyboard: false,
                 touchZoom: false,
-                attributionControl: true,
+                attributionControl: false,
             });
 
-            L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+                subdomains: 'abcd',
                 maxZoom: 19,
-                attribution: '&copy; OpenStreetMap contributors',
+                attribution: '&copy; OpenStreetMap contributors &copy; CARTO',
             }).addTo(serviceAreaMap);
-
-            L.circle(acworth, {
-                radius: radiusMeters,
-                color: '#38471B',
-                weight: 2,
-                fillColor: '#C8D59E',
-                fillOpacity: 0.14,
-            }).addTo(serviceAreaMap).bindPopup('15-mile service radius from Acworth, GA');
 
             serviceAreaMarkers = L.layerGroup().addTo(serviceAreaMap);
             const mapCities = cities.length > 0 ? cities : [
@@ -673,19 +664,27 @@
                 {name: 'Woodstock', latitude: 34.1015, longitude: -84.5194},
             ];
 
+            const markers = [];
             mapCities.forEach(city => {
                 if (city.name && Number.isFinite(city.latitude) && Number.isFinite(city.longitude)) {
-                    L.circleMarker([city.latitude, city.longitude], {
-                        radius: 6,
+                    const marker = L.circleMarker([city.latitude, city.longitude], {
+                        radius: 7,
                         color: '#0F0F11',
                         weight: 2,
                         fillColor: '#D4AF37',
                         fillOpacity: 1,
-                    }).bindTooltip(city.name, {permanent: true, direction: 'top', offset: [0, -6]}).addTo(serviceAreaMarkers);
+                    }).bindTooltip(city.name, {permanent: true, direction: 'top', offset: [0, -8], className: 'vra-map-tooltip'});
+                    marker.addTo(serviceAreaMarkers);
+                    markers.push(marker);
                 }
             });
 
-            serviceAreaMap.fitBounds(radiusBounds, {padding: [10, 10], maxZoom: 11});
+            if (markers.length > 0) {
+                const markerGroup = L.featureGroup(markers);
+                serviceAreaMap.fitBounds(markerGroup.getBounds().pad(0.35));
+            } else {
+                serviceAreaMap.setView([34.05, -84.60], 11);
+            }
             setTimeout(() => serviceAreaMap.invalidateSize(), 250);
         }
 
@@ -1003,6 +1002,37 @@
             } catch (e) {}
         }
 
+        const defaultGalleryCases = [
+            {
+                antes: "https://cdn.sanity.io/images/vjs9yzly/production/b0ce868efeb849e5ee8121495576610ea0b7645a-960x1280.jpg",
+                despues: "https://cdn.sanity.io/images/vjs9yzly/production/b3800ff97420ffb553e53b1df692276239826d26-960x1280.jpg"
+            },
+            {
+                antes: "https://cdn.sanity.io/images/vjs9yzly/production/f097882c8f11ed43149ca15e33d1998e6d3b9021-1080x1440.jpg",
+                despues: "https://cdn.sanity.io/images/vjs9yzly/production/2b38ef52c42113cce9b6122cbf5b90c850ac17b9-1080x1440.jpg"
+            },
+            {
+                antes: "https://cdn.sanity.io/images/vjs9yzly/production/80a6485707b78aae51428a33cb7241547a4317bb-960x1280.jpg",
+                despues: "https://cdn.sanity.io/images/vjs9yzly/production/ed812840e97f2bd3b1bbabe0b2c35801971ff5f6-960x1280.jpg"
+            },
+            {
+                antes: "https://cdn.sanity.io/images/vjs9yzly/production/5e387f7b4097665ff56ea605b05eb47a26a6f028-960x1280.jpg",
+                despues: "https://cdn.sanity.io/images/vjs9yzly/production/66c4535b8e35830b10e98d857f239743c61ca5bd-960x1280.jpg"
+            },
+            {
+                antes: "https://cdn.sanity.io/images/vjs9yzly/production/41d2be05a5bed5633b35b7ec2e85b836c85c3ec5-960x1280.jpg",
+                despues: "https://cdn.sanity.io/images/vjs9yzly/production/96e17670394be06f69d3630b727abfa75eac1a79-960x1280.jpg"
+            },
+            {
+                antes: "https://cdn.sanity.io/images/vjs9yzly/production/47f4c6bc9da80c086140b7a5ce927bc11f15c9de-960x1280.jpg",
+                despues: "https://cdn.sanity.io/images/vjs9yzly/production/62de6493338dd511f417ab7cd201b84fa3d0d58f-960x1280.jpg"
+            },
+            {
+                antes: "https://cdn.sanity.io/images/vjs9yzly/production/c1e510cf89c29d5e8618504040eb0cb6babba24f-720x1280.jpg",
+                despues: "https://cdn.sanity.io/images/vjs9yzly/production/a8f78fd8901953b3ff79b159526a5c4014fa5259-960x1280.jpg"
+            }
+        ];
+
         async function loadGallery() {
             try {
                 const sanityContent = await fetchSanityContent();
@@ -1020,29 +1050,32 @@
                 const sanityCases = Array.isArray(sanityContent.gallery)
                     ? sanityContent.gallery.filter(pair => pair.antes && pair.despues)
                     : [];
-                const signature = JSON.stringify(sanityCases);
-
-                if (signature !== lastGallerySignature) {
-                    lastGallerySignature = signature;
-                    initSwiper(sanityCases);
+                if (sanityCases.length > 0) {
+                    const signature = JSON.stringify(sanityCases);
+                    if (signature !== lastGallerySignature) {
+                        lastGallerySignature = signature;
+                        initSwiper(sanityCases);
+                    }
                 }
             } catch (sanityError) {
-                console.log('Sanity content unavailable; fallback to cached data if available.');
+                console.warn('Sanity content unavailable; maintaining gallery view.', sanityError);
             }
         }
 
-        // Hidratación instantánea (0ms): Si hay datos en caché, aplicarlos inmediatamente para evitar parpadeos
+        // Carga inmediata de galería: garantizada en 0ms
         const initialCachedData = getStoredSanityData();
-        if (initialCachedData) {
+        if (initialCachedData && Array.isArray(initialCachedData.gallery) && initialCachedData.gallery.length > 0) {
             lastSanitySignature = JSON.stringify(initialCachedData);
             applySanityContent(initialCachedData);
-            if (Array.isArray(initialCachedData.gallery)) {
-                const cachedCases = initialCachedData.gallery.filter(pair => pair.antes && pair.despues);
-                if (cachedCases.length > 0) {
-                    lastGallerySignature = JSON.stringify(cachedCases);
-                    initSwiper(cachedCases);
-                }
+            const cachedCases = initialCachedData.gallery.filter(pair => pair.antes && pair.despues);
+            if (cachedCases.length > 0) {
+                lastGallerySignature = JSON.stringify(cachedCases);
+                initSwiper(cachedCases);
+            } else {
+                initSwiper(defaultGalleryCases);
             }
+        } else {
+            initSwiper(defaultGalleryCases);
         }
 
         function initEmailLinks() {
@@ -1064,9 +1097,9 @@
         initServiceAreaMap();
         initEmailLinks();
 
-        // Revalidar en foco de ventana y en intervalos moderados (2 min) en vez de quemar la API cada 4s
+        // Revalidar en foco y periódicamente
         window.addEventListener('focus', loadGallery);
-        setInterval(loadGallery, 120000);
+        setInterval(loadGallery, 15000);
 
         const imageModal = document.getElementById('image-modal');
         const imageModalImg = document.getElementById('image-modal-img');
@@ -1124,213 +1157,6 @@
                 }
             });
         });
-
-        // ==========================================
-        // REAL-TIME CONNECTIVITY & OUTAGE DETECTOR
-        // ==========================================
-        const connectionAlert = document.getElementById('connection-alert');
-        const connectionAlertBox = document.getElementById('connection-alert-box');
-        const connectionIcon = document.getElementById('connection-icon');
-        const connectionText = document.getElementById('connection-text');
-        const connectionAction = document.getElementById('connection-action');
-        let hideAlertTimeout = null;
-
-        function showConnectionAlert(isOnline) {
-            if (!connectionAlert) return;
-            clearTimeout(hideAlertTimeout);
-
-            if (!isOnline) {
-                connectionAlertBox.className = 'pointer-events-auto max-w-lg w-full rounded-xl shadow-2xl border px-4 py-3 flex items-center justify-between gap-3 text-xs sm:text-sm backdrop-blur-md bg-amber-950/90 border-amber-600/50 text-amber-200';
-                connectionIcon.textContent = '⚠️';
-                connectionText.textContent = 'Internet connection lost. Displaying cached vehicle services. Call directly to book:';
-                connectionAction.href = 'tel:+14042874757';
-                connectionAction.textContent = '(404) 287-4757';
-                connectionAction.classList.remove('hidden');
-                connectionAlert.classList.remove('-translate-y-full');
-            } else {
-                connectionAlertBox.className = 'pointer-events-auto max-w-lg w-full rounded-xl shadow-2xl border px-4 py-3 flex items-center justify-between gap-3 text-xs sm:text-sm backdrop-blur-md bg-emerald-950/90 border-emerald-600/50 text-emerald-200';
-                connectionIcon.textContent = '✓';
-                connectionText.textContent = 'Connection restored! Live detailing booking is active.';
-                connectionAction.classList.add('hidden');
-                connectionAlert.classList.remove('-translate-y-full');
-
-                hideAlertTimeout = setTimeout(() => {
-                    connectionAlert.classList.add('-translate-y-full');
-                }, 3500);
-            }
-        }
-
-        window.addEventListener('offline', () => showConnectionAlert(false));
-        window.addEventListener('online', () => showConnectionAlert(true));
-        if (!navigator.onLine) {
-            showConnectionAlert(false);
-        }
-
-        // ==========================================
-        // COOKIE BANNER & PREFERENCES LOGIC
-        // ==========================================
-        const COOKIE_STORAGE_KEY = 'vra_cookie_consent_v1';
-        const cookieBanner = document.getElementById('cookie-banner');
-        const cookieModal = document.getElementById('cookie-modal');
-        const cookieAcceptAll = document.getElementById('cookie-accept-all');
-        const cookieEssential = document.getElementById('cookie-essential');
-        const cookieOpenPrefs = document.getElementById('cookie-open-prefs');
-        const cookieSettingsBtn = document.getElementById('cookie-settings-btn');
-        const cookieModalClose = document.getElementById('cookie-modal-close');
-        const cookieSavePrefs = document.getElementById('cookie-save-prefs');
-        const prefAnalytics = document.getElementById('pref-analytics');
-        const prefMarketing = document.getElementById('pref-marketing');
-
-        function getCookieConsent() {
-            try {
-                const raw = localStorage.getItem(COOKIE_STORAGE_KEY);
-                return raw ? JSON.parse(raw) : null;
-            } catch (e) {
-                return null;
-            }
-        }
-
-        function saveCookieConsent(settings) {
-            try {
-                localStorage.setItem(COOKIE_STORAGE_KEY, JSON.stringify({
-                    ...settings,
-                    timestamp: new Date().toISOString()
-                }));
-            } catch (e) {}
-            if (cookieBanner) cookieBanner.classList.add('hidden');
-            if (cookieModal) {
-                cookieModal.classList.add('hidden');
-                cookieModal.classList.remove('flex');
-            }
-        }
-
-        const existingConsent = getCookieConsent();
-        if (!existingConsent && cookieBanner) {
-            setTimeout(() => {
-                cookieBanner.classList.remove('hidden');
-            }, 1000);
-        }
-
-        if (cookieAcceptAll) {
-            cookieAcceptAll.addEventListener('click', () => {
-                saveCookieConsent({ essential: true, analytics: true, marketing: true });
-            });
-        }
-
-        if (cookieEssential) {
-            cookieEssential.addEventListener('click', () => {
-                saveCookieConsent({ essential: true, analytics: false, marketing: false });
-            });
-        }
-
-        function openCookiePreferences() {
-            const consent = getCookieConsent() || { analytics: true, marketing: false };
-            if (prefAnalytics) prefAnalytics.checked = !!consent.analytics;
-            if (prefMarketing) prefMarketing.checked = !!consent.marketing;
-            if (cookieModal) {
-                cookieModal.classList.remove('hidden');
-                cookieModal.classList.add('flex');
-            }
-        }
-
-        if (cookieOpenPrefs) cookieOpenPrefs.addEventListener('click', openCookiePreferences);
-        if (cookieSettingsBtn) cookieSettingsBtn.addEventListener('click', openCookiePreferences);
-        if (cookieModalClose) {
-            cookieModalClose.addEventListener('click', () => {
-                cookieModal.classList.add('hidden');
-                cookieModal.classList.remove('flex');
-            });
-        }
-        if (cookieModal) {
-            cookieModal.addEventListener('click', (event) => {
-                if (event.target === cookieModal) {
-                    cookieModal.classList.add('hidden');
-                    cookieModal.classList.remove('flex');
-                }
-            });
-        }
-        if (cookieSavePrefs) {
-            cookieSavePrefs.addEventListener('click', () => {
-                saveCookieConsent({
-                    essential: true,
-                    analytics: prefAnalytics ? prefAnalytics.checked : false,
-                    marketing: prefMarketing ? prefMarketing.checked : false
-                });
-            });
-        }
     </script>
-
-    <!-- ==========================================
-         COOKIE CONSENT BANNER & MODAL
-    =========================================== -->
-    <div id="cookie-banner" class="fixed bottom-4 left-4 right-4 md:left-auto md:right-6 md:max-w-md z-[80] bg-vra-card/95 backdrop-blur-xl border border-vra-border rounded-2xl p-5 shadow-2xl hidden transition-all duration-300">
-        <div class="flex items-start gap-3">
-            <div class="text-2xl mt-0.5 select-none">🍪</div>
-            <div class="space-y-2 flex-grow">
-                <h3 class="text-sm font-bold text-white tracking-wide">Cookie & Privacy Notice</h3>
-                <p class="text-xs text-vra-muted leading-relaxed">
-                    We use cookies and local cache to store your preferences, ensure instantaneous 0ms price loading, and enhance your mobile detailing experience. Learn more in our <a href="privacy.html" class="text-vra-primary hover:underline underline-offset-2">Privacy Policy</a>.
-                </p>
-                <div class="flex flex-wrap items-center gap-2 pt-2">
-                    <button id="cookie-accept-all" type="button" class="px-4 py-2 bg-vra-button text-white rounded-lg text-xs font-bold hover:bg-vra-buttonHover transition-colors shadow">
-                        Accept All
-                    </button>
-                    <button id="cookie-essential" type="button" class="px-3 py-2 bg-vra-bg text-vra-text border border-vra-border rounded-lg text-xs font-semibold hover:border-vra-primary transition-colors">
-                        Essential Only
-                    </button>
-                    <button id="cookie-open-prefs" type="button" class="px-2 py-2 text-vra-muted hover:text-white text-xs underline underline-offset-2 transition-colors">
-                        Customize
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Cookie Preferences Modal -->
-    <div id="cookie-modal" class="fixed inset-0 z-[90] bg-black/80 backdrop-blur-sm hidden items-center justify-center p-4">
-        <div class="bg-vra-card border border-vra-border rounded-2xl max-w-lg w-full p-6 space-y-6 shadow-2xl">
-            <div class="flex items-center justify-between border-b border-vra-border pb-4">
-                <h3 class="text-lg font-heading font-bold text-white flex items-center gap-2">
-                    <span>🍪</span> Cookie Preferences
-                </h3>
-                <button id="cookie-modal-close" type="button" class="text-vra-muted hover:text-white text-2xl leading-none">&times;</button>
-            </div>
-            
-            <div class="space-y-4 text-xs sm:text-sm">
-                <div class="p-3 bg-vra-bg rounded-xl border border-vra-border flex items-start justify-between gap-4">
-                    <div>
-                        <div class="font-semibold text-white flex items-center gap-2">
-                            <span>Strictly Necessary & Cache</span>
-                            <span class="text-[0.65rem] bg-vra-button/40 text-vra-primary border border-vra-button px-2 py-0.5 rounded uppercase">Required</span>
-                        </div>
-                        <p class="text-xs text-vra-muted mt-1">Enables instant pricing cache, core navigation, security, and appointment routing.</p>
-                    </div>
-                    <input type="checkbox" checked disabled class="mt-1 accent-vra-primary w-4 h-4 cursor-not-allowed opacity-80">
-                </div>
-
-                <div class="p-3 bg-vra-bg rounded-xl border border-vra-border flex items-start justify-between gap-4">
-                    <div>
-                        <div class="font-semibold text-white">Performance & Content Sync</div>
-                        <p class="text-xs text-vra-muted mt-1">Allows Sanity CMS and Leaflet mapping to cache regional data for faster loading.</p>
-                    </div>
-                    <input id="pref-analytics" type="checkbox" checked class="mt-1 accent-vra-primary w-4 h-4 cursor-pointer">
-                </div>
-
-                <div class="p-3 bg-vra-bg rounded-xl border border-vra-border flex items-start justify-between gap-4">
-                    <div>
-                        <div class="font-semibold text-white">Marketing & Campaign Referrals</div>
-                        <p class="text-xs text-vra-muted mt-1">Helps us measure local promotional campaigns and social media click-throughs.</p>
-                    </div>
-                    <input id="pref-marketing" type="checkbox" class="mt-1 accent-vra-primary w-4 h-4 cursor-pointer">
-                </div>
-            </div>
-
-            <div class="flex items-center justify-end gap-3 pt-2 border-t border-vra-border">
-                <button id="cookie-save-prefs" type="button" class="px-5 py-2.5 bg-vra-button text-white rounded-xl text-xs font-bold hover:bg-vra-buttonHover transition-colors shadow">
-                    Save Preferences
-                </button>
-            </div>
-        </div>
-    </div>
 </body>
 </html>
