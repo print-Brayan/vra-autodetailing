@@ -18,6 +18,10 @@
     <!-- SwiperJS CSS (for the carousel) -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
 
+    <!-- Leaflet (2D raster map without WebGL requirement) -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.js"></script>
+
     <!-- Security Meta Tags -->
     <meta name="referrer" content="strict-origin-when-cross-origin">
     <meta http-equiv="X-Content-Type-Options" content="nosniff">
@@ -82,18 +86,43 @@
             transition: transform 0.7s ease, opacity 0.7s ease, filter 0.7s ease;
         }
 
-        #service-area-map-frame {
+        #service-area-map {
             display: block;
             width: 100%;
             height: 280px;
-            border: 0;
-            background-color: #18181B;
+            background: #0F0F11 !important;
+            font-family: Montserrat, sans-serif;
+            position: relative;
+            z-index: 1;
         }
 
         @media (min-width: 768px) {
-            #service-area-map-frame {
+            #service-area-map {
                 height: 340px;
             }
+        }
+
+        #service-area-map .leaflet-container {
+            background: #0F0F11 !important;
+            width: 100%;
+            height: 100%;
+        }
+
+        #service-area-map .leaflet-tile-pane {
+            filter: invert(100%) hue-rotate(180deg) brightness(95%) contrast(90%);
+        }
+
+        .vra-map-tooltip {
+            background: #18181B !important;
+            color: #F4F4F5 !important;
+            border: 1px solid #38471B !important;
+            border-radius: 6px !important;
+            font-weight: 600 !important;
+            font-size: 11px !important;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.5) !important;
+        }
+        .vra-map-tooltip:before {
+            border-top-color: #38471B !important;
         }
 
         [data-package-price-value], [data-package-name], [data-package-description] {
@@ -415,14 +444,7 @@
             <div class="bg-vra-card border border-vra-border rounded-2xl p-4 md:p-6 overflow-hidden shadow-[0_10px_30px_rgba(56,71,27,0.18)]">
                 <div class="grid grid-cols-1 lg:grid-cols-[1.2fr_0.8fr] items-center gap-8">
                     <div class="rounded-2xl border border-vra-border overflow-hidden bg-vra-card shadow-inner">
-                        <iframe
-                            id="service-area-map-frame"
-                            title="Service area map"
-                            src="https://www.openstreetmap.org/export/embed.html?bbox=-84.82%2C33.96%2C-84.46%2C34.18&layer=mapnik&marker=34.0657%2C-84.6503"
-                            class="w-full h-[260px] md:h-[320px] border-0"
-                            loading="lazy"
-                            referrerpolicy="no-referrer-when-downgrade">
-                        </iframe>
+                        <div id="service-area-map" class="relative z-0 w-full h-[260px] md:h-[320px] bg-[#0F0F11]" aria-label="Service area map"></div>
                     </div>
 
                     <div class="text-left">
@@ -624,31 +646,95 @@
         let swiperInstance = null;
         let lastGallerySignature = '';
         let lastSanitySignature = '';
-        function updateServiceMap(cities = []) {
-            const frame = document.getElementById('service-area-map-frame');
-            if (!frame) return;
+        let serviceAreaMap = null;
+        let serviceAreaMarkers = null;
 
-            const mapCities = Array.isArray(cities) && cities.length > 0 ? cities : [
+        function updateServiceMap(cities = []) {
+            const mapElement = document.getElementById('service-area-map');
+            if (!mapElement) return;
+
+            if (typeof L === 'undefined') {
+                setTimeout(() => updateServiceMap(cities), 100);
+                return;
+            }
+
+            const defaultCities = [
                 { name: 'Acworth', latitude: 34.0657, longitude: -84.6503 },
                 { name: 'Kennesaw', latitude: 34.0232, longitude: -84.6155 },
                 { name: 'Woodstock', latitude: 34.1015, longitude: -84.5194 }
             ];
 
-            const validCities = mapCities.filter(c => Number.isFinite(c.latitude) && Number.isFinite(c.longitude));
-            if (validCities.length > 0) {
-                const lats = validCities.map(c => c.latitude);
-                const lons = validCities.map(c => c.longitude);
-                const minLat = (Math.min(...lats) - 0.07).toFixed(4);
-                const maxLat = (Math.max(...lats) + 0.07).toFixed(4);
-                const minLon = (Math.min(...lons) - 0.10).toFixed(4);
-                const maxLon = (Math.max(...lons) + 0.10).toFixed(4);
-                const centerLat = validCities[0].latitude;
-                const centerLon = validCities[0].longitude;
-                const newSrc = `https://www.openstreetmap.org/export/embed.html?bbox=${minLon}%2C${minLat}%2C${maxLon}%2C${maxLat}&layer=mapnik&marker=${centerLat}%2C${centerLon}`;
-                if (frame.src !== newSrc && frame.getAttribute('src') !== newSrc) {
-                    frame.src = newSrc;
+            const mapCities = Array.isArray(cities) && cities.length > 0 ? cities : defaultCities;
+            const validCities = mapCities.filter(c => c && c.name && Number.isFinite(c.latitude) && Number.isFinite(c.longitude));
+
+            if (!serviceAreaMap) {
+                serviceAreaMap = L.map(mapElement, {
+                    center: [34.0657, -84.60],
+                    zoom: 11,
+                    zoomControl: false,
+                    dragging: false,
+                    scrollWheelZoom: false,
+                    doubleClickZoom: false,
+                    boxZoom: false,
+                    keyboard: false,
+                    touchZoom: false,
+                    attributionControl: false
+                });
+
+                // Standard 2D raster tiles from OpenStreetMap (0% WebGL, 100% compatible)
+                L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                    maxZoom: 18,
+                    attribution: '&copy; OpenStreetMap contributors'
+                }).addTo(serviceAreaMap);
+
+                serviceAreaMarkers = L.layerGroup().addTo(serviceAreaMap);
+
+                const triggerResize = () => {
+                    if (serviceAreaMap) serviceAreaMap.invalidateSize();
+                };
+                window.addEventListener('resize', triggerResize);
+                if ('ResizeObserver' in window) {
+                    new ResizeObserver(triggerResize).observe(mapElement);
+                }
+                setTimeout(triggerResize, 100);
+                setTimeout(triggerResize, 400);
+                setTimeout(triggerResize, 1000);
+            }
+
+            serviceAreaMarkers.clearLayers();
+            const markers = [];
+
+            validCities.forEach(city => {
+                const marker = L.circleMarker([city.latitude, city.longitude], {
+                    radius: 7,
+                    color: '#0F0F11',
+                    weight: 2,
+                    fillColor: '#D4AF37',
+                    fillOpacity: 1
+                }).bindTooltip(city.name, {
+                    permanent: true,
+                    direction: 'top',
+                    offset: [0, -8],
+                    className: 'vra-map-tooltip'
+                });
+                marker.addTo(serviceAreaMarkers);
+                markers.push(marker);
+            });
+
+            if (markers.length > 0) {
+                try {
+                    const group = L.featureGroup(markers);
+                    const bounds = group.getBounds();
+                    if (bounds.isValid()) {
+                        serviceAreaMap.fitBounds(bounds.pad(0.35));
+                    }
+                } catch (e) {
+                    serviceAreaMap.setView([34.0657, -84.60], 11);
                 }
             }
+            setTimeout(() => {
+                if (serviceAreaMap) serviceAreaMap.invalidateSize();
+            }, 250);
         }
 
         const sanityProjectId = 'vjs9yzly';
