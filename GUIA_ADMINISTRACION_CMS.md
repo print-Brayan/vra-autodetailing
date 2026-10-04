@@ -78,9 +78,9 @@ El panel inferior permite ofrecer servicios complementarios para aumentar el val
 ### Añadir un nuevo Add-on:
 1. Ve al bloque **"Add-ons / Servicios adicionales"** (`addOns`).
 2. Haz clic en **"Add item"**.
-3. Rellena los dos campos obligatorios:
-   - **Título (`title`):** Nombre del servicio (ejemplo: *Engine Bay Detail*, *Ceramic Coating Spray*, *Headlight Restoration*).
-   - **Precio (`price`):** Rango o tarifa sugerida como texto libre (ejemplo: `$50 - $80`, `$120 flat`, `From $40`).
+3. Completa los campos:
+   - **Título (`title`):** Nombre del servicio (ejemplo: *Engine Bay Detail*, *Ceramic Coating Spray*, *Headlight Restoration*). **(Obligatorio)**
+   - **Precio (`price`):** **(Opcional)**. Si lo dejas completamente vacío o en blanco, la web mostrará únicamente el nombre del servicio con diseño de tarjeta limpia sin ningún precio, ideal para presupuestos personalizados o consultas directas. Si en el futuro deseas mostrar un precio, simplemente escribe la tarifa (ejemplo: `$50 - $80`, `$120`, etc.).
 4. Haz clic en **"Publish"**.
 
 ### Editar o Eliminar un Add-on:

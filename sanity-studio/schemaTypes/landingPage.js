@@ -138,10 +138,21 @@ export default defineType({
           name: 'addOn',
           title: 'Servicio adicional',
           fields: [
-            defineField({name: 'title', title: 'Título', type: 'string', validation: (rule) => rule.required()}),
-            defineField({name: 'price', title: 'Precio', type: 'string', validation: (rule) => rule.required()}),
+            defineField({name: 'title', title: 'Título del servicio', type: 'string', validation: (rule) => rule.required()}),
+            defineField({
+              name: 'price',
+              title: 'Precio (opcional)',
+              type: 'string',
+              description: 'Opcional. Déjalo en blanco si no deseas mostrar precio en la web.',
+            }),
           ],
-          preview: {select: {title: 'title', subtitle: 'price'}},
+          preview: {
+            select: {title: 'title', subtitle: 'price'},
+            prepare({title, subtitle}) {
+              const cleanSub = subtitle ? String(subtitle).trim() : '';
+              return {title: title || 'Servicio adicional', subtitle: cleanSub ? cleanSub : 'Sin precio visible'}
+            }
+          },
         },
       ],
     }),

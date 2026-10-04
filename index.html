@@ -445,12 +445,12 @@
                     <p class="text-vra-muted text-sm">Ask about additional services.</p>
                 </div>
                 <div id="add-ons-list" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3">
-                    <div class="border border-vra-border rounded-xl p-4 bg-vra-bg"><p class="text-sm font-semibold">Engine Bay Detail</p><p class="text-vra-primary text-sm mt-2">$50 - $80</p></div>
-                    <div class="border border-vra-border rounded-xl p-4 bg-vra-bg"><p class="text-sm font-semibold">Headlight Restoration</p><p class="text-vra-primary text-sm mt-2">$90 - $150</p></div>
-                    <div class="border border-vra-border rounded-xl p-4 bg-vra-bg"><p class="text-sm font-semibold">Pet Hair Removal</p><p class="text-vra-primary text-sm mt-2">$30 - $80</p></div>
-                    <div class="border border-vra-border rounded-xl p-4 bg-vra-bg"><p class="text-sm font-semibold">Seat & Carpet Shampoo</p><p class="text-vra-primary text-sm mt-2">$40 - $100</p></div>
-                    <div class="border border-vra-border rounded-xl p-4 bg-vra-bg"><p class="text-sm font-semibold">Odor Treatment</p><p class="text-vra-primary text-sm mt-2">$40 - $80</p></div>
-                    <div class="border border-vra-border rounded-xl p-4 bg-vra-bg"><p class="text-sm font-semibold">Clay Bar Treatment</p><p class="text-vra-primary text-sm mt-2">$80 - $120</p></div>
+                    <div class="border border-vra-border rounded-xl p-4 bg-vra-bg flex flex-col justify-center items-center text-center hover:border-vra-primary/50 transition-colors"><p class="text-sm font-semibold text-white">Engine Bay Detail</p></div>
+                    <div class="border border-vra-border rounded-xl p-4 bg-vra-bg flex flex-col justify-center items-center text-center hover:border-vra-primary/50 transition-colors"><p class="text-sm font-semibold text-white">Headlight Restoration</p></div>
+                    <div class="border border-vra-border rounded-xl p-4 bg-vra-bg flex flex-col justify-center items-center text-center hover:border-vra-primary/50 transition-colors"><p class="text-sm font-semibold text-white">Pet Hair Removal</p></div>
+                    <div class="border border-vra-border rounded-xl p-4 bg-vra-bg flex flex-col justify-center items-center text-center hover:border-vra-primary/50 transition-colors"><p class="text-sm font-semibold text-white">Seat & Carpet Shampoo</p></div>
+                    <div class="border border-vra-border rounded-xl p-4 bg-vra-bg flex flex-col justify-center items-center text-center hover:border-vra-primary/50 transition-colors"><p class="text-sm font-semibold text-white">Odor Treatment</p></div>
+                    <div class="border border-vra-border rounded-xl p-4 bg-vra-bg flex flex-col justify-center items-center text-center hover:border-vra-primary/50 transition-colors"><p class="text-sm font-semibold text-white">Clay Bar Treatment</p></div>
                 </div>
             </div>
         </div>
@@ -906,26 +906,6 @@
             });
         }
 
-        const DEFAULT_ADDON_PRICES = {
-            'Engine Bay Detail': '$50 - $80',
-            'Headlight Restoration': '$90 - $150',
-            'Pet Hair Removal': '$30 - $80',
-            'Seat & Carpet Shampoo': '$40 - $100',
-            'Odor Treatment': '$40 - $80',
-            'Clay Bar Treatment': '$80 - $120'
-        };
-
-        function formatAddonPrice(priceStr, title) {
-            const clean = priceStr ? String(priceStr).trim() : '';
-            if (clean.length > 0) {
-                if (/^\d+(\.\d+)?$/.test(clean)) {
-                    return `$${clean}`;
-                }
-                return clean;
-            }
-            return DEFAULT_ADDON_PRICES[title] || 'Ask for quote';
-        }
-
         function applyAddOns(addOns) {
             if (!Array.isArray(addOns) || addOns.length === 0) {
                 return;
@@ -941,21 +921,25 @@
                 }
 
                 const title = String(addOn.title).trim();
-                const displayPrice = formatAddonPrice(addOn.price, title);
+                const rawPrice = addOn.price ? String(addOn.price).trim() : '';
 
                 const item = document.createElement('div');
-                item.className = 'border border-vra-border rounded-xl p-4 bg-vra-bg transition-colors hover:border-vra-primary/50';
+                item.className = 'border border-vra-border rounded-xl p-4 bg-vra-bg transition-colors hover:border-vra-primary/50 flex flex-col justify-center items-center text-center';
 
                 const titleEl = document.createElement('p');
                 titleEl.className = 'text-sm font-semibold text-white';
                 titleEl.textContent = title;
-
-                const priceEl = document.createElement('p');
-                priceEl.className = 'text-vra-primary text-sm mt-2 font-medium';
-                priceEl.textContent = displayPrice;
-
                 item.appendChild(titleEl);
-                item.appendChild(priceEl);
+
+                // Solo mostrar precio si se proporcionó explícitamente uno (no vacío ni espacios)
+                if (rawPrice.length > 0) {
+                    const displayPrice = /^\d+(\.\d+)?$/.test(rawPrice) ? `$${rawPrice}` : rawPrice;
+                    const priceEl = document.createElement('p');
+                    priceEl.className = 'text-vra-primary text-sm mt-2 font-medium';
+                    priceEl.textContent = displayPrice;
+                    item.appendChild(priceEl);
+                }
+
                 list.appendChild(item);
             });
         }
@@ -1117,7 +1101,7 @@
             });
         }
 
-        const SANITY_CACHE_STORAGE_KEY = 'vra_sanity_cached_data_v4';
+        const SANITY_CACHE_STORAGE_KEY = 'vra_sanity_cached_data_v5';
 
         function getStoredSanityData() {
             try {
