@@ -35,10 +35,10 @@
                         vra: {
                             bg: '#0F0F11',       
                             card: '#18181B',     
-                            primary: '#C8D59E',
-                            button: '#38471B',
-                            buttonHover: '#526528',
-                            buttonSoft: '#C8D59E',
+                            primary: '#9FE699',
+                            button: '#267E22',
+                            buttonHover: '#32A82E',
+                            buttonSoft: '#A8EDB0',
                             text: '#F4F4F5',     
                             muted: '#A1A1AA',    
                             border: '#27272A'    
@@ -65,10 +65,10 @@
         
         /* Visual tweaks for the Swiper carousel buttons */
         .swiper-button-next, .swiper-button-prev {
-            color: #C8D59E !important;
+            color: #9FE699 !important;
         }
         .swiper-pagination-bullet-active {
-            background-color: #C8D59E !important;
+            background-color: #267E22 !important;
         }
         .swiper-pagination-bullet {
             background-color: #F4F4F5;
@@ -115,14 +115,14 @@
         .vra-map-tooltip {
             background: #18181B !important;
             color: #F4F4F5 !important;
-            border: 1px solid #38471B !important;
+            border: 1px solid #267E22 !important;
             border-radius: 6px !important;
             font-weight: 600 !important;
             font-size: 11px !important;
             box-shadow: 0 4px 12px rgba(0,0,0,0.5) !important;
         }
         .vra-map-tooltip:before {
-            border-top-color: #38471B !important;
+            border-top-color: #267E22 !important;
         }
 
         [data-package-price-value], [data-package-name], [data-package-description] {
@@ -139,7 +139,7 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-20">
                 <div class="flex-shrink-0 flex items-center">
-                    <img src="images/logo.jpg" alt="V.R.A. Auto Detailing" class="w-14 h-14 rounded-full object-cover border border-vra-primary shadow-[0_0_10px_rgba(56,71,27,0.35)]">
+                    <img src="images/logo.jpg" alt="V.R.A. Auto Detailing" class="w-14 h-14 rounded-full object-cover border border-vra-primary shadow-[0_0_10px_rgba(38,126,34,0.35)]">
                     <div class="flex flex-col justify-center leading-none ml-2">
                         <span class="font-sans text-lg sm:text-xl text-vra-primary font-semibold tracking-[0.08em]">VRA AUTO DETAILING</span>
                         <span class="font-sans text-[0.48rem] text-white tracking-[0.26em] uppercase mt-1 ml-1 font-medium">
@@ -157,7 +157,7 @@
                     </div>
                 </div>
                 <div class="hidden md:block">
-                    <a href="#pricing" class="bg-vra-button text-white px-6 py-2 rounded-full font-bold hover:bg-vra-buttonHover transition-colors duration-300 shadow-[0_0_15px_rgba(56,71,27,0.45)]">
+                    <a href="#pricing" class="bg-vra-button text-white px-6 py-2 rounded-full font-bold hover:bg-vra-buttonHover transition-colors duration-300 shadow-[0_0_15px_rgba(38,126,34,0.45)]">
                         Book Now
                     </a>
                 </div>
@@ -193,13 +193,13 @@
         </div>
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
             <h1 id="hero-title" class="text-4xl md:text-6xl font-display font-bold tracking-wide mb-6">
-                PREMIUM <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#F3F6DD] via-vra-primary to-vra-buttonSoft">MOBILE AUTO CARE</span>
+                PREMIUM <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#EBFCE8] via-vra-primary to-vra-buttonHover">MOBILE AUTO CARE</span>
             </h1>
             <p id="hero-subtitle" class="mt-4 text-xl md:text-2xl text-vra-muted max-w-3xl mx-auto mb-10">
                 Deep clean, sanitized, and refreshed. We bring the ultimate detailing experience directly to your doorstep. Est. 2024.
             </p>
             <div class="flex justify-center gap-4">
-                <a href="#pricing" class="bg-vra-button text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-vra-buttonHover transition-colors duration-300 shadow-[0_0_20px_rgba(56,71,27,0.5)]">
+                <a href="#pricing" class="bg-vra-button text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-vra-buttonHover transition-colors duration-300 shadow-[0_0_20px_rgba(38,126,34,0.5)]">
                     View Packages
                 </a>
             </div>
@@ -289,7 +289,7 @@
 
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
                 <!-- CARD 1 -->
-                <div data-package="standard" class="order-1 lg:order-1 bg-vra-card rounded-2xl p-8 border border-vra-border flex flex-col transition-all duration-300 hover:-translate-y-2 hover:border-vra-primary hover:shadow-[0_10px_30px_rgba(56,71,27,0.24)] relative overflow-hidden">
+                <div data-package="standard" class="order-1 lg:order-1 bg-vra-card rounded-2xl p-8 border border-vra-border flex flex-col transition-all duration-300 hover:-translate-y-2 hover:border-vra-primary hover:shadow-[0_10px_30px_rgba(38,126,34,0.26)] relative overflow-hidden">
                     <div class="absolute top-5 -right-12 bg-[#D4AF37] text-[#0F0F11] text-xs font-bold px-12 py-1 rotate-45">POPULAR</div>
                     <div class="mb-6">
                         <h3 data-package-name class="text-2xl font-bold text-white mb-2 uppercase tracking-wide">Standard Detail</h3>
@@ -331,7 +331,7 @@
                 </div>
 
                 <!-- CARD 2 -->
-                <div data-package="interior" class="order-2 lg:order-2 bg-vra-card rounded-2xl p-8 border border-vra-border flex flex-col transition-all duration-300 hover:-translate-y-2 hover:border-vra-primary hover:shadow-[0_10px_30px_rgba(56,71,27,0.24)] relative overflow-hidden">
+                <div data-package="interior" class="order-2 lg:order-2 bg-vra-card rounded-2xl p-8 border border-vra-border flex flex-col transition-all duration-300 hover:-translate-y-2 hover:border-vra-primary hover:shadow-[0_10px_30px_rgba(38,126,34,0.26)] relative overflow-hidden">
                     <div class="mb-6">
                         <h3 data-package-name class="text-2xl font-bold text-white mb-2 uppercase tracking-wide">Interior Focus</h3>
                         <p data-package-description class="text-vra-muted text-sm italic mb-4">Deep Clean. Sanitized. Refreshed.</p>
@@ -370,7 +370,7 @@
                 </div>
 
                 <!-- CARD 3 -->
-                <div data-package="full" class="order-3 lg:order-3 bg-vra-card rounded-2xl p-8 border border-vra-border flex flex-col transition-all duration-300 hover:-translate-y-2 hover:border-vra-primary hover:shadow-[0_10px_30px_rgba(56,71,27,0.24)] relative overflow-hidden">
+                <div data-package="full" class="order-3 lg:order-3 bg-vra-card rounded-2xl p-8 border border-vra-border flex flex-col transition-all duration-300 hover:-translate-y-2 hover:border-vra-primary hover:shadow-[0_10px_30px_rgba(38,126,34,0.26)] relative overflow-hidden">
                     <div class="absolute top-5 -right-12 bg-[#FFD700] text-black text-xs font-bold px-12 py-1 rotate-45">BEST VALUE</div>
                     <div class="mb-6">
                         <h3 data-package-name class="text-2xl font-bold text-white mb-2 uppercase tracking-wide">Full Detail</h3>
@@ -441,7 +441,7 @@
             <h2 class="text-3xl md:text-4xl font-heading font-bold mb-6">Service Area</h2>
             <p id="service-area-description" class="text-vra-muted mb-10 text-lg">We are a 100% mobile detailing service, proudly serving the greater metro Atlanta area.</p>
             
-            <div class="bg-vra-card border border-vra-border rounded-2xl p-4 md:p-6 overflow-hidden shadow-[0_10px_30px_rgba(56,71,27,0.18)]">
+            <div class="bg-vra-card border border-vra-border rounded-2xl p-4 md:p-6 overflow-hidden shadow-[0_10px_30px_rgba(38,126,34,0.20)]">
                 <div class="grid grid-cols-1 lg:grid-cols-[1.2fr_0.8fr] items-center gap-8">
                     <div class="rounded-2xl border border-vra-border overflow-hidden bg-vra-card shadow-inner">
                         <div id="service-area-map" class="relative z-0 w-full h-[260px] md:h-[320px] bg-[#0F0F11]" aria-label="Service area map"></div>
@@ -521,7 +521,7 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex flex-col md:flex-row justify-between items-center gap-8">
                 <a href="#" class="flex items-center justify-center md:justify-start gap-3 group" aria-label="V.R.A. Auto Detailing Home">
-                    <img src="images/logo.jpg" alt="V.R.A. Auto Detailing" class="w-14 h-14 rounded-full object-cover border border-vra-primary shadow-[0_0_10px_rgba(56,71,27,0.35)] group-hover:scale-105 transition-transform duration-300">
+                    <img src="images/logo.jpg" alt="V.R.A. Auto Detailing" class="w-14 h-14 rounded-full object-cover border border-vra-primary shadow-[0_0_10px_rgba(38,126,34,0.35)] group-hover:scale-105 transition-transform duration-300">
                     <div class="flex flex-col justify-center leading-none text-left">
                         <span class="font-sans text-lg sm:text-xl text-vra-primary font-semibold tracking-[0.08em]">VRA AUTO DETAILING</span>
                         <span class="font-sans text-[0.48rem] text-white tracking-[0.26em] uppercase mt-1 ml-0.5 font-medium">
@@ -714,7 +714,7 @@
                     radius: 7,
                     color: '#0F0F11',
                     weight: 2,
-                    fillColor: '#D4AF37',
+                    fillColor: '#267E22',
                     fillOpacity: 1
                 }).bindTooltip(city.name, {
                     permanent: true,
@@ -901,7 +901,7 @@
                 heroTitle.append(document.createTextNode(`${titleLead} `));
 
                 const titleAccent = document.createElement('span');
-                titleAccent.className = 'text-transparent bg-clip-text bg-gradient-to-r from-[#F3F6DD] via-vra-primary to-vra-buttonSoft';
+                titleAccent.className = 'text-transparent bg-clip-text bg-gradient-to-r from-[#EBFCE8] via-vra-primary to-vra-buttonHover';
                 titleAccent.textContent = titleWords.join(' ');
                 heroTitle.appendChild(titleAccent);
             }
