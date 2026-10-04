@@ -1,63 +1,70 @@
 # V.R.A. Auto Detailing
 
-Landing page premium para el servicio móvil de detailing automotriz de V.R.A. La web es estática y consume el contenido publicado desde Sanity.
+Landing page premium y panel de gestión de contenido para **V.R.A. Auto Detailing**, servicio móvil especializado de detailing automotriz con base en Acworth, GA, atendiendo Kennesaw, Woodstock y el área metropolitana de Atlanta.
+
+El sitio es estático, optimizado para alto rendimiento y consume su contenido dinámicamente desde Sanity CMS con almacenamiento en caché local para una carga instantánea (0ms).
+
+---
 
 ## Características
 
-- Diseño responsive con Tailwind CSS y Montserrat.
-- Hero con video administrable desde Sanity.
-- Galería antes y después cargada exclusivamente desde Sanity.
-- Paquetes, precios, descripciones y características editables desde Sanity.
-- Área de servicio con mapa y ciudades enlazadas.
-- Reservas por Gmail en computadora y SMS en teléfonos.
-- WhatsApp, Facebook, Instagram y correo en el footer.
-- Menú responsive para móviles.
+- **Diseño Móvil First**: Interfaz visual moderna, oscura y responsiva construida con Tailwind CSS y tipografías optimizadas (*Montserrat*, *Oswald*, *Bebas Neue*).
+- **Contenido Dinámico con Sanity CMS**: Títulos, galería antes/después, paquetes, precios, add-ons y descripciones administrables en tiempo real.
+- **Cero Parpadeo (0ms Cache)**: Hidratación local inmediata con `localStorage` que previene saltos de precios al navegar o recargar.
+- **Canales de Reserva Integrados**: Enlaces directos a llamada telefónica, SMS, WhatsApp y correo electrónico nativo (`mailto:`) adaptados automáticamente según el dispositivo (móvil o escritorio).
+- **Área de Cobertura Interactiva**: Mapa con Leaflet y OpenStreetMap que delimita el radio operativo de 15 millas desde Acworth, GA.
+- **Cumplimiento Legal y Privacidad**: Incluye Términos de Servicio (Aviso Legal), Política de Privacidad y Banner de Consentimiento de Cookies con panel de preferencias.
+- **Resiliencia Operativa**: Páginas personalizadas `404.html`, `maintenance.html` (aviso de caída de servicio con líneas directas de despacho) y detector de conectividad sin conexión en tiempo real.
 
-## Stack
+---
 
-- HTML5 y JavaScript vanilla
-- Tailwind CSS vía CDN
-- Swiper.js
-- Sanity Studio
-- Cloudflare Workers
-- GitHub
+## Stack Tecnológico
 
-## Estructura
+| Capa | Tecnologías |
+| :--- | :--- |
+| **Frontend** | HTML5 semántico, JavaScript Vanilla ES6+, Tailwind CSS |
+| **Librerías UI** | Swiper.js (carrusel antes/después), Leaflet (mapa de cobertura) |
+| **Headless CMS** | Sanity Studio v3 (`@sanity/cli`, esquemas estructurados) |
+| **Hosting & CDN** | Cloudflare |
+| **Control de Versiones** | Git / GitHub |
+
+---
+
+## Estructura del Proyecto
 
 ```text
 .
-├── admin/                 # Configuración heredada de Decap CMS
-├── images/                # Logo local del sitio
-├── sanity-studio/         # Panel y schema de Sanity
-│   ├── schemaTypes/
-│   ├── package.json
-│   ├── sanity.cli.js
-│   └── sanity.config.js
-├── index.html             # Landing page
-├── README.md
-└── .gitignore
+├── images/                # Logotipos y recursos gráficos locales
+├── sanity-studio/         # Panel de administración y schemas de Sanity CMS
+│   ├── schemaTypes/       # Definición de tipos de datos y campos
+│   ├── sanity.cli.js      # Configuración de CLI de Sanity
+│   ├── sanity.config.js   # Configuración del panel de Sanity Studio
+│   └── package.json       # Dependencias de Sanity Studio
+├── 404.html               # Página personalizada para rutas no encontradas
+├── 500.html               # Redirección de errores de servidor
+├── index.html             # Landing page principal
+├── maintenance.html       # Página de respaldo ante caída o mantenimiento
+├── privacy.html           # Política de Privacidad
+├── terms.html             # Términos de Servicio y Aviso Legal
+├── README.md              # Documentación del proyecto
+└── .gitignore             # Archivos excluidos del control de versiones
 ```
 
-## Sanity
+---
 
-Proyecto: `vjs9yzly`
-Dataset: `production`
-Studio publicado: `https://vra-autodetailing.sanity.studio/`
-Web principal: `https://vra-autodetailing.com/`
-Web con www: `https://www.vra-autodetailing.com/`
-Web temporal: `https://vra-autodetailing.brayanmartinez1020.workers.dev/`
+## Desarrollo Local
 
-El documento principal se llama **V.R.A. Auto Detailing**. Desde allí se pueden administrar:
+### 1. Landing Page
+Para previsualizar la web localmente, ejecuta cualquier servidor estático en la raíz del proyecto:
 
-- título y subtítulo del hero
-- imagen y videos del hero
-- galería antes y después
-- paquetes, precios, duración y características
-- add-ons con títulos y precios editables
-- descripción del área de servicio y ciudades
-- mensaje predeterminado de WhatsApp y enlaces de Facebook e Instagram
+```powershell
+npx serve .
+```
 
-### Ejecutar el Studio localmente
+O utilizando la extensión Live Server de VS Code.
+
+### 2. Sanity Studio
+Para ejecutar el panel de administración localmente:
 
 ```powershell
 cd sanity-studio
@@ -65,60 +72,30 @@ npm install
 npm run dev
 ```
 
-### Desplegar el Studio
+El panel estará disponible en la URL local indicada por el comando (por defecto `http://localhost:3333`).
 
-Requiere una cuenta con permisos de administrador o developer en el proyecto:
+---
 
-```powershell
-cd sanity-studio
-npx sanity login
-npm run deploy
-```
+## Despliegue
 
-El cliente solo necesita entrar al Studio publicado con su cuenta invitada como **Editor**. No necesita acceso a GitHub, Cloudflare ni al código.
+- **Landing Page**: Desplegada de forma continua a través de Cloudflare. Cada actualización en la rama principal (`main`) se refleja en producción.
+- **Sanity Studio**: El panel de edición se publica en la nube mediante el CLI de Sanity:
+  ```powershell
+  cd sanity-studio
+  npm run deploy
+  ```
 
-## Paquetes y precios
+---
 
-En Sanity, dentro de **Paquetes y precios**, usa estas claves para conectar las tarjetas existentes:
+## Seguridad y Buenas Prácticas
 
-```text
-standard
-interior
-full
-```
+- **Sin exposición de secretos**: El repositorio no contiene credenciales privadas, tokens de escritura ni variables de entorno sensibles.
+- **Sanitización de URLs**: Todas las fuentes dinámicas consumidas desde Sanity (imágenes, videos y redes sociales) se validan contra protocolos seguros `https:` y orígenes autorizados antes de renderizarse en el DOM.
+- **Canales de contacto seguros**: La web no recopila ni almacena números de tarjetas de crédito o contraseñas en bases de datos vulnerables; las reservas y cotizaciones se gestionan directamente a través de canales de mensajería del cliente.
 
-Cada paquete permite editar nombre, descripción, precio, duración, etiqueta y secciones de características. Al publicar, la landing consulta Sanity automáticamente.
+---
 
-En **Add-ons / Servicios adicionales** se pueden editar los nombres y precios de servicios como Engine Bay Detail, Headlight Restoration, Pet Hair Removal y Clay Bar Treatment.
+## Licencia y Derechos
 
-## Desarrollo y publicación de la web
-
-La web principal se publica desde la rama `main`. Para probarla localmente, usa cualquier servidor estático, por ejemplo:
-
-```powershell
-npx serve .
-```
-
-Después de publicar cambios en GitHub, Cloudflare realiza el despliegue automático en la cuenta que administra el dominio actual. Para evitar caché, recarga con `Ctrl + F5`.
-
-## CORS de Sanity
-
-El dominio principal registrado en CORS es:
-
-```text
-https://vra-autodetailing.com
-```
-
-También está autorizado:
-
-```text
-https://www.vra-autodetailing.com
-```
-
-El dominio temporal también está autorizado como respaldo. Para desarrollo local, agrega el origen del servidor utilizado, por ejemplo `http://localhost:3000`.
-
-Sanity ya tiene ambos dominios registrados en **API > CORS origins**. El dominio personalizado aún requiere que el DNS de Cloudflare esté activo.
-
-## Autor
-
-V.R.A. Auto Detailing
+© 2026 V.R.A. Auto Detailing. Todos los derechos reservados.
+Sitio web oficial: [vra-autodetailing.com](https://vra-autodetailing.com)

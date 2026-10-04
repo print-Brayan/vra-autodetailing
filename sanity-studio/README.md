@@ -1,6 +1,8 @@
 # V.R.A. Auto Detailing - Sanity Studio
 
-## Primera instalación
+Panel de gestión de contenido para **V.R.A. Auto Detailing**.
+
+## Desarrollo Local
 
 ```powershell
 cd sanity-studio
@@ -8,24 +10,20 @@ npm install
 npm run dev
 ```
 
-Abre la URL local que muestra el comando, inicia sesión con la cuenta de Sanity y abre el documento `V.R.A. Auto Detailing`.
+Abre la URL local indicada por el comando, inicia sesión con tu cuenta de Sanity y edita los esquemas y contenidos en el documento `V.R.A. Auto Detailing`.
 
-## Publicar el panel del cliente
+## Despliegue del Studio
+
+Para compilar y publicar actualizaciones en el Studio alojado en la nube de Sanity:
 
 ```powershell
 npm run deploy
 ```
 
-El Studio ya está publicado en:
+El Studio se encuentra publicado en:
+`https://vra-autodetailing.sanity.studio/`
 
-```text
-https://vra-autodetailing.sanity.studio/
-```
+## Configuración
 
-Si se modifica el schema, vuelve a desplegarlo con `npm run deploy` usando una cuenta con permisos de administrador o developer.
-
-Proyecto: `vjs9yzly`
-Dataset: `production`
-Web principal: `https://vra-autodetailing.com/`
-Web con www: `https://www.vra-autodetailing.com/`
-Web temporal: `https://vra-autodetailing.brayanmartinez1020.workers.dev/`
+- **Dataset**: `production`
+- **Web Oficial**: `https://vra-autodetailing.com`

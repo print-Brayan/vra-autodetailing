@@ -21,8 +21,9 @@
     <!-- Leaflet CSS (for the service area map) -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="" />
 
-    <!-- Netlify Identity script for CMS login -->
-    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+    <!-- Security Meta Tags -->
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
     
     <!-- Configuración de colores personalizados de Tailwind -->
     <script>
@@ -88,9 +89,24 @@
             background: #E8E6DC;
             font-family: Montserrat, sans-serif;
         }
+
+        [data-package-price-value], [data-package-name], [data-package-description] {
+            transition: opacity 0.25s ease-in-out;
+        }
     </style>
 </head>
 <body class="bg-vra-bg text-vra-text font-sans antialiased selection:bg-vra-primary selection:text-vra-bg">
+
+    <!-- Real-time Connectivity & Service Outage Alert -->
+    <div id="connection-alert" class="fixed top-0 inset-x-0 z-[100] transform -translate-y-full transition-transform duration-300 ease-in-out pointer-events-none px-4 py-2.5 flex items-center justify-center">
+        <div class="pointer-events-auto max-w-lg w-full rounded-xl shadow-2xl border px-4 py-3 flex items-center justify-between gap-3 text-xs sm:text-sm backdrop-blur-md bg-amber-950/90 border-amber-600/50 text-amber-200" id="connection-alert-box">
+            <div class="flex items-center gap-2.5">
+                <span id="connection-icon" class="text-base sm:text-lg">⚠️</span>
+                <span id="connection-text" class="font-medium text-white">Connection lost. Operating in offline mode.</span>
+            </div>
+            <a id="connection-action" href="tel:+14042874757" class="shrink-0 px-3 py-1 bg-white/10 hover:bg-white/20 border border-white/20 rounded-lg text-white font-semibold transition-colors">Call Dispatch</a>
+        </div>
+    </div>
 
     <!-- ==========================================
          NAVIGATION BAR
@@ -280,7 +296,7 @@
                         </div>
                     </div>
                     
-                          <a href="https://mail.google.com/mail/?view=cm&fs=1&to=vra.autodetailing@gmail.com&su=Standard%20Detail%20Booking&body=Hello%2C%20I%20would%20like%20to%20book%20the%20Standard%20Detail%20package." target="_blank" rel="noopener noreferrer"
+                          <a href="mailto:vra.autodetailing@gmail.com?subject=Standard%20Detail%20Booking&body=Hello%2C%20I%20would%20like%20to%20book%20the%20Standard%20Detail%20package."
                               class="hidden md:block w-full text-center bg-transparent border-2 border-vra-button text-vra-buttonSoft font-bold py-3 rounded-xl hover:bg-vra-button hover:text-white transition-colors duration-300">
                                 Book via Email
                           </a>
@@ -319,7 +335,7 @@
                         </div>
                     </div>
                     
-                          <a href="https://mail.google.com/mail/?view=cm&fs=1&to=vra.autodetailing@gmail.com&su=Interior%20Focus%20Booking&body=Hello%2C%20I%20would%20like%20to%20book%20the%20Interior%20Focus%20Detail%20package." target="_blank" rel="noopener noreferrer"
+                          <a href="mailto:vra.autodetailing@gmail.com?subject=Interior%20Focus%20Booking&body=Hello%2C%20I%20would%20like%20to%20book%20the%20Interior%20Focus%20Detail%20package."
                               class="hidden md:block w-full text-center bg-vra-button text-white font-bold py-3 rounded-xl hover:bg-vra-buttonHover transition-colors duration-300">
                                 Book via Email
                           </a>
@@ -354,7 +370,7 @@
                         </div>
                     </div>
                     
-                          <a href="https://mail.google.com/mail/?view=cm&fs=1&to=vra.autodetailing@gmail.com&su=Full%20Detail%20Booking&body=Hello%2C%20I%20would%20like%20to%20book%20the%20Full%20Detail%20package." target="_blank" rel="noopener noreferrer"
+                          <a href="mailto:vra.autodetailing@gmail.com?subject=Full%20Detail%20Booking&body=Hello%2C%20I%20would%20like%20to%20book%20the%20Full%20Detail%20package."
                               class="hidden md:block w-full text-center bg-transparent border-2 border-vra-button text-vra-buttonSoft font-bold py-3 rounded-xl hover:bg-vra-button hover:text-white transition-colors duration-300 mt-auto">
                                 Book via Email
                           </a>
@@ -486,7 +502,7 @@
                 </div>
                 
                 <div class="flex gap-6">
-                    <a href="https://mail.google.com/mail/?view=cm&fs=1&to=vra.autodetailing@gmail.com" target="_blank" rel="noopener noreferrer" class="text-vra-muted hover:text-vra-primary transition-colors" title="Email V.R.A. Auto Detailing with Gmail">
+                    <a id="footer-email-link" href="mailto:vra.autodetailing@gmail.com?subject=V.R.A.%20Auto%20Detailing%20Inquiry&body=Hi%20V.R.A.%20Auto%20Detailing%2C%0A%0AI%20would%20like%20to%20inquire%20about%20your%20services." class="text-vra-muted hover:text-vra-primary transition-colors" title="Email V.R.A. Auto Detailing">
                         <span class="sr-only">Email</span>
                         <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M3 6.75A1.75 1.75 0 014.75 5h14.5A1.75 1.75 0 0121 6.75v10.5A1.75 1.75 0 0119.25 19H4.75A1.75 1.75 0 013 17.25V6.75z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M4 6l8 6 8-6"></path></svg>
                     </a>
@@ -505,9 +521,15 @@
                 </div>
             </div>
             
-            <div class="mt-8 border-t border-vra-border pt-8 flex flex-col md:flex-row justify-between items-center text-sm text-vra-muted gap-4">
+            <div class="mt-8 border-t border-vra-border pt-8 flex flex-col md:flex-row justify-between items-center text-xs sm:text-sm text-vra-muted gap-4">
                 <p>&copy; 2026 V.R.A. Auto Detailing. All rights reserved.</p>
-                <p>vra-autodetailing.com</p>
+                <div class="flex flex-wrap items-center justify-center gap-3 sm:gap-5 text-xs">
+                    <a href="terms.html" class="hover:text-vra-primary transition-colors">Terms of Service (Aviso Legal)</a>
+                    <span>•</span>
+                    <a href="privacy.html" class="hover:text-vra-primary transition-colors">Privacy Policy</a>
+                    <span>•</span>
+                    <button type="button" id="cookie-settings-btn" class="hover:text-vra-primary transition-colors underline underline-offset-2">Cookie Settings</button>
+                </div>
             </div>
         </div>
     </footer>
@@ -518,6 +540,26 @@
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
         <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
     <script>
+        function isMobileDevice() {
+            return /Android|iPhone|iPad|iPod|webOS|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
+                || (window.matchMedia && window.matchMedia('(pointer:coarse)').matches)
+                || window.innerWidth <= 768;
+        }
+
+        function getSmartEmailUrl(subject = '', body = '') {
+            const email = 'vra.autodetailing@gmail.com';
+            const encSub = encodeURIComponent(subject || 'V.R.A. Auto Detailing Inquiry');
+            const encBody = encodeURIComponent(body || 'Hi V.R.A. Auto Detailing,\n\nI would like to inquire about your mobile detailing services.');
+
+            if (isMobileDevice()) {
+                // En móviles, mailto: abre DIRECTAMENTE la aplicación nativa (Gmail app, Apple Mail, Outlook) sin caer en workspace.google.com
+                return `mailto:${email}?subject=${encSub}&body=${encBody}`;
+            } else {
+                // En computadoras de escritorio, abre el compositor web de Gmail en una pestaña nueva
+                return `https://mail.google.com/mail/?view=cm&fs=1&to=${email}&su=${encSub}&body=${encBody}`;
+            }
+        }
+
         function safeSanityImageUrl(path) {
             if (typeof path !== 'string') {
                 return null;
@@ -533,6 +575,27 @@
             }
 
             return null;
+        }
+
+        function safeExternalUrl(urlStr, allowedHosts = []) {
+            if (typeof urlStr !== 'string') {
+                return null;
+            }
+            try {
+                const parsed = new URL(urlStr);
+                if (parsed.protocol !== 'https:') {
+                    return null;
+                }
+                if (Array.isArray(allowedHosts) && allowedHosts.length > 0) {
+                    const isAllowed = allowedHosts.some(host => parsed.hostname === host || parsed.hostname.endsWith('.' + host));
+                    if (!isAllowed) {
+                        return null;
+                    }
+                }
+                return parsed.href;
+            } catch (e) {
+                return null;
+            }
         }
 
         function createImageColumn({ src, label, position, grayscale = false }) {
@@ -723,10 +786,24 @@
                 }
 
                 const bookingText = `Hello, I would like to book the ${packageData.name || 'service'} package.`;
-                const emailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=vra.autodetailing@gmail.com&su=${encodeURIComponent(`${packageData.name || 'Service'} Booking`)}&body=${encodeURIComponent(bookingText)}`;
+                const bookingSubject = `${packageData.name || 'Service'} Booking`;
+                const emailUrl = getSmartEmailUrl(bookingSubject, bookingText);
                 const smsUrl = `sms:+14042874757?body=${encodeURIComponent(bookingText)}`;
-                card.querySelectorAll('a[href*="mail.google.com"], a[href^="sms:"]').forEach(link => {
-                    link.href = link.href.startsWith('sms:') ? smsUrl : emailUrl;
+                const isMobile = isMobileDevice();
+
+                card.querySelectorAll('a[href*="mail.google.com"], a[href^="mailto:"], a[href^="sms:"]').forEach(link => {
+                    if (link.href.startsWith('sms:')) {
+                        link.href = smsUrl;
+                    } else {
+                        link.href = emailUrl;
+                        if (isMobile) {
+                            link.removeAttribute('target');
+                            link.removeAttribute('rel');
+                        } else {
+                            link.target = '_blank';
+                            link.rel = 'noopener noreferrer';
+                        }
+                    }
                 });
             });
         }
@@ -784,16 +861,25 @@
                 document.getElementById('whatsapp-link').href = `https://wa.me/16784474945?text=${encodeURIComponent(content.whatsappMessage)}`;
             }
             if (content.heroImageUrl) {
-                heroSection.style.backgroundImage = `linear-gradient(rgba(15, 15, 17, 0.72), rgba(15, 15, 17, 0.88)), url("${content.heroImageUrl}")`;
-                heroSection.style.backgroundSize = 'cover';
-                heroSection.style.backgroundPosition = 'center';
+                const safeHeroImg = safeSanityImageUrl(content.heroImageUrl);
+                if (safeHeroImg) {
+                    heroSection.style.backgroundImage = `linear-gradient(rgba(15, 15, 17, 0.72), rgba(15, 15, 17, 0.88)), url("${safeHeroImg}")`;
+                    heroSection.style.backgroundSize = 'cover';
+                    heroSection.style.backgroundPosition = 'center';
+                }
             }
             if (Array.isArray(content.videos) && content.videos[0]?.url) {
-                heroVideo.src = content.videos[0].url;
-                if (content.videos[0].posterUrl) {
-                    heroVideo.poster = content.videos[0].posterUrl;
+                const safeVideoUrl = safeSanityImageUrl(content.videos[0].url);
+                if (safeVideoUrl) {
+                    heroVideo.src = safeVideoUrl;
+                    if (content.videos[0].posterUrl) {
+                        const safePosterUrl = safeSanityImageUrl(content.videos[0].posterUrl);
+                        if (safePosterUrl) {
+                            heroVideo.poster = safePosterUrl;
+                        }
+                    }
+                    heroVideo.classList.remove('hidden');
                 }
-                heroVideo.classList.remove('hidden');
             }
             if (content.serviceAreaDescription) {
                 serviceDescription.textContent = content.serviceAreaDescription;
@@ -817,10 +903,16 @@
             }
 
             if (content.facebookUrl) {
-                document.getElementById('facebook-link').href = content.facebookUrl;
+                const safeFb = safeExternalUrl(content.facebookUrl, ['facebook.com']);
+                if (safeFb) {
+                    document.getElementById('facebook-link').href = safeFb;
+                }
             }
             if (content.instagramUrl) {
-                document.getElementById('instagram-link').href = content.instagramUrl;
+                const safeIg = safeExternalUrl(content.instagramUrl, ['instagram.com']);
+                if (safeIg) {
+                    document.getElementById('instagram-link').href = safeIg;
+                }
             }
         }
 
@@ -894,6 +986,23 @@
             });
         }
 
+        const SANITY_CACHE_STORAGE_KEY = 'vra_sanity_cached_data_v2';
+
+        function getStoredSanityData() {
+            try {
+                const raw = localStorage.getItem(SANITY_CACHE_STORAGE_KEY);
+                return raw ? JSON.parse(raw) : null;
+            } catch (e) {
+                return null;
+            }
+        }
+
+        function setStoredSanityData(data) {
+            try {
+                localStorage.setItem(SANITY_CACHE_STORAGE_KEY, JSON.stringify(data));
+            } catch (e) {}
+        }
+
         async function loadGallery() {
             try {
                 const sanityContent = await fetchSanityContent();
@@ -905,6 +1014,7 @@
                 if (sanitySignature !== lastSanitySignature) {
                     lastSanitySignature = sanitySignature;
                     applySanityContent(sanityContent);
+                    setStoredSanityData(sanityContent);
                 }
 
                 const sanityCases = Array.isArray(sanityContent.gallery)
@@ -917,13 +1027,46 @@
                     initSwiper(sanityCases);
                 }
             } catch (sanityError) {
-                console.log('Sanity content unavailable; gallery will remain empty.');
+                console.log('Sanity content unavailable; fallback to cached data if available.');
+            }
+        }
+
+        // Hidratación instantánea (0ms): Si hay datos en caché, aplicarlos inmediatamente para evitar parpadeos
+        const initialCachedData = getStoredSanityData();
+        if (initialCachedData) {
+            lastSanitySignature = JSON.stringify(initialCachedData);
+            applySanityContent(initialCachedData);
+            if (Array.isArray(initialCachedData.gallery)) {
+                const cachedCases = initialCachedData.gallery.filter(pair => pair.antes && pair.despues);
+                if (cachedCases.length > 0) {
+                    lastGallerySignature = JSON.stringify(cachedCases);
+                    initSwiper(cachedCases);
+                }
+            }
+        }
+
+        function initEmailLinks() {
+            const footerEmail = document.getElementById('footer-email-link');
+            if (footerEmail) {
+                const isMobile = isMobileDevice();
+                footerEmail.href = getSmartEmailUrl('V.R.A. Auto Detailing Inquiry', 'Hi V.R.A. Auto Detailing,\n\nI would like to inquire about your mobile detailing services.');
+                if (isMobile) {
+                    footerEmail.removeAttribute('target');
+                    footerEmail.removeAttribute('rel');
+                } else {
+                    footerEmail.target = '_blank';
+                    footerEmail.rel = 'noopener noreferrer';
+                }
             }
         }
 
         loadGallery();
         initServiceAreaMap();
-        setInterval(loadGallery, 4000);
+        initEmailLinks();
+
+        // Revalidar en foco de ventana y en intervalos moderados (2 min) en vez de quemar la API cada 4s
+        window.addEventListener('focus', loadGallery);
+        setInterval(loadGallery, 120000);
 
         const imageModal = document.getElementById('image-modal');
         const imageModalImg = document.getElementById('image-modal-img');
@@ -981,19 +1124,213 @@
                 }
             });
         });
-    </script>
 
-    <!-- CMS login redirect -->
-    <script>
-        if (window.netlifyIdentity) {
-            window.netlifyIdentity.on("init", user => {
-                if (!user) {
-                    window.netlifyIdentity.on("login", () => {
-                        document.location.href = "/admin/";
-                    });
+        // ==========================================
+        // REAL-TIME CONNECTIVITY & OUTAGE DETECTOR
+        // ==========================================
+        const connectionAlert = document.getElementById('connection-alert');
+        const connectionAlertBox = document.getElementById('connection-alert-box');
+        const connectionIcon = document.getElementById('connection-icon');
+        const connectionText = document.getElementById('connection-text');
+        const connectionAction = document.getElementById('connection-action');
+        let hideAlertTimeout = null;
+
+        function showConnectionAlert(isOnline) {
+            if (!connectionAlert) return;
+            clearTimeout(hideAlertTimeout);
+
+            if (!isOnline) {
+                connectionAlertBox.className = 'pointer-events-auto max-w-lg w-full rounded-xl shadow-2xl border px-4 py-3 flex items-center justify-between gap-3 text-xs sm:text-sm backdrop-blur-md bg-amber-950/90 border-amber-600/50 text-amber-200';
+                connectionIcon.textContent = '⚠️';
+                connectionText.textContent = 'Internet connection lost. Displaying cached vehicle services. Call directly to book:';
+                connectionAction.href = 'tel:+14042874757';
+                connectionAction.textContent = '(404) 287-4757';
+                connectionAction.classList.remove('hidden');
+                connectionAlert.classList.remove('-translate-y-full');
+            } else {
+                connectionAlertBox.className = 'pointer-events-auto max-w-lg w-full rounded-xl shadow-2xl border px-4 py-3 flex items-center justify-between gap-3 text-xs sm:text-sm backdrop-blur-md bg-emerald-950/90 border-emerald-600/50 text-emerald-200';
+                connectionIcon.textContent = '✓';
+                connectionText.textContent = 'Connection restored! Live detailing booking is active.';
+                connectionAction.classList.add('hidden');
+                connectionAlert.classList.remove('-translate-y-full');
+
+                hideAlertTimeout = setTimeout(() => {
+                    connectionAlert.classList.add('-translate-y-full');
+                }, 3500);
+            }
+        }
+
+        window.addEventListener('offline', () => showConnectionAlert(false));
+        window.addEventListener('online', () => showConnectionAlert(true));
+        if (!navigator.onLine) {
+            showConnectionAlert(false);
+        }
+
+        // ==========================================
+        // COOKIE BANNER & PREFERENCES LOGIC
+        // ==========================================
+        const COOKIE_STORAGE_KEY = 'vra_cookie_consent_v1';
+        const cookieBanner = document.getElementById('cookie-banner');
+        const cookieModal = document.getElementById('cookie-modal');
+        const cookieAcceptAll = document.getElementById('cookie-accept-all');
+        const cookieEssential = document.getElementById('cookie-essential');
+        const cookieOpenPrefs = document.getElementById('cookie-open-prefs');
+        const cookieSettingsBtn = document.getElementById('cookie-settings-btn');
+        const cookieModalClose = document.getElementById('cookie-modal-close');
+        const cookieSavePrefs = document.getElementById('cookie-save-prefs');
+        const prefAnalytics = document.getElementById('pref-analytics');
+        const prefMarketing = document.getElementById('pref-marketing');
+
+        function getCookieConsent() {
+            try {
+                const raw = localStorage.getItem(COOKIE_STORAGE_KEY);
+                return raw ? JSON.parse(raw) : null;
+            } catch (e) {
+                return null;
+            }
+        }
+
+        function saveCookieConsent(settings) {
+            try {
+                localStorage.setItem(COOKIE_STORAGE_KEY, JSON.stringify({
+                    ...settings,
+                    timestamp: new Date().toISOString()
+                }));
+            } catch (e) {}
+            if (cookieBanner) cookieBanner.classList.add('hidden');
+            if (cookieModal) {
+                cookieModal.classList.add('hidden');
+                cookieModal.classList.remove('flex');
+            }
+        }
+
+        const existingConsent = getCookieConsent();
+        if (!existingConsent && cookieBanner) {
+            setTimeout(() => {
+                cookieBanner.classList.remove('hidden');
+            }, 1000);
+        }
+
+        if (cookieAcceptAll) {
+            cookieAcceptAll.addEventListener('click', () => {
+                saveCookieConsent({ essential: true, analytics: true, marketing: true });
+            });
+        }
+
+        if (cookieEssential) {
+            cookieEssential.addEventListener('click', () => {
+                saveCookieConsent({ essential: true, analytics: false, marketing: false });
+            });
+        }
+
+        function openCookiePreferences() {
+            const consent = getCookieConsent() || { analytics: true, marketing: false };
+            if (prefAnalytics) prefAnalytics.checked = !!consent.analytics;
+            if (prefMarketing) prefMarketing.checked = !!consent.marketing;
+            if (cookieModal) {
+                cookieModal.classList.remove('hidden');
+                cookieModal.classList.add('flex');
+            }
+        }
+
+        if (cookieOpenPrefs) cookieOpenPrefs.addEventListener('click', openCookiePreferences);
+        if (cookieSettingsBtn) cookieSettingsBtn.addEventListener('click', openCookiePreferences);
+        if (cookieModalClose) {
+            cookieModalClose.addEventListener('click', () => {
+                cookieModal.classList.add('hidden');
+                cookieModal.classList.remove('flex');
+            });
+        }
+        if (cookieModal) {
+            cookieModal.addEventListener('click', (event) => {
+                if (event.target === cookieModal) {
+                    cookieModal.classList.add('hidden');
+                    cookieModal.classList.remove('flex');
                 }
             });
         }
+        if (cookieSavePrefs) {
+            cookieSavePrefs.addEventListener('click', () => {
+                saveCookieConsent({
+                    essential: true,
+                    analytics: prefAnalytics ? prefAnalytics.checked : false,
+                    marketing: prefMarketing ? prefMarketing.checked : false
+                });
+            });
+        }
     </script>
+
+    <!-- ==========================================
+         COOKIE CONSENT BANNER & MODAL
+    =========================================== -->
+    <div id="cookie-banner" class="fixed bottom-4 left-4 right-4 md:left-auto md:right-6 md:max-w-md z-[80] bg-vra-card/95 backdrop-blur-xl border border-vra-border rounded-2xl p-5 shadow-2xl hidden transition-all duration-300">
+        <div class="flex items-start gap-3">
+            <div class="text-2xl mt-0.5 select-none">🍪</div>
+            <div class="space-y-2 flex-grow">
+                <h3 class="text-sm font-bold text-white tracking-wide">Cookie & Privacy Notice</h3>
+                <p class="text-xs text-vra-muted leading-relaxed">
+                    We use cookies and local cache to store your preferences, ensure instantaneous 0ms price loading, and enhance your mobile detailing experience. Learn more in our <a href="privacy.html" class="text-vra-primary hover:underline underline-offset-2">Privacy Policy</a>.
+                </p>
+                <div class="flex flex-wrap items-center gap-2 pt-2">
+                    <button id="cookie-accept-all" type="button" class="px-4 py-2 bg-vra-button text-white rounded-lg text-xs font-bold hover:bg-vra-buttonHover transition-colors shadow">
+                        Accept All
+                    </button>
+                    <button id="cookie-essential" type="button" class="px-3 py-2 bg-vra-bg text-vra-text border border-vra-border rounded-lg text-xs font-semibold hover:border-vra-primary transition-colors">
+                        Essential Only
+                    </button>
+                    <button id="cookie-open-prefs" type="button" class="px-2 py-2 text-vra-muted hover:text-white text-xs underline underline-offset-2 transition-colors">
+                        Customize
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Cookie Preferences Modal -->
+    <div id="cookie-modal" class="fixed inset-0 z-[90] bg-black/80 backdrop-blur-sm hidden items-center justify-center p-4">
+        <div class="bg-vra-card border border-vra-border rounded-2xl max-w-lg w-full p-6 space-y-6 shadow-2xl">
+            <div class="flex items-center justify-between border-b border-vra-border pb-4">
+                <h3 class="text-lg font-heading font-bold text-white flex items-center gap-2">
+                    <span>🍪</span> Cookie Preferences
+                </h3>
+                <button id="cookie-modal-close" type="button" class="text-vra-muted hover:text-white text-2xl leading-none">&times;</button>
+            </div>
+            
+            <div class="space-y-4 text-xs sm:text-sm">
+                <div class="p-3 bg-vra-bg rounded-xl border border-vra-border flex items-start justify-between gap-4">
+                    <div>
+                        <div class="font-semibold text-white flex items-center gap-2">
+                            <span>Strictly Necessary & Cache</span>
+                            <span class="text-[0.65rem] bg-vra-button/40 text-vra-primary border border-vra-button px-2 py-0.5 rounded uppercase">Required</span>
+                        </div>
+                        <p class="text-xs text-vra-muted mt-1">Enables instant pricing cache, core navigation, security, and appointment routing.</p>
+                    </div>
+                    <input type="checkbox" checked disabled class="mt-1 accent-vra-primary w-4 h-4 cursor-not-allowed opacity-80">
+                </div>
+
+                <div class="p-3 bg-vra-bg rounded-xl border border-vra-border flex items-start justify-between gap-4">
+                    <div>
+                        <div class="font-semibold text-white">Performance & Content Sync</div>
+                        <p class="text-xs text-vra-muted mt-1">Allows Sanity CMS and Leaflet mapping to cache regional data for faster loading.</p>
+                    </div>
+                    <input id="pref-analytics" type="checkbox" checked class="mt-1 accent-vra-primary w-4 h-4 cursor-pointer">
+                </div>
+
+                <div class="p-3 bg-vra-bg rounded-xl border border-vra-border flex items-start justify-between gap-4">
+                    <div>
+                        <div class="font-semibold text-white">Marketing & Campaign Referrals</div>
+                        <p class="text-xs text-vra-muted mt-1">Helps us measure local promotional campaigns and social media click-throughs.</p>
+                    </div>
+                    <input id="pref-marketing" type="checkbox" class="mt-1 accent-vra-primary w-4 h-4 cursor-pointer">
+                </div>
+            </div>
+
+            <div class="flex items-center justify-end gap-3 pt-2 border-t border-vra-border">
+                <button id="cookie-save-prefs" type="button" class="px-5 py-2.5 bg-vra-button text-white rounded-xl text-xs font-bold hover:bg-vra-buttonHover transition-colors shadow">
+                    Save Preferences
+                </button>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
