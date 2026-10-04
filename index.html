@@ -5,6 +5,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>V.R.A. Auto Detailing | Premium Mobile Care</title>
     
+    <!-- Canonical Redirection (Apex vra-autodetailing.com -> www.vra-autodetailing.com) -->
+    <link rel="canonical" href="https://www.vra-autodetailing.com/" />
+    <script>
+        (function() {
+            if (window.location.hostname === 'vra-autodetailing.com') {
+                window.location.replace('https://www.vra-autodetailing.com' + window.location.pathname + window.location.search + window.location.hash);
+            }
+        })();
+    </script>
+
+    <!-- Social & SEO Meta Tags (Facebook Open Graph, Twitter) -->
+    <meta name="description" content="Deep-cleaned, sanitized, and refreshed. We bring the ultimate detailing experience directly to your doorstep. Est. 2022. Mobile auto detailing in Acworth, Kennesaw, Woodstock GA.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.vra-autodetailing.com/">
+    <meta property="og:title" content="V.R.A. Auto Detailing | Premium Mobile Care">
+    <meta property="og:description" content="Deep-cleaned, sanitized, and refreshed. We bring the ultimate detailing experience directly to your doorstep. Est. 2022. Mobile auto detailing in Acworth, Kennesaw, Woodstock GA.">
+    <meta property="og:image" content="https://www.vra-autodetailing.com/images/logo.jpg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="V.R.A. Auto Detailing | Premium Mobile Care">
+    <meta name="twitter:description" content="Deep-cleaned, sanitized, and refreshed. We bring the ultimate detailing experience directly to your doorstep. Est. 2022.">
+    <meta name="twitter:image" content="https://www.vra-autodetailing.com/images/logo.jpg">
+    
     <!-- Tailwind CSS via CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     
@@ -196,7 +218,7 @@
                 PREMIUM <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#EBFCE8] via-vra-primary to-vra-buttonHover">MOBILE AUTO CARE</span>
             </h1>
             <p id="hero-subtitle" class="mt-4 text-xl md:text-2xl text-vra-muted max-w-3xl mx-auto mb-10">
-                Deep clean, sanitized, and refreshed. We bring the ultimate detailing experience directly to your doorstep. Est. 2024.
+                Deep-cleaned, sanitized, and refreshed. We bring the ultimate detailing experience directly to your doorstep. Est. 2022.
             </p>
             <div class="flex justify-center gap-4">
                 <a href="#pricing" class="bg-vra-button text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-vra-buttonHover transition-colors duration-300 shadow-[0_0_20px_rgba(38,126,34,0.5)]">
@@ -375,7 +397,7 @@
                     <div class="mb-6">
                         <h3 data-package-name class="text-2xl font-bold text-white mb-2 uppercase tracking-wide">Full Detail</h3>
                         <p data-package-description class="text-vra-muted text-sm italic mb-4">Our Most Comprehensive Service</p>
-                        <div data-package-price class="text-4xl font-bold text-vra-primary mb-2"><span class="text-xl text-vra-muted font-normal mr-1">Starting at</span><span data-package-price-value>$375</span></div>
+                        <div data-package-price class="text-4xl font-bold text-vra-primary mb-2"><span class="text-xl text-vra-muted font-normal mr-1">Starting at</span><span data-package-price-value>$374</span></div>
                         <p data-package-duration class="text-sm text-vra-muted flex items-center gap-2">
                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                             <span data-package-duration-value>5+ Hours</span>
@@ -439,7 +461,7 @@
     <section id="coverage" class="py-20 border-t border-vra-border bg-[#0a0a0c]">
         <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <h2 class="text-3xl md:text-4xl font-heading font-bold mb-6">Service Area</h2>
-            <p id="service-area-description" class="text-vra-muted mb-10 text-lg">We are a 100% mobile detailing service, proudly serving the greater metro Atlanta area.</p>
+            <p id="service-area-description" class="text-vra-muted mb-10 text-lg">We are a 100% mobile detailing service, proudly serving North-west Atlanta area.</p>
             
             <div class="bg-vra-card border border-vra-border rounded-2xl p-4 md:p-6 overflow-hidden shadow-[0_10px_30px_rgba(38,126,34,0.20)]">
                 <div class="grid grid-cols-1 lg:grid-cols-[1.2fr_0.8fr] items-center gap-8">
@@ -1039,7 +1061,7 @@
             });
         }
 
-        const SANITY_CACHE_STORAGE_KEY = 'vra_sanity_cached_data_v2';
+        const SANITY_CACHE_STORAGE_KEY = 'vra_sanity_cached_data_v3';
 
         function getStoredSanityData() {
             try {

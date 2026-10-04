@@ -16,6 +16,15 @@
     <link rel="icon" type="image/jpeg" href="images/logo.jpg">
     <link rel="apple-touch-icon" href="images/logo.jpg">
 
+    <!-- Canonical Redirection -->
+    <script>
+        (function() {
+            if (window.location.hostname === 'vra-autodetailing.com') {
+                window.location.replace('https://www.vra-autodetailing.com' + window.location.pathname + window.location.search + window.location.hash);
+            }
+        })();
+    </script>
+
     <!-- Custom Tailwind Configuration -->
     <script>
         tailwind.config = {
@@ -25,10 +34,10 @@
                         vra: {
                             bg: '#0F0F11',       
                             card: '#18181B',     
-                            primary: '#C8D59E',
-                            button: '#38471B',
-                            buttonHover: '#526528',
-                            buttonSoft: '#C8D59E',
+                            primary: '#9FE699',
+                            button: '#267E22',
+                            buttonHover: '#32A82E',
+                            buttonSoft: '#A8EDB0',
                             text: '#F4F4F5',     
                             muted: '#A1A1AA',    
                             border: '#27272A'    
