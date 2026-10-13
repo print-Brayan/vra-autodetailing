@@ -89,7 +89,19 @@ El panel inferior permite ofrecer servicios complementarios para aumentar el val
 
 ---
 
-## 5. Ciudades Atendidas y Mensajes de Contacto
+## 5. Logotipo de la Empresa y Textos Principales
+
+- **Logotipo de la empresa (`logoImage`):**
+  - Ubicado en el panel de Sanity.
+  - **Por defecto:** Si este campo se deja vacío, el sitio web mantiene el logo original de V.R.A. Auto Detailing (`images/logo.png`).
+  - **Cambiar el logo:** Si en el futuro deseas reemplazar el logo, simplemente sube tu nueva imagen (preferiblemente en formato PNG transparente o circular) y presiona **"Publish"**. La barra de navegación y el pie de página se actualizarán automáticamente.
+- **Título principal (`heroTitle`):**
+  - Valor predeterminado: **PREMIUM MOBILE AUTO CARE**.
+  - Este título controla el encabezado de impacto visual de la página y puede ser personalizado en cualquier momento desde Sanity.
+
+---
+
+## 6. Ciudades Atendidas y Mensajes de Contacto
 
 - **Ciudades (`cities`):** Puedes gestionar las poblaciones listadas en la sección de cobertura (por defecto: *Acworth*, *Kennesaw*, *Woodstock*). Si te expandes a nuevas zonas (ej. *Marietta*, *Canton*), puedes añadirlas con sus coordenadas geográficas y el mapa las incorporará de forma automática.
 - **Mensaje de WhatsApp (`whatsappMessage`):** Texto inicial que recibe el cliente al presionar el botón de WhatsApp desde su teléfono.
@@ -97,7 +109,7 @@ El panel inferior permite ofrecer servicios complementarios para aumentar el val
 
 ---
 
-## 6. Resumen de Buenas Prácticas
+## 7. Resumen de Buenas Prácticas
 
 1. **Pruebas en tiempo real:** Tras hacer clic en *Publish*, abre la página web en tu navegador. Si no ves el cambio al instante, refresca con `Ctrl + F5` (o `Cmd + Shift + R` en Mac) para limpiar la caché local.
 2. **Fotografía profesional:** Toma las fotos de "Antes" y "Después" con buena iluminación y desde la misma distancia y ángulo; esto aumenta exponencialmente la tasa de conversión y reserva de clientes.

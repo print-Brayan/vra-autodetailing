@@ -19,6 +19,13 @@ export default defineType({
       rows: 3,
     }),
     defineField({
+      name: 'logoImage',
+      title: 'Logotipo de la empresa',
+      type: 'image',
+      description: 'Opcional. Si lo dejas vacío, se usará automáticamente el logo actual predeterminado.',
+      options: {hotspot: true},
+    }),
+    defineField({
       name: 'whatsappMessage',
       title: 'Mensaje predeterminado de WhatsApp',
       type: 'text',
