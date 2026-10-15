@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>V.R.A. Auto Detailing | Driven By Excellence</title>
+    <title>🎃 V.R.A. Auto Detailing | Driven By Excellence</title>
 
     <!-- Canonical Redirection (Apex vra-autodetailing.com -> www.vra-autodetailing.com) -->
     <link rel="canonical" href="https://www.vra-autodetailing.com/" />
@@ -33,6 +33,11 @@
 
     <!-- Tailwind CSS via CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
+
+        <!-- Font Awesome 6 Free via CDN (Internet Vector Icons) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+        integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <!-- Google Fonts -->
     <link
@@ -167,20 +172,531 @@
         [data-package-description] {
             transition: opacity 0.25s ease-in-out;
         }
+    
+        /* =========================================================
+           EXTRAVAGANT HALLOWEEN THEME - FULL PAGE INTEGRATION
+        ========================================================= */
+        :root {
+            --hw-orange: #FF6600;
+            --hw-orange-bright: #FF8533;
+            --hw-orange-dark: #B33600;
+            --hw-orange-glow: rgba(255, 102, 0, 0.45);
+            --hw-purple: #9D4EDD;
+            --hw-purple-bright: #C77DFF;
+            --hw-purple-glow: rgba(157, 78, 221, 0.45);
+        }
+
+        body.halloween-mode {
+            background-color: #08080A !important;
+            transition: background-color 0.5s ease;
+        }
+
+        /* Top Announcement Banner */
+        .hw-banner {
+            background: linear-gradient(90deg, #1C0A00 0%, #351000 30%, #20003B 70%, #0D001A 100%);
+            border-bottom: 2px solid var(--hw-orange);
+            box-shadow: 0 4px 20px var(--hw-orange-glow);
+            position: relative;
+            z-index: 60;
+        }
+
+        .hw-slime-drips {
+            position: absolute;
+            bottom: -12px;
+            left: 0;
+            width: 100%;
+            height: 14px;
+            pointer-events: none;
+            filter: drop-shadow(0 3px 6px var(--hw-orange-glow));
+            z-index: 55;
+        }
+
+        /* Hanging Spider */
+        .hw-hanging-spider-wrap {
+            position: absolute;
+            top: 0;
+            right: 80px;
+            z-index: 60;
+            pointer-events: auto;
+            cursor: pointer;
+            animation: spiderBob 6s ease-in-out infinite;
+            transform-origin: top center;
+        }
+
+        .hw-web-thread {
+            width: 1.5px;
+            height: 48px;
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.7) 0%, rgba(255, 102, 0, 0.8) 100%);
+            margin: 0 auto;
+        }
+
+        @keyframes spiderBob {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            30% { transform: translateY(20px) rotate(8deg); }
+            70% { transform: translateY(10px) rotate(-8deg); }
+        }
+
+        .hw-hanging-spider-wrap:hover {
+            animation: spiderSwing 0.8s ease-in-out infinite alternate;
+        }
+
+        @keyframes spiderSwing {
+            0% { transform: translateY(5px) rotate(-15deg); }
+            100% { transform: translateY(25px) rotate(15deg); }
+        }
+
+        /* 100% Vector Moon - ZERO SQUARE BOX, totally transparent container */
+        .hw-moon-wrapper {
+            position: absolute;
+            top: 4.5rem;
+            right: 4%;
+            width: 150px;
+            height: 150px;
+            pointer-events: none;
+            z-index: 4;
+            background: transparent !important;
+            border: none !important;
+            box-shadow: none !important;
+            overflow: visible !important;
+        }
+
+        @media (min-width: 768px) {
+            .hw-moon-wrapper {
+                width: 190px;
+                height: 190px;
+                top: 5.5rem;
+                right: 8%;
+            }
+        }
+
+        .hw-moon-svg {
+            width: 100%;
+            height: 100%;
+            display: block;
+            background: transparent !important;
+            overflow: visible !important;
+        }
+
+        .hw-witch-group {
+            animation: witchSway 14s ease-in-out infinite alternate;
+            transform-origin: 100px 100px;
+        }
+
+        @keyframes witchSway {
+            0% { transform: translate(-8px, 6px) rotate(-3deg); }
+            50% { transform: translate(10px, -8px) rotate(4deg); }
+            100% { transform: translate(16px, 4px) rotate(-1deg); }
+        }
+
+        /* Ambient Embers Canvas */
+        #hw-fog-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 3;
+            opacity: 0.8;
+            background: transparent !important;
+        }
+
+        /* Flapping Bats */
+        .hw-bat {
+            position: absolute;
+            pointer-events: none;
+            z-index: 5;
+            filter: drop-shadow(0 0 6px rgba(255, 102, 0, 0.45));
+        }
+
+        .hw-bat-wing-l, .hw-bat-wing-r {
+            transform-origin: center;
+            animation: batFlap 0.28s ease-in-out infinite alternate;
+        }
+
+        @keyframes batFlap {
+            0% { transform: scaleY(1); }
+            100% { transform: scaleY(-0.8); }
+        }
+
+        .hw-bat-1 { top: 18%; left: 6%; width: 50px; animation: batPath1 15s ease-in-out infinite; }
+        .hw-bat-2 { top: 32%; right: 22%; width: 42px; animation: batPath2 17s ease-in-out infinite 2s; }
+        .hw-bat-3 { top: 48%; left: 16%; width: 34px; animation: batPath3 13s ease-in-out infinite 4s; }
+
+        @keyframes batPath1 {
+            0% { transform: translate(0, 0); }
+            50% { transform: translate(90px, 20px) scale(1.05); }
+            100% { transform: translate(0, 0); }
+        }
+        @keyframes batPath2 {
+            0% { transform: translate(0, 0); }
+            50% { transform: translate(-100px, 25px) scale(0.95); }
+            100% { transform: translate(0, 0); }
+        }
+        @keyframes batPath3 {
+            0% { transform: translate(0, 0); }
+            50% { transform: translate(40px, -30px) scale(1.1); }
+            100% { transform: translate(0, 0); }
+        }
+
+        /* Hero Badge */
+        .hw-hero-badge {
+            background: linear-gradient(135deg, rgba(255, 102, 0, 0.2) 0%, rgba(157, 78, 221, 0.22) 50%, rgba(255, 102, 0, 0.15) 100%);
+            border: 1.5px solid var(--hw-orange-bright);
+            box-shadow: 0 0 25px var(--hw-orange-glow), inset 0 0 15px rgba(255, 102, 0, 0.15);
+        }
+
+        /* Graveyard Horizon Divider */
+        .hw-graveyard-divider {
+            position: relative;
+            z-index: 20;
+            filter: drop-shadow(0 -6px 15px rgba(255, 102, 0, 0.3));
+        }
+
+        /* How It Works Halloween Accents */
+        body.halloween-mode #how-it-works .bg-vra-card {
+            border-color: rgba(255, 102, 0, 0.25);
+            transition: all 0.3s ease;
+        }
+
+        body.halloween-mode #how-it-works .bg-vra-card:hover {
+            border-color: var(--hw-orange);
+            box-shadow: 0 10px 30px rgba(255, 102, 0, 0.2);
+            transform: translateY(-4px);
+        }
+
+        /* =========================================================
+           FOTOS / GALERIA DE RESULTADOS - HALLOWEEN DECORATION
+        ========================================================= */
+        body.halloween-mode #results {
+            background: linear-gradient(180deg, #0A080C 0%, #0F0A12 50%, #0A080C 100%) !important;
+            border-top: 1px solid rgba(255, 102, 0, 0.35) !important;
+            border-bottom: 1px solid rgba(255, 102, 0, 0.35) !important;
+            position: relative;
+        }
+
+        body.halloween-mode #results .swiper-slide .bg-vra-card {
+            border: 1.5px solid rgba(255, 102, 0, 0.45) !important;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8), 0 0 25px rgba(255, 102, 0, 0.2) !important;
+            transition: all 0.35s ease;
+            position: relative;
+        }
+
+        body.halloween-mode #results .swiper-slide .bg-vra-card:hover {
+            border-color: #FF8533 !important;
+            box-shadow: 0 15px 40px rgba(255, 102, 0, 0.45), 0 0 35px rgba(255, 102, 0, 0.3) !important;
+            transform: translateY(-4px);
+        }
+
+        /* Swiper Arrows in Glowing Orange */
+        body.halloween-mode .swiper-button-next,
+        body.halloween-mode .swiper-button-prev {
+            color: #FF8533 !important;
+            filter: drop-shadow(0 0 10px #FF6600) !important;
+            transition: transform 0.2s ease, filter 0.2s ease;
+        }
+
+        body.halloween-mode .swiper-button-next:hover,
+        body.halloween-mode .swiper-button-prev:hover {
+            filter: drop-shadow(0 0 16px #FFA500) !important;
+            transform: scale(1.15);
+        }
+
+        body.halloween-mode .swiper-pagination-bullet-active {
+            background-color: #FF6600 !important;
+            box-shadow: 0 0 10px #FF6600;
+        }
+
+        /* =========================================================
+           PRICING SECTION HALLOWEEN DECORATION
+        ========================================================= */
+        body.halloween-mode [data-package="standard"] {
+            border: 1.5px solid rgba(255, 102, 0, 0.6) !important;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8), 0 0 25px rgba(255, 102, 0, 0.25) !important;
+            background: linear-gradient(180deg, #181414 0%, #100C0A 100%) !important;
+        }
+        body.halloween-mode [data-package="standard"]:hover {
+            border-color: #FF8533 !important;
+            box-shadow: 0 15px 45px rgba(255, 102, 0, 0.5) !important;
+        }
+
+        body.halloween-mode [data-package="interior"] {
+            border: 1.5px solid rgba(157, 78, 221, 0.6) !important;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8), 0 0 25px rgba(157, 78, 221, 0.25) !important;
+            background: linear-gradient(180deg, #150F1E 0%, #0D0714 100%) !important;
+        }
+        body.halloween-mode [data-package="interior"]:hover {
+            border-color: #C77DFF !important;
+            box-shadow: 0 15px 45px rgba(157, 78, 221, 0.55) !important;
+        }
+
+        body.halloween-mode [data-package="full"] {
+            border: 2px solid var(--hw-orange-bright) !important;
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.9), 0 0 35px rgba(255, 102, 0, 0.4) !important;
+            background: linear-gradient(180deg, #1C120A 0%, #120A1C 100%) !important;
+        }
+        body.halloween-mode [data-package="full"]:hover {
+            border-color: #FFA500 !important;
+            box-shadow: 0 20px 55px rgba(255, 102, 0, 0.65) !important;
+        }
+
+        .hw-badge-standard {
+            background: linear-gradient(90deg, #B33600 0%, #FF6600 50%, #FF8533 100%) !important;
+            color: #000 !important;
+            box-shadow: 0 0 16px rgba(255, 102, 0, 0.8) !important;
+        }
+
+        .hw-badge-interior {
+            background: linear-gradient(90deg, #3C096C 0%, #7B2CBF 50%, #C77DFF 100%) !important;
+            color: #FFF !important;
+            box-shadow: 0 0 16px rgba(157, 78, 221, 0.8) !important;
+        }
+
+        .hw-badge-full {
+            background: linear-gradient(90deg, #FF6600 0%, #FFD166 50%, #FF3D00 100%) !important;
+            color: #000 !important;
+            box-shadow: 0 0 20px rgba(255, 209, 102, 0.8) !important;
+        }
+
+        /* =========================================================
+           ADD-ONS & COVERAGE HALLOWEEN DECORATION
+        ========================================================= */
+        body.halloween-mode #add-ons-list > div {
+            border-color: rgba(255, 102, 0, 0.3);
+            transition: all 0.25s ease;
+        }
+        body.halloween-mode #add-ons-list > div:hover {
+            border-color: var(--hw-orange-bright);
+            box-shadow: 0 0 15px rgba(255, 102, 0, 0.35);
+            transform: translateY(-2px);
+        }
+
+        body.halloween-mode #coverage .bg-vra-card {
+            border-color: rgba(255, 102, 0, 0.4) !important;
+            box-shadow: 0 10px 30px rgba(255, 102, 0, 0.15) !important;
+        }
+
+        body.halloween-mode #service-cities a {
+            border-color: rgba(255, 102, 0, 0.5);
+            background: rgba(255, 102, 0, 0.12);
+            color: #FFA500;
+        }
+        body.halloween-mode #service-cities a:hover {
+            background: #FF6600;
+            color: #000;
+            box-shadow: 0 0 15px rgba(255, 102, 0, 0.5);
+        }
+
+        /* =========================================================
+           FAQ HALLOWEEN DECORATION
+        ========================================================= */
+        body.halloween-mode #faq details {
+            border-color: rgba(255, 102, 0, 0.3) !important;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+        body.halloween-mode #faq details[open] {
+            border-color: var(--hw-orange) !important;
+            box-shadow: 0 4px 20px rgba(255, 102, 0, 0.25);
+        }
+
+        /* =========================================================
+           PIE DE PAGINA (FOOTER) HALLOWEEN DECORATION
+        ========================================================= */
+        body.halloween-mode footer {
+            background: linear-gradient(180deg, #0C0A0F 0%, #060508 100%) !important;
+            border-top: 1.5px solid rgba(255, 102, 0, 0.4) !important;
+            position: relative;
+        }
+
+        body.halloween-mode footer .social-icon-link {
+            transition: all 0.25s ease;
+        }
+        body.halloween-mode footer .social-icon-link:hover {
+            color: #FF8533 !important;
+            filter: drop-shadow(0 0 8px #FF6600);
+            transform: scale(1.15);
+        }
+
+        /* Controller Dock (Silent & No Flash) */
+        #hw-cauldron-dock {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            z-index: 100;
+            background: rgba(14, 10, 20, 0.94);
+            backdrop-filter: blur(16px);
+            border: 2px solid var(--hw-orange-bright);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.9), 0 0 25px var(--hw-orange-glow);
+            border-radius: 9999px;
+            padding: 8px 18px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            transition: all 0.3s ease;
+        }
+
+        #hw-cauldron-dock:hover {
+            border-color: #FFA500;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.95), 0 0 35px rgba(255, 133, 51, 0.7);
+        }
+
+        .hw-switch {
+            position: relative;
+            display: inline-block;
+            width: 46px;
+            height: 24px;
+        }
+        .hw-switch input { opacity: 0; width: 0; height: 0; }
+        .hw-slider {
+            position: absolute;
+            cursor: pointer;
+            inset: 0;
+            background-color: #27272A;
+            transition: .3s;
+            border-radius: 24px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .hw-slider:before {
+            position: absolute;
+            content: "";
+            height: 18px;
+            width: 18px;
+            left: 2px;
+            bottom: 2px;
+            background-color: white;
+            transition: .3s;
+            border-radius: 50%;
+        }
+        input:checked + .hw-slider {
+            background: linear-gradient(90deg, #FF6600 0%, #FF8533 100%);
+            box-shadow: 0 0 14px rgba(255, 102, 0, 0.8);
+            border-color: #FF8533;
+        }
+        input:checked + .hw-slider:before {
+            transform: translateX(22px);
+            background-color: #FFFFFF;
+        }
+
+        /* Mouse Embers Trail */
+        .hw-ember-particle {
+            position: fixed;
+            pointer-events: none;
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            background: #FF8533;
+            box-shadow: 0 0 8px #FF3D00, 0 0 16px #FF8533;
+            z-index: 9999;
+            transition: transform 0.5s ease-out, opacity 0.5s ease-out;
+        }
+
+        /* Hero padding */
+        body.halloween-mode #hero-section {
+            padding-top: 10.5rem;
+        }
+        @media (min-width: 1024px) {
+            body.halloween-mode #hero-section {
+                padding-top: 14.5rem;
+            }
+        }
+
+        
+        /* Photo Badges Toggle Styling */
+        body:not(.halloween-mode) .photo-badge-before {
+            background-color: #000 !important;
+            color: #C8A951 !important;
+            border: 1px solid #C8A951 !important;
+            border-radius: 4px !important;
+            box-shadow: none !important;
+        }
+        body:not(.halloween-mode) .photo-badge-before .hw-icon-skull {
+            display: none !important;
+        }
+        body:not(.halloween-mode) .photo-badge-after {
+            background: #FFFFFF !important;
+            color: #000000 !important;
+            border: 1px solid #FFFFFF !important;
+            border-radius: 4px !important;
+            box-shadow: none !important;
+        }
+        body:not(.halloween-mode) .photo-badge-after .hw-icon-sparkle {
+            display: none !important;
+        }
+        body:not(.halloween-mode) .photo-badge-after span {
+            font-weight: 700;
+        }
+
+        /* Toggle OFF hiding */
+        body:not(.halloween-mode) .hw-banner,
+        body:not(.halloween-mode) .hw-slime-drips,
+        body:not(.halloween-mode) #hw-fog-canvas,
+        body:not(.halloween-mode) .hw-moon-wrapper,
+        body:not(.halloween-mode) .hw-hanging-spider-wrap,
+        body:not(.halloween-mode) .hw-bat,
+        body:not(.halloween-mode) .hw-hero-badge,
+        body:not(.halloween-mode) .hw-graveyard-divider,
+        body:not(.halloween-mode) .hw-pumpkin-logo,
+        body:not(.halloween-mode) .hw-package-spooky-title,
+        body:not(.halloween-mode) .hw-footer-spooky-badge {
+            display: none !important;
+        }
+
     </style>
 </head>
 
-<body class="bg-vra-bg text-vra-text font-sans antialiased selection:bg-vra-primary selection:text-vra-bg">
+<body class="bg-vra-bg text-vra-text font-sans antialiased selection:bg-[#FF6600] selection:text-white halloween-mode">
+
 
     <!-- ==========================================
-         NAVIGATION BAR
+         HALLOWEEN HEADER & BANNER
     =========================================== -->
-    <nav class="fixed w-full z-50 bg-vra-bg/90 backdrop-blur-md border-b border-vra-border">
+    <header id="main-header" class="fixed top-0 left-0 w-full z-50">
+        <!-- Spooky Announcement Banner -->
+        <div id="halloween-banner" class="hw-banner text-xs sm:text-sm py-2.5 px-4 text-center transition-all duration-300">
+            <div class="max-w-7xl mx-auto flex items-center justify-between gap-3">
+                <div class="flex-1 flex items-center justify-center gap-2 flex-wrap">
+                    <i class="fa-solid fa-ghost text-purple-400 text-sm"></i>
+                    <span class="font-bold tracking-widest text-black uppercase text-[0.7rem] sm:text-xs bg-gradient-to-r from-orange-400 via-amber-300 to-orange-500 px-3 py-0.5 rounded-full shadow-[0_0_12px_rgba(255,102,0,0.6)] font-heading">
+                        <i class="fa-solid fa-fire text-black mr-1"></i> SPOOKY SHINE EVENT 2026
+                    </span>
+                    <span class="text-zinc-100 font-medium tracking-wide">
+                        Don't drive a haunted nightmare! Treat your vehicle to an apocalypse-level showroom shine.
+                    </span>
+                    <a href="#pricing" class="inline-flex items-center gap-1 font-bold text-orange-400 hover:text-orange-300 underline underline-offset-4 transition-colors ml-1">
+                        <span>Claim Spooky Specials</span>
+                        <i class="fa-solid fa-wand-magic-sparkles text-xs text-amber-300"></i>
+                    </a>
+                </div>
+                <button id="hw-dismiss-banner" type="button" class="text-zinc-400 hover:text-white transition-colors p-1" aria-label="Dismiss banner" title="Close banner">
+                    <i class="fa-solid fa-xmark text-sm"></i>
+                </button>
+            </div>
+            <!-- Dripping Slime SVG -->
+            <svg class="hw-slime-drips" preserveAspectRatio="none" viewBox="0 0 1200 40">
+                <path d="M0,0 L1200,0 L1200,8 Q1150,36 1100,10 Q1050,40 1000,8 Q950,26 900,12 Q850,38 800,10 Q750,22 700,8 Q650,42 600,14 Q550,28 500,8 Q450,38 400,12 Q350,24 300,6 Q250,40 200,10 Q150,32 100,8 Q50,26 0,8 Z" fill="#FF6600"/>
+            </svg>
+        </div>
+
+        <!-- Hanging Spider from Top Nav -->
+        <div class="hw-hanging-spider-wrap" id="hw-spider" title="Spooky Spider">
+            <div class="hw-web-thread"></div>
+            <div class="w-8 h-8 flex items-center justify-center text-orange-400 filter drop-shadow-[0_0_8px_rgba(255,102,0,0.8)]">
+                <i class="fa-solid fa-spider text-2xl"></i>
+            </div>
+        </div>
+
+        <!-- Navigation Bar -->
+        <nav class="w-full bg-vra-bg/90 backdrop-blur-md border-b border-vra-border">
+
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-20">
                 <div class="flex-shrink-0 flex items-center">
-                    <img id="nav-logo" src="images/logo.png" alt="V.R.A. Auto Detailing"
+                    <div class="relative inline-block"><img id="nav-logo" src="images/logo.png" alt="V.R.A. Auto Detailing"
                         class="w-14 h-14 rounded-full object-cover border border-vra-primary shadow-[0_0_10px_rgba(38,126,34,0.35)]">
+                        <div class="hw-pumpkin-logo absolute -top-2 -right-2 text-orange-400 filter drop-shadow-[0_0_8px_rgba(255,102,0,0.9)] animate-bounce" title="Happy Halloween!">
+                            <i class="fa-solid fa-hat-wizard text-base text-purple-400"></i>
+                        </div>
+                    </div>
                     <div class="flex flex-col justify-center leading-none ml-2">
                         <span class="font-sans text-lg sm:text-xl text-vra-primary font-semibold tracking-[0.08em]">VRA
                             AUTO DETAILING</span>
@@ -243,17 +759,88 @@
             </div>
         </div>
     </nav>
+    </header>
 
     <!-- ==========================================
          HERO SECTION
     =========================================== -->
     <section id="hero-section" class="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden">
+
+        <!-- Canvas for Dynamic Mist & Rising Embers -->
+        <canvas id="hw-fog-canvas"></canvas>
+
+        <!-- 100% Vector Harvest Moon & Witch (Pure SVG with zero square container artifact) -->
+        <div class="hw-moon-wrapper" aria-hidden="true">
+            <svg class="hw-moon-svg" viewBox="0 0 200 200" fill="none">
+                <defs>
+                    <radialGradient id="hwMoonHalo" cx="50%" cy="50%" r="50%">
+                        <stop offset="65%" stop-color="#FF9E00" stop-opacity="0.32" />
+                        <stop offset="100%" stop-color="#FF9E00" stop-opacity="0" />
+                    </radialGradient>
+                    <radialGradient id="hwMoonBody" cx="38%" cy="38%" r="62%">
+                        <stop offset="0%" stop-color="#FFF8E1" />
+                        <stop offset="40%" stop-color="#FFD54F" />
+                        <stop offset="75%" stop-color="#FFA726" />
+                        <stop offset="100%" stop-color="#FB8C00" />
+                    </radialGradient>
+                    <radialGradient id="hwCrater" cx="50%" cy="50%" r="50%">
+                        <stop offset="0%" stop-color="#E65100" stop-opacity="0.22" />
+                        <stop offset="100%" stop-color="#E65100" stop-opacity="0" />
+                    </radialGradient>
+                </defs>
+                <!-- Soft Circular Outer Halo -->
+                <circle cx="100" cy="100" r="96" fill="url(#hwMoonHalo)" />
+                <!-- Moon Body Disc -->
+                <circle cx="100" cy="100" r="64" fill="url(#hwMoonBody)" />
+                <!-- Subtle Craters -->
+                <circle cx="78" cy="85" r="14" fill="url(#hwCrater)" />
+                <circle cx="120" cy="112" r="18" fill="url(#hwCrater)" />
+                <circle cx="92" cy="125" r="11" fill="url(#hwCrater)" />
+                <!-- Flying Witch Silhouette -->
+                <g class="hw-witch-group" transform="translate(68, 74) scale(0.65)">
+                    <path d="M-18,18 L55,-4 M-14,15 L-24,25 L-8,21 M48,-2 L62,-6 L56,2" stroke="#120A16" stroke-width="2.6" stroke-linecap="round" fill="none"/>
+                    <path d="M12,4 Q8,-12 0,-18 Q16,-14 22,-2 M8,8 Q18,4 24,14 Q14,22 4,16 Z" fill="#120A16"/>
+                    <circle cx="20" cy="0" r="4.5" fill="#120A16"/>
+                    <path d="M6,8 Q-12,5 -18,18 Q-4,16 8,14 Z" fill="#120A16"/>
+                </g>
+            </svg>
+        </div>
+
+        <!-- Flapping Vampire Bats Swarm -->
+        <svg class="hw-bat hw-bat-1" viewBox="0 0 64 36" fill="#FF8533">
+            <g class="hw-bat-wing-l"><path d="M32 14 C26 6, 16 2, 6 6 C0 9, 0 18, 0 20 C6 18, 12 20, 16 26 C20 20, 26 18, 30 24 Z"/></g>
+            <g class="hw-bat-wing-r"><path d="M32 14 C38 6, 48 2, 58 6 C64 9, 64 18, 64 20 C58 18, 52 20, 48 26 C44 20, 38 18, 34 24 Z"/></g>
+            <circle cx="32" cy="18" r="4" fill="#FF8533"/>
+        </svg>
+
+        <svg class="hw-bat hw-bat-2" viewBox="0 0 64 36" fill="#C77DFF">
+            <g class="hw-bat-wing-l"><path d="M32 14 C26 6, 16 2, 6 6 C0 9, 0 18, 0 20 C6 18, 12 20, 16 26 C20 20, 26 18, 30 24 Z"/></g>
+            <g class="hw-bat-wing-r"><path d="M32 14 C38 6, 48 2, 58 6 C64 9, 64 18, 64 20 C58 18, 52 20, 48 26 C44 20, 38 18, 34 24 Z"/></g>
+            <circle cx="32" cy="18" r="4" fill="#C77DFF"/>
+        </svg>
+
+        <svg class="hw-bat hw-bat-3" viewBox="0 0 64 36" fill="#FF6600">
+            <g class="hw-bat-wing-l"><path d="M32 14 C26 6, 16 2, 6 6 C0 9, 0 18, 0 20 C6 18, 12 20, 16 26 C20 20, 26 18, 30 24 Z"/></g>
+            <g class="hw-bat-wing-r"><path d="M32 14 C38 6, 48 2, 58 6 C64 9, 64 18, 64 20 C58 18, 52 20, 48 26 C44 20, 38 18, 34 24 Z"/></g>
+            <circle cx="32" cy="18" r="4" fill="#FF6600"/>
+        </svg>
+
         <div class="absolute inset-0 z-0 overflow-hidden pointer-events-none" aria-hidden="true">
             <video id="hero-video" class="absolute inset-0 w-full h-full object-cover opacity-45 hidden" autoplay muted
                 loop playsinline></video>
             <div class="absolute inset-0 bg-vra-bg/75"></div>
         </div>
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+
+            <!-- Extravagant Halloween Season Badge -->
+            <div class="inline-flex items-center gap-2.5 px-5 py-2.5 rounded-full hw-hero-badge mb-6 select-none" id="hw-hero-badge">
+                <i class="fa-solid fa-skull text-orange-400 text-lg filter drop-shadow-[0_0_6px_rgba(255,102,0,0.8)]"></i>
+                <span class="text-xs sm:text-sm font-black tracking-widest uppercase text-transparent bg-clip-text bg-gradient-to-r from-orange-300 via-amber-200 to-purple-300 font-heading">
+                    SCARE AWAY DIRT & GRIME • HALLOWEEN SPECIAL EDITION
+                </span>
+                <i class="fa-solid fa-wand-magic-sparkles text-purple-300 text-sm"></i>
+            </div>
+
             <h1 id="hero-title" class="text-4xl md:text-6xl font-display font-bold tracking-wide mb-6">
                 PREMIUM <span
                     class="text-transparent bg-clip-text bg-gradient-to-r from-[#EBFCE8] via-vra-primary to-vra-buttonHover">MOBILE
@@ -275,6 +862,14 @@
         </div>
     </section>
 
+
+    <!-- Spooky Graveyard Horizon Section Divider -->
+    <div class="hw-graveyard-divider w-full overflow-hidden leading-none -mb-1 relative z-20 pointer-events-none">
+        <svg viewBox="0 0 1200 90" preserveAspectRatio="none" class="w-full h-14 sm:h-20 text-[#0F0F11] fill-current">
+            <path d="M0,90 L1200,90 L1200,60 Q1170,55 1150,60 L1150,42 Q1150,35 1140,35 Q1130,35 1130,42 L1130,60 Q1050,55 980,65 Q950,30 920,50 Q880,25 850,65 Q800,60 750,60 L750,45 L735,45 L735,60 Q650,55 580,65 Q520,20 460,55 Q400,60 360,50 L360,65 Q300,60 250,60 L250,40 Q250,32 240,32 Q230,32 230,40 L230,60 Q150,55 80,65 Q40,45 0,60 Z"/>
+        </svg>
+    </div>
+
     <!-- ==========================================
          HOW IT WORKS SECTION
     =========================================== -->
@@ -287,16 +882,14 @@
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
                 <div class="bg-vra-card p-8 rounded-2xl border border-vra-border text-center">
-                    <div
-                        class="w-16 h-16 bg-vra-bg rounded-full flex items-center justify-center text-vra-primary text-2xl font-bold mx-auto mb-6 border border-vra-border">
-                        1</div>
+                    <div class="w-16 h-16 bg-vra-bg rounded-full flex items-center justify-center text-orange-400 text-2xl font-black mx-auto mb-6 border border-orange-500/50 shadow-[0_0_15px_rgba(255,102,0,0.3)]">
+                        <i class="fa-solid fa-wand-magic-sparkles text-xl"></i></div>
                     <h3 class="text-xl font-bold mb-3">Choose Your Package</h3>
                     <p class="text-vra-muted">Select the detailing package that best suits your vehicle's needs.</p>
                 </div>
                 <div class="bg-vra-card p-8 rounded-2xl border border-vra-border text-center">
-                    <div
-                        class="w-16 h-16 bg-vra-bg rounded-full flex items-center justify-center text-vra-primary text-2xl font-bold mx-auto mb-6 border border-vra-border">
-                        2</div>
+                    <div class="w-16 h-16 bg-vra-bg rounded-full flex items-center justify-center text-purple-400 text-2xl font-black mx-auto mb-6 border border-purple-500/50 shadow-[0_0_15px_rgba(157,78,221,0.3)]">
+                        <i class="fa-solid fa-envelope-open-text text-xl"></i></div>
                     <div class="hidden md:block">
                         <h3 class="text-xl font-bold mb-3">Book via Email</h3>
                         <p class="text-vra-muted">Send us an email directly. We'll confirm your date and time promptly.
@@ -309,9 +902,8 @@
                     </div>
                 </div>
                 <div class="bg-vra-card p-8 rounded-2xl border border-vra-border text-center">
-                    <div
-                        class="w-16 h-16 bg-vra-bg rounded-full flex items-center justify-center text-vra-primary text-2xl font-bold mx-auto mb-6 border border-vra-border">
-                        3</div>
+                    <div class="w-16 h-16 bg-vra-bg rounded-full flex items-center justify-center text-amber-400 text-2xl font-black mx-auto mb-6 border border-amber-500/50 shadow-[0_0_15px_rgba(255,193,7,0.3)]">
+                        <i class="fa-solid fa-van-shuttle text-xl"></i></div>
                     <h3 class="text-xl font-bold mb-3">We Come To You</h3>
                     <p class="text-vra-muted">Relax at home or work. Our fully equipped mobile unit handles the rest.
                     </p>
@@ -326,8 +918,11 @@
     <section id="results" class="py-20 bg-[#0a0a0c] border-t border-vra-border overflow-hidden">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
             <div class="text-center mb-16">
-                <h2 class="text-3xl md:text-4xl font-heading font-bold">Our Results</h2>
-                <p class="mt-4 text-vra-muted">Real transformations. Swipe to see the V.R.A. difference.</p>
+                <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-orange-950/60 border border-orange-500/40 text-orange-400 text-xs font-bold uppercase tracking-widest mb-3">
+                    <i class="fa-solid fa-ghost"></i> Spooky Before & After Cases
+                </div>
+                <h2 class="text-3xl md:text-4xl font-heading font-bold">Haunted Transformations</h2>
+                <p class="mt-4 text-vra-muted">From scary road grime to showroom resurrection. Swipe to see the magic.</p>
             </div>
 
             <!-- Estructura principal de Swiper -->
@@ -371,9 +966,11 @@
                 <!-- CARD 1 -->
                 <div data-package="standard"
                     class="order-1 lg:order-1 bg-vra-card rounded-2xl p-8 border border-vra-border flex flex-col transition-all duration-300 hover:-translate-y-2 hover:border-vra-primary hover:shadow-[0_10px_30px_rgba(38,126,34,0.26)] relative overflow-hidden">
-                    <div
-                        class="package-badge absolute top-5 -right-12 bg-[#D4AF37] text-[#0F0F11] text-xs font-bold px-12 py-1 rotate-45">
-                        POPULAR</div>
+                    <div class="package-badge absolute top-5 -right-12 hw-badge-standard text-xs font-black px-12 py-1 rotate-45 shadow-lg tracking-wider flex items-center justify-center gap-1">
+                        <i class="fa-solid fa-fire text-[0.65rem] mr-1"></i> SPOOKY SHINE</div>
+                    <div class="hw-package-spooky-title mb-2 inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-orange-400 bg-orange-950/40 px-3 py-1 rounded-full border border-orange-500/40">
+                        <i class="fa-solid fa-ghost"></i> Vampire Quick Revive
+                    </div>
                     <div class="mb-6">
                         <h3 data-package-name class="text-2xl font-bold text-white mb-2 uppercase tracking-wide">
                             Standard Detail</h3>
@@ -430,8 +1027,10 @@
                 <!-- CARD 2 -->
                 <div data-package="interior"
                     class="order-2 lg:order-2 bg-vra-card rounded-2xl p-8 border border-vra-border flex flex-col transition-all duration-300 hover:-translate-y-2 hover:border-vra-primary hover:shadow-[0_10px_30px_rgba(38,126,34,0.26)] relative overflow-hidden">
-                    <div
-                        class="package-badge absolute top-5 -right-12 bg-[#D4AF37] text-[#0F0F11] text-xs font-bold px-12 py-1 rotate-45 hidden">
+                    <div class="package-badge absolute top-5 -right-12 hw-badge-interior text-xs font-black px-12 py-1 rotate-45 shadow-lg tracking-wider flex items-center justify-center gap-1">
+                        <i class="fa-solid fa-wand-magic-sparkles text-[0.65rem] mr-1"></i> HAUNT-FREE</div>
+                    <div class="hw-package-spooky-title mb-2 inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-purple-300 bg-purple-950/40 px-3 py-1 rounded-full border border-purple-500/40">
+                        <i class="fa-solid fa-skull"></i> Cabin Exorcism Detail
                     </div>
                     <div class="mb-6">
                         <h3 data-package-name class="text-2xl font-bold text-white mb-2 uppercase tracking-wide">
@@ -485,9 +1084,11 @@
                 <!-- CARD 3 -->
                 <div data-package="full"
                     class="order-3 lg:order-3 bg-vra-card rounded-2xl p-8 border border-vra-border flex flex-col transition-all duration-300 hover:-translate-y-2 hover:border-vra-primary hover:shadow-[0_10px_30px_rgba(38,126,34,0.26)] relative overflow-hidden">
-                    <div
-                        class="package-badge absolute top-5 -right-12 bg-[#FFD700] text-black text-xs font-bold px-12 py-1 rotate-45">
-                        BEST VALUE</div>
+                    <div class="package-badge absolute top-5 -right-12 hw-badge-full text-xs font-black px-12 py-1 rotate-45 shadow-xl tracking-wider flex items-center justify-center gap-1">
+                        <i class="fa-solid fa-bolt text-[0.65rem] mr-1"></i> MONSTER GLOSS</div>
+                    <div class="hw-package-spooky-title mb-2 inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-amber-300 bg-amber-950/40 px-3 py-1 rounded-full border border-amber-500/40">
+                        <i class="fa-solid fa-crown"></i> Apocalypse Beast Armor
+                    </div>
                     <div class="mb-6">
                         <h3 data-package-name class="text-2xl font-bold text-white mb-2 uppercase tracking-wide">Full
                             Detail</h3>
@@ -757,8 +1358,10 @@
             <div class="flex flex-col md:flex-row justify-between items-center gap-8">
                 <a href="#" class="flex items-center justify-center md:justify-start gap-3 group"
                     aria-label="V.R.A. Auto Detailing Home">
-                    <img id="footer-logo" src="images/logo.png" alt="V.R.A. Auto Detailing"
+                    <div class="relative inline-block"><img id="footer-logo" src="images/logo.png" alt="V.R.A. Auto Detailing"
                         class="w-14 h-14 rounded-full object-cover border border-vra-primary shadow-[0_0_10px_rgba(38,126,34,0.35)] group-hover:scale-105 transition-transform duration-300">
+                        <span class="hw-pumpkin-logo absolute -top-2 -right-2 text-purple-400 text-sm filter drop-shadow"><i class="fa-solid fa-hat-wizard"></i></span>
+                    </div>
                     <div class="flex flex-col justify-center leading-none text-left">
                         <span class="font-sans text-lg sm:text-xl text-vra-primary font-semibold tracking-[0.08em]">VRA
                             AUTO DETAILING</span>
@@ -772,7 +1375,7 @@
                 <div class="flex gap-6">
                     <a id="footer-email-link"
                         href="mailto:vra.autodetailing@gmail.com?subject=V.R.A.%20Auto%20Detailing%20Inquiry&body=Hi%20V.R.A.%20Auto%20Detailing%2C%0A%0AI%20would%20like%20to%20inquire%20about%20your%20services."
-                        class="text-vra-muted hover:text-vra-primary transition-colors"
+                        class="text-vra-muted hover:text-orange-400 social-icon-link transition-colors"
                         title="Email V.R.A. Auto Detailing">
                         <span class="sr-only">Email</span>
                         <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
@@ -784,7 +1387,7 @@
                         </svg>
                     </a>
                     <a id="facebook-link" href="https://www.facebook.com/VRAautodetailing" target="_blank"
-                        rel="noopener noreferrer" class="text-vra-muted hover:text-vra-primary transition-colors">
+                        rel="noopener noreferrer" class="text-vra-muted hover:text-orange-400 social-icon-link transition-colors">
                         <span class="sr-only">Facebook</span>
                         <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
                             <path fill-rule="evenodd"
@@ -795,7 +1398,7 @@
                     <a id="whatsapp-link"
                         href="https://wa.me/16784474945?text=Hi%21%20%F0%9F%91%8B%F0%9F%8F%BB%20Thank%20you%20for%20contacting%20VRA%20Auto%20Detailing.%0AWe%E2%80%99d%20be%20happy%20to%20help%20you%20with%20a%20quote.%0AWhat%20vehicle%E2%80%99s%20year%2C%20make%20%26%20model%3F"
                         target="_blank" rel="noopener noreferrer"
-                        class="text-vra-muted hover:text-vra-primary transition-colors" title="Chat on WhatsApp">
+                        class="text-vra-muted hover:text-orange-400 social-icon-link transition-colors" title="Chat on WhatsApp">
                         <span class="sr-only">WhatsApp</span>
                         <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                             <path
@@ -805,7 +1408,7 @@
                     <a id="instagram-link"
                         href="https://www.instagram.com/vra.autodetailing?utm_source=ig_web_button_share_sheet&stkn=ZDNlZDc0MzIxNw=="
                         target="_blank" rel="noopener noreferrer"
-                        class="text-vra-muted hover:text-vra-primary transition-colors">
+                        class="text-vra-muted hover:text-orange-400 social-icon-link transition-colors">
                         <span class="sr-only">Instagram</span>
                         <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
                             <path fill-rule="evenodd"
@@ -816,13 +1419,37 @@
                 </div>
             </div>
 
-            <div
-                class="mt-8 border-t border-vra-border pt-8 flex flex-col md:flex-row justify-between items-center text-sm text-vra-muted gap-4">
-                <p>&copy; 2026 V.R.A. Auto Detailing. All rights reserved.</p>
-                <p>vra-autodetailing.com</p>
+            <div class="mt-8 border-t border-vra-border pt-8 flex flex-col md:flex-row justify-between items-center text-sm text-vra-muted gap-4">
+                <div class="flex items-center gap-3">
+                    <p>&copy; 2026 V.R.A. Auto Detailing. All rights reserved.</p>
+                    <span class="hw-footer-spooky-badge inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-orange-950/60 border border-orange-500/40 text-orange-300 text-xs font-semibold">
+                        <i class="fa-solid fa-ghost"></i> Halloween 2026 Edition
+                    </span>
+                </div>
+                <p class="text-orange-400 font-medium">vra-autodetailing.com</p>
             </div>
         </div>
     </footer>
+
+    <!-- ==========================================
+         HALLOWEEN CONTROLLER DOCK (SILENT & NO FLASH)
+    =========================================== -->
+    <aside id="hw-cauldron-dock" aria-label="Halloween Mode Controller">
+        <div class="flex items-center gap-2.5 select-none">
+            <div class="w-8 h-8 rounded-full bg-gradient-to-tr from-orange-600 to-amber-500 flex items-center justify-center shadow-[0_0_12px_rgba(255,102,0,0.8)]">
+                <i class="fa-solid fa-wand-magic-sparkles text-black text-sm"></i>
+            </div>
+            <div class="flex flex-col leading-tight">
+                <span class="text-xs font-black text-orange-400 tracking-wider uppercase font-heading">Halloween Vibe</span>
+                <span id="hw-mode-status" class="text-[0.65rem] text-zinc-300 font-medium">Mode: Active</span>
+            </div>
+        </div>
+        <label class="hw-switch" title="Toggle Halloween Mode On/Off">
+            <input type="checkbox" id="hw-mode-toggle" checked>
+            <span class="hw-slider"></span>
+        </label>
+    </aside>
+
 
     <!-- ==========================================
          SCRIPTS: SWIPERJS Y CMS LÓGICA
@@ -895,9 +1522,12 @@
 
             const badge = document.createElement('div');
             badge.className = position === 'before'
-                ? 'absolute top-4 left-4 bg-black text-[#C8A951] text-xs font-bold px-3 py-1 rounded backdrop-blur-sm z-10 border border-[#C8A951]'
-                : 'absolute top-4 right-4 bg-white text-black text-xs font-bold px-3 py-1 rounded backdrop-blur-sm z-10 border border-white';
-            badge.textContent = label.toUpperCase();
+                ? 'photo-badge-before absolute top-4 left-4 bg-black/90 text-orange-400 text-xs font-bold px-3 py-1 rounded-full backdrop-blur-md z-10 border border-orange-500 shadow-[0_0_12px_rgba(255,102,0,0.6)] flex items-center gap-1.5'
+                : 'photo-badge-after absolute top-4 right-4 bg-gradient-to-r from-orange-500 to-amber-400 text-black text-xs font-black px-3 py-1 rounded-full backdrop-blur-md z-10 border border-amber-300 shadow-[0_0_15px_rgba(255,102,0,0.8)] flex items-center gap-1.5';
+
+            badge.innerHTML = position === 'before'
+                ? '<i class="fa-solid fa-skull text-xs hw-icon-skull"></i> <span>BEFORE</span>'
+                : '<i class="fa-solid fa-wand-magic-sparkles text-xs hw-icon-sparkle"></i> <span>RESURRECTION</span>';
 
             const image = document.createElement('img');
             image.src = src;
@@ -1534,6 +2164,134 @@
             });
         });
     </script>
+<script>
+        // =========================================================
+        // HALLOWEEN ENGINE (FULL PAGE, SILENT, NO FLASH)
+        // =========================================================
+        const hwToggle = document.getElementById('hw-mode-toggle');
+        const hwStatus = document.getElementById('hw-mode-status');
+        const hwBanner = document.getElementById('halloween-banner');
+        const hwDismissBtn = document.getElementById('hw-dismiss-banner');
+
+        function setHalloweenMode(enabled) {
+            if (enabled) {
+                document.body.classList.add('halloween-mode');
+                if (hwStatus) hwStatus.textContent = 'Mode: Active';
+                if (hwToggle) hwToggle.checked = true;
+                if (hwBanner && !sessionStorage.getItem('vra_hw_banner_dismissed')) {
+                    hwBanner.style.display = 'block';
+                }
+            } else {
+                document.body.classList.remove('halloween-mode');
+                if (hwStatus) hwStatus.textContent = 'Mode: Disabled';
+                if (hwToggle) hwToggle.checked = false;
+                if (hwBanner) {
+                    hwBanner.style.display = 'none';
+                }
+            }
+        }
+
+        if (hwToggle) {
+            hwToggle.addEventListener('change', (e) => {
+                setHalloweenMode(e.target.checked);
+            });
+        }
+
+        if (hwDismissBtn) {
+            hwDismissBtn.addEventListener('click', () => {
+                if (hwBanner) {
+                    hwBanner.style.opacity = '0';
+                    hwBanner.style.transform = 'translateY(-100%)';
+                    setTimeout(() => { hwBanner.style.display = 'none'; }, 300);
+                    sessionStorage.setItem('vra_hw_banner_dismissed', 'true');
+                }
+            });
+        }
+
+        // Dynamic Mist & Rising Embers in Hero Canvas
+        (function initFogCanvas() {
+            const canvas = document.getElementById('hw-fog-canvas');
+            if (!canvas) return;
+            const ctx = canvas.getContext('2d');
+            let width, height;
+            let embers = [];
+
+            function resize() {
+                width = canvas.width = canvas.parentElement.offsetWidth;
+                height = canvas.height = canvas.parentElement.offsetHeight;
+            }
+            resize();
+            window.addEventListener('resize', resize);
+
+            for (let i = 0; i < 40; i++) {
+                embers.push({
+                    x: Math.random() * width,
+                    y: Math.random() * height,
+                    radius: Math.random() * 2 + 1,
+                    speedY: Math.random() * 0.7 + 0.25,
+                    speedX: (Math.random() - 0.5) * 0.4,
+                    alpha: Math.random() * 0.75 + 0.2,
+                    color: Math.random() > 0.4 ? 'rgba(255, 133, 51, ' : 'rgba(199, 125, 255, '
+                });
+            }
+
+            function animate() {
+                if (!document.body.classList.contains('halloween-mode')) {
+                    ctx.clearRect(0, 0, width, height);
+                    requestAnimationFrame(animate);
+                    return;
+                }
+
+                ctx.clearRect(0, 0, width, height);
+                embers.forEach(p => {
+                    p.y -= p.speedY;
+                    p.x += p.speedX;
+                    if (p.y < 0) {
+                        p.y = height + 10;
+                        p.x = Math.random() * width;
+                    }
+                    ctx.beginPath();
+                    ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+                    ctx.fillStyle = p.color + p.alpha + ')';
+                    ctx.shadowBlur = 8;
+                    ctx.shadowColor = '#FF6600';
+                    ctx.fill();
+                });
+                requestAnimationFrame(animate);
+            }
+            animate();
+        })();
+
+        // Gentle Mouse Ember Trail
+        let lastEmberTime = 0;
+        window.addEventListener('mousemove', (e) => {
+            if (!document.body.classList.contains('halloween-mode')) return;
+            const now = Date.now();
+            if (now - lastEmberTime < 70) return;
+            lastEmberTime = now;
+
+            const ember = document.createElement('div');
+            ember.className = 'hw-ember-particle';
+            ember.style.left = `${e.clientX}px`;
+            ember.style.top = `${e.clientY}px`;
+            if (Math.random() > 0.5) {
+                ember.style.background = '#C77DFF';
+                ember.style.boxShadow = '0 0 8px #9D4EDD, 0 0 16px #C77DFF';
+            }
+            document.body.appendChild(ember);
+
+            setTimeout(() => {
+                const offsetX = (Math.random() - 0.5) * 30;
+                const offsetY = -Math.random() * 40 - 15;
+                ember.style.transform = `translate(${offsetX}px, ${offsetY}px) scale(0)`;
+                ember.style.opacity = '0';
+            }, 20);
+
+            setTimeout(() => {
+                ember.remove();
+            }, 550);
+        });
+</script>
 </body>
 
 </html>
